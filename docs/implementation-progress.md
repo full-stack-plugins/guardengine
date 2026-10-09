@@ -50,3 +50,7 @@ Tasks 2.5 and 4.5 accepted by independent publication review: neutral-rule diffe
 Tasks2.3/2.4 accepted after6ae9bb4a: real child crash/cancel, partial serialization sink failure, no new final successful file, old attempt preservation and explicit recovery diagnostics. Full60tests independently repeated; this is private Linux/local adapter publication, not a current pointer or supervisor. Local acceptance is now15/24.
 
 See local-consumer-matrix.md for14 actual artifact sets and70 negative checks. This does not yet complete all-six native producer, authenticated trust, hosted enforcement or release gates. Task2.1 historical ordering caveat remains explicit; retrospective compatibility evidence is preserved rather than labelled historical RED.
+
+## Frozen six-consumer gate: 17/24 locally accepted
+
+Independent review of `e84b306` accepts tasks1.6 and2.2 for the explicit local profiles. All six consumer changes now point to exact schema/manifest hashes and named positive/negative mappings. The 16-case corpus (15 engine-backed sets and one expressly derived CodeGuard native-only vector) passed61 tests,63 raw-file hashes and15 extra analyzer/source-snapshot mismatch probes. No specialist logic entered the engine. Review evidence: cloud ledger `guardengine-corpus-independent-review.md`. Tasks2.6/4.2 remain partial pending actual command-aware native CodeGuard0/3/error differential mapping; a derived wire vector does not replace this. Production identity, hosted enforcement and public release remain unclaimed.
