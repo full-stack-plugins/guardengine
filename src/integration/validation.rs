@@ -6,7 +6,7 @@ fn hex(s: &str, n: usize) -> bool {
         && s.bytes()
             .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
 }
-fn digest(s: &str) -> bool {
+pub(super) fn digest(s: &str) -> bool {
     s.strip_prefix("sha256:").is_some_and(|s| hex(s, 64))
 }
 fn sorted_set(v: &[String]) -> bool {
@@ -42,6 +42,37 @@ fn bounds(v: &serde_json::Value, depth: usize) -> Result<(), IntegrationError> {
             }
         }
         _ => {}
+    }
+    Ok(())
+}
+/// Borrowed binding checks shared by envelopes and standalone approval validation.
+/// No serialization or copied input allocation is needed for admission.
+pub(super) fn validate_binding(b: &RunBinding) -> Result<(), IntegrationError> {
+    let valid_string = |s: &str| !s.trim().is_empty() && s.len() <= 4096;
+    if ![&b.repo_id, &b.task_id, &b.worktree_id]
+        .iter()
+        .all(|s| valid_string(s))
+        || b.merge_group_id.as_ref().is_some_and(|s| !valid_string(s))
+        || b.requirement_ids.len() > 4096
+        || b.requirement_ids.iter().any(|s| !valid_string(s))
+    {
+        return fail("blank or oversized binding string or collection");
+    }
+    if ![&b.candidate_oid, &b.base_oid]
+        .iter()
+        .all(|s| hex(s, 40) || hex(s, 64))
+    {
+        return fail("invalid full object ID");
+    }
+    if !digest(&b.source_snapshot_digest) || b.baseline_digest.as_ref().is_some_and(|s| !digest(s))
+    {
+        return fail("invalid binding digest");
+    }
+    if b.requirement_ids.is_empty() {
+        return fail("requirements and required scopes cannot be empty");
+    }
+    if !sorted_set(&b.requirement_ids) {
+        return fail("set arrays must be sorted and unique");
     }
     Ok(())
 }
@@ -83,17 +114,7 @@ impl GuardRunEnvelope {
             return fail("unsupported envelope version or kind");
         }
         let b = &self.binding;
-        if ![&b.candidate_oid, &b.base_oid]
-            .iter()
-            .all(|s| hex(s, 40) || hex(s, 64))
-        {
-            return fail("invalid full object ID");
-        }
-        if !digest(&b.source_snapshot_digest)
-            || b.baseline_digest.as_ref().is_some_and(|s| !digest(s))
-        {
-            return fail("invalid binding digest");
-        }
+        validate_binding(b)?;
         let c = &self.coverage;
         if b.requirement_ids.is_empty() || c.required_scopes.is_empty() {
             return fail("requirements and required scopes cannot be empty");

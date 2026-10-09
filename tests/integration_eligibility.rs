@@ -489,3 +489,53 @@ fn public_approval_validator_rejects_malformed_protected_policy() {
         );
     }
 }
+
+#[test]
+fn standalone_approval_rejects_matching_malformed_bindings_and_contracts() {
+    for variant in 0..12 {
+        let (mut f, _) = Fixture::approved();
+        match variant {
+            0 => f.p.binding.candidate_oid.clear(),
+            1 => f.p.binding.base_oid = "xyz".into(),
+            2 => f.p.binding.source_snapshot_digest.clear(),
+            3 => f.p.binding.baseline_digest = Some("invalid".into()),
+            4 => f.p.binding.repo_id.clear(),
+            5 => f.p.binding.task_id = " ".into(),
+            6 => f.p.binding.worktree_id = "x".repeat(4097),
+            7 => f.p.binding.requirement_ids.clear(),
+            8 => f.p.binding.requirement_ids = vec!["b".into(), "a".into()],
+            9 => f.p.binding.requirement_ids = vec!["a".into(), "a".into()],
+            10 => f.p.binding.merge_group_id = Some(" ".into()),
+            _ => f.p.contract_digest.clear(),
+        }
+        let mut record = f.approval("security");
+        record.binding = f.p.binding.clone();
+        record.contract_digest = f.p.contract_digest.clone();
+        assert_eq!(
+            validate_approval_record(&record, &f.p, "security", NOW),
+            Err(EligibilityCode::InvalidPolicy),
+            "variant {variant}"
+        );
+    }
+}
+
+#[test]
+fn existing_eligibility_retains_structural_error_precedence() {
+    let (mut f, _) = Fixture::approved();
+    f.p.binding.candidate_oid.clear();
+    assert_eq!(
+        f.eval(&f.provider(), NOW).code,
+        EligibilityCode::BindingChanged
+    );
+    f.e.binding.candidate_oid.clear();
+    assert_eq!(
+        f.eval(&f.provider(), NOW).code,
+        EligibilityCode::InvalidEvidence
+    );
+    let (mut f, _) = Fixture::approved();
+    f.p.contract_digest.clear();
+    assert_eq!(
+        f.eval(&f.provider(), NOW).code,
+        EligibilityCode::BindingChanged
+    );
+}

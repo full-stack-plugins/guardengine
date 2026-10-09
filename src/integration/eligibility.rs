@@ -235,7 +235,10 @@ pub fn validate_approval_record(
     purpose: &str,
     now: i64,
 ) -> Result<(), EligibilityCode> {
-    if !policy.valid() {
+    if !policy.valid()
+        || super::validation::validate_binding(&policy.binding).is_err()
+        || !super::validation::digest(&policy.contract_digest)
+    {
         return Err(EligibilityCode::InvalidPolicy);
     }
     if record.purpose != purpose
