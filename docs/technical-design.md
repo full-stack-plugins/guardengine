@@ -135,3 +135,8 @@ These are commands to run, not reported passing results. A future protocol chang
 | E5: optional attestation/service | Separately reviewed signing/storage/controller integrations | Key rotation, tenant permissions, recovery and retention verified; local library remains usable without service |
 
 Before E2 schema freeze, resolve canonicalization, capabilities and distribution decisions. Before E3/E5 deployment, select approval/identity/attestation providers and retention/resource limits. These are explicit future decision gates; documentation completion does not claim these phases implemented.
+
+
+### Pre-binding transport failures
+
+The target error/cancelled envelope applies only after required invocation identity, producer profile and coverage are frozen. Invalid arguments or unresolved repository/candidate/base use separate transport diagnostics without a GuardRunEnvelope; do not invent identities or empty required fields. Current engine CLI errors remain plain stderr and exit 4. See the shared integration contract for this distinction.

@@ -66,7 +66,7 @@ See [architecture](docs/architecture.md), [technical design](docs/technical-desi
 2. Fact completeness is **claimed by the analyzer**. A malicious local agent can fabricate inputs. Trusted CI must independently regenerate facts using protected contract versions.
 3. ArchGuard's current snapshot digest covers examined **Cargo manifests**, not the entire Git tree.
 4. Reports are unsigned and not attestations. Signing, approvals, policy exception registries, Git branch control, and semantic code graphs are future integrations.
-5. This source uses a local sibling path dependency until both repositories are published and the dependency is replaced by a pinned, independently released GuardEngine artifact.
+5. ArchGuard currently declares a local sibling path dependency on GuardEngine. Independent consumption awaits replacement with a pinned, released GuardEngine artifact.
 
 ## Implementation and target design
 
