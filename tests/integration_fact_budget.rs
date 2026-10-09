@@ -42,3 +42,18 @@ fn escaped_serialized_size_and_count_are_bounded() {
     assert!(b.push_relation("s", "p", "o", "source").is_err());
     assert!(b.finish().is_err());
 }
+
+#[test]
+fn composed_source_is_checked_before_joining() {
+    let mut b = FactBudget::new();
+    b.push_relation_with_source_parts("s", "p", "o", &["native:", "abc"])
+        .unwrap();
+    assert_eq!(b.finish().unwrap()[0].source, "native:abc");
+    let large = "x".repeat(MAX_ARTIFACT_BYTES / 2);
+    let mut b = FactBudget::new();
+    assert!(
+        b.push_relation_with_source_parts("s", "p", "o", &[&large, &large])
+            .is_err()
+    );
+    assert!(b.finish().is_err());
+}
