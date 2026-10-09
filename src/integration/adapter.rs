@@ -27,6 +27,7 @@ pub fn verify_engine_artifacts(
             return fail("artifact byte digest mismatch");
         }
     }
+    super::yaml_validation::validate_contract_yaml(contract_yaml)?;
     let contract =
         crate::load_contract_yaml(contract_yaml).map_err(|e| IntegrationError(e.to_string()))?;
     let facts = crate::load_facts_json(facts_json).map_err(|e| IntegrationError(e.to_string()))?;

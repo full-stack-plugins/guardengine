@@ -2,6 +2,7 @@
 mod adapter;
 mod model;
 mod validation;
+mod yaml_validation;
 pub use adapter::{evaluate_bounded, verify_engine_artifacts};
 pub use model::*;
 pub use validation::load_envelope_json;
