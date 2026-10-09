@@ -30,3 +30,9 @@ Branch `impl/guard-roadmap-20261009`; source baseline `e9261e6164291662eb402421b
 Review of 4e881ba identified an important multiplicative recomputation budget issue. Commit36d63a5 adds conservative expansion/comparison preflight before unchanged core evaluation; the same reviewer reproduction now rejects early and peak memory fell from133MiB to8.4MiB (environment-specific observation, not capacity guarantee). A schema URI-control discrepancy was fixed, and final-newline lexical vectors were added. Final core+integration suite17tests, schema vectors and strict clippy pass. Original16tests also pass on declared MSRV Rust1.85.0.
 
 Independent review accepted full tasks1.1 and1.2 locally; those two boxes are checked. Tasks1.3–1.5 remain partial, task2.2 behavior is accepted but its staged prerequisites remain open. The GE-CONTRACT gate is not complete, no production trust/release/queue acceptance is claimed. Review artifacts live in cloud execution ledger guardengine-contract-review.md; implementation fixes remain local and unpushed.
+
+## Lifecycle and pure trust review checkpoint
+
+Commits0c02178/bc812f6/799fb1e/11a5ba7 add profile vectors, required-scope preparation, ordered evidence regressions, and generic eligibility/append-only CAS ports. Independent review found and closed a lifecycle defect: required scopes freeze, actual observed/missing/status coverage is supplied at finish; weakening frozen scope rejects. Full suite35tests and clippy pass independently.
+
+Full locally accepted tasks now1.1–1.5 and3.1–3.5 (10/24). Trust acceptance covers provider-injection contracts, explicit principal authorization, immutable comparisons, expiry/revocation and in-memory append/CAS semantics only; no production provider/durable backend/hosted authorization is asserted. GE-CONTRACT consumer matrix1.6 and real-controller3.6 remain open. Review evidence: cloud ledger guardengine-trust-review.md and guardengine-trust-report.md.
