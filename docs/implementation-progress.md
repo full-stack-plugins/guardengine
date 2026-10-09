@@ -1,0 +1,26 @@
+# GuardEngine implementation progress
+
+Branch `impl/guard-roadmap-20261009`; source baseline `e9261e6164291662eb402421b5d73278c8637155` (documentation + OpenSpec). Original document branch untouched. Product pushes require parent confirmation.
+
+## Execution order
+
+1. Preserve legacy requirements, add delta/scenario format; baseline 10 tests and old/new strict validation.
+2. GE-CONTRACT tasks 1.1–1.5: explicit field/profile decisions, bounded strict model/schema and golden vectors. Tests precede code; 1.6 waits consumer mapping review.
+3. GE-ADAPTER 2.1–2.5: preserve existing binary behavior, validate actual engine artifacts and safe opt-in output; 2.6 waits real consumers.
+4. GE-TRUST 3.1–3.5: pure generic records/eligibility/concurrency ports without credentials/domain policy; production 3.6 requires authentic controller evidence, explicit fixtures cannot substitute.
+5. GE-RELEASE local package/matrix and joint scenarios after adapters, no registry publishing or production activation authorized.
+
+## Evidence
+
+- Baseline `cargo test --all-targets` on Rust 1.99.0: 10 tests passed, 0 failed. Log: execution ledger guardengine-baseline.log (cloud review artifact).
+- Legacy bootstrap spec normalized without changing normative paragraphs or any task status; strict validation now valid, zero issues.
+- No new task marked complete yet. Decisions in schemas/integration/decisions.md require independent review.
+
+## First contract slice (implemented, review pending)
+
+- Closed Rust model/loader, explicit EngineBacked/NativeOnly capability, required nullable fields, binding/coverage/lifecycle/UTC invariants, byte/depth/string/collection budgets. No new CLI and no network resolution.
+- JSON Schema and positive/negative vectors; schema limitations and mandatory runtime semantic validation are explicit.
+- Exact artifact byte digest checking plus existing full-report recomputation and analyzer/snapshot/completeness/decision agreement. Native profiles cannot satisfy stronger evidence.
+- Preserved native engine evaluation code. Golden compact typed serialization pinned separately from historical core digests.
+- `cargo test --all-targets`: 16 passed (10 historical, 6 integration); `cargo clippy --all-targets -- -D warnings`: passed. Python Draft 2020-12 schema-vector test passed. RED logs show missing semantic validation and missing artifact verification failing before implementation; initial artifact fixture error was corrected before the behavioral RED run.
+- Tasks 1.1–1.5 and 2.2 have substantial implementation, but reviewer approval, all named acceptance fixtures and consumer matrix remain pending. 1.6, 2.1/2.3–2.6, trust, publication and end-to-end gates are not complete. No task boxes changed.

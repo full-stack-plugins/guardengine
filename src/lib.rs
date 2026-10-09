@@ -15,3 +15,5 @@ pub use protocol::{
     GuardAssertion, GuardContract, GuardFact, GuardFacts, GuardRule, GuardSubject,
     load_contract_yaml, load_facts_json,
 };
+
+pub mod integration;

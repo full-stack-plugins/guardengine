@@ -1,0 +1,53 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "kind": "GuardRunEnvelope",
+  "runId": "attempt-1",
+  "producer": {
+    "guard": "CodeGuard",
+    "version": "0.1.0",
+    "analyzerId": "native",
+    "analyzerVersion": "1"
+  },
+  "binding": {
+    "repoId": "repo",
+    "taskId": "task",
+    "worktreeId": "worktree",
+    "requirementIds": [
+      "R1"
+    ],
+    "candidateOid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baseOid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "mergeGroupId": null,
+    "sourceSnapshotDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "baselineDigest": null
+  },
+  "runStatus": "completed",
+  "decision": "ALLOW",
+  "coverage": {
+    "status": "complete",
+    "requiredScopes": [
+      "lint"
+    ],
+    "observedScopes": [
+      "lint"
+    ],
+    "missingScopes": []
+  },
+  "artifacts": {
+    "contract": null,
+    "facts": null,
+    "report": null,
+    "domain": [
+      {
+        "uri": "artifact://local/native.json",
+        "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "mediaType": "application/json"
+      }
+    ]
+  },
+  "approvalRefs": [],
+  "diagnostics": [],
+  "startedAt": "2026-10-09T10:00:00Z",
+  "finishedAt": "2026-10-09T10:00:01Z",
+  "expiresAt": null
+}

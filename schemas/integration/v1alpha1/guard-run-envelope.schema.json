@@ -1,0 +1,544 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://full-stack-plugins.github.io/guardengine/schemas/integration/v1alpha1/guard-run-envelope.schema.json",
+  "title": "GuardRunEnvelope v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "runId",
+    "producer",
+    "binding",
+    "runStatus",
+    "decision",
+    "coverage",
+    "artifacts",
+    "approvalRefs",
+    "diagnostics",
+    "startedAt",
+    "finishedAt",
+    "expiresAt"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "guard.integration/v1alpha1"
+    },
+    "kind": {
+      "const": "GuardRunEnvelope"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "\\S"
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "guard",
+        "version",
+        "analyzerId",
+        "analyzerVersion"
+      ],
+      "properties": {
+        "guard": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        },
+        "analyzerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        },
+        "analyzerVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repoId",
+        "taskId",
+        "worktreeId",
+        "requirementIds",
+        "candidateOid",
+        "baseOid",
+        "mergeGroupId",
+        "sourceSnapshotDigest",
+        "baselineDigest"
+      ],
+      "properties": {
+        "repoId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        },
+        "taskId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        },
+        "worktreeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        },
+        "requirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "candidateOid": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        },
+        "baseOid": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        },
+        "mergeGroupId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sourceSnapshotDigest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "baselineDigest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "runStatus": {
+      "enum": [
+        "completed",
+        "error",
+        "cancelled"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "ALLOW",
+        "BLOCK",
+        "REQUIRE_APPROVAL",
+        null
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "requiredScopes",
+        "observedScopes",
+        "missingScopes"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "complete",
+            "partial"
+          ]
+        },
+        "requiredScopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "minItems": 1,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "observedScopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true
+        },
+        "missingScopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "minItems": 0,
+          "maxItems": 4096,
+          "uniqueItems": true
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "facts",
+        "report",
+        "domain"
+      ],
+      "properties": {
+        "contract": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "facts": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "report": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "domain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          },
+          "minItems": 0,
+          "maxItems": 4096
+        }
+      }
+    },
+    "approvalRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "pattern": "\\S"
+      },
+      "minItems": 0,
+      "maxItems": 4096,
+      "uniqueItems": true
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message",
+          "retryable",
+          "source"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096,
+                "pattern": "\\S"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 4096
+    },
+    "startedAt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "(?:Z|\\+00:00|-00:00)$",
+      "format": "date-time"
+    },
+    "finishedAt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "(?:Z|\\+00:00|-00:00)$",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "(?:Z|\\+00:00|-00:00)$",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uri",
+        "digest",
+        "mediaType"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^artifact://[^\\s%\\\\?#@:/]+(?:/[^\\s%\\\\?#@:/]+)+$",
+          "allOf": [
+            {
+              "not": {
+                "pattern": "/(?:\\.{1,2})(?:/|$)"
+              }
+            }
+          ]
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "mediaType": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "engineBackedCompleted": {
+      "properties": {
+        "artifacts": {
+          "properties": {
+            "contract": {
+              "$ref": "#/$defs/artifact"
+            },
+            "facts": {
+              "$ref": "#/$defs/artifact"
+            },
+            "report": {
+              "$ref": "#/$defs/artifact"
+            }
+          }
+        }
+      }
+    },
+    "nativeOnlyCompleted": {
+      "properties": {
+        "artifacts": {
+          "properties": {
+            "contract": {
+              "type": "null"
+            },
+            "facts": {
+              "type": "null"
+            },
+            "report": {
+              "type": "null"
+            },
+            "domain": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/artifact"
+              },
+              "minItems": 1,
+              "maxItems": 4096
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "runStatus": {
+            "const": "completed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "enum": [
+              "ALLOW",
+              "BLOCK",
+              "REQUIRE_APPROVAL"
+            ]
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "artifacts": {
+                "properties": {
+                  "contract": {
+                    "$ref": "#/$defs/artifact"
+                  },
+                  "facts": {
+                    "$ref": "#/$defs/artifact"
+                  },
+                  "report": {
+                    "$ref": "#/$defs/artifact"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "artifacts": {
+                "properties": {
+                  "contract": {
+                    "type": "null"
+                  },
+                  "facts": {
+                    "type": "null"
+                  },
+                  "report": {
+                    "type": "null"
+                  },
+                  "domain": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/artifact"
+                    },
+                    "minItems": 1,
+                    "maxItems": 4096
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "else": {
+        "properties": {
+          "decision": {
+            "type": "null"
+          },
+          "diagnostics": {
+            "minItems": 1
+          },
+          "artifacts": {
+            "properties": {
+              "report": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "runStatus": {
+            "const": "completed"
+          },
+          "coverage": {
+            "properties": {
+              "status": {
+                "const": "partial"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "BLOCK"
+          }
+        }
+      }
+    }
+  ]
+}
