@@ -234,3 +234,51 @@ fn profile_aware_capability_vectors() {
         );
     }
 }
+#[test]
+fn set_fields_are_canonical_but_diagnostic_and_rule_order_is_preserved() {
+    let mut value = envelope();
+    value["binding"]["requirementIds"] = json!(["R2", "R1"]);
+    assert!(
+        !load(&value),
+        "unordered sets must not acquire an ambiguous identity"
+    );
+    value["binding"]["requirementIds"] = json!(["R1", "R2"]);
+    value["diagnostics"] = json!([{"code":"z","message":"last","retryable":false,"source":null},{"code":"a","message":"first","retryable":false,"source":null}]);
+    let first = load_envelope_json(
+        &serde_json::to_vec(&value).unwrap(),
+        EvidenceProfile::NativeOnly,
+    )
+    .unwrap();
+    assert_eq!(first.diagnostics[0].code, "z");
+    value["diagnostics"].as_array_mut().unwrap().reverse();
+    let second = load_envelope_json(
+        &serde_json::to_vec(&value).unwrap(),
+        EvidenceProfile::NativeOnly,
+    )
+    .unwrap();
+    assert_ne!(
+        serde_json::to_vec(&first).unwrap(),
+        serde_json::to_vec(&second).unwrap()
+    );
+    let (_, cb, fb, _) = artifacts();
+    let mut c: Value = serde_json::from_slice(&cb).unwrap();
+    let mut r = c["spec"]["rules"][0].clone();
+    r["id"] = json!("another");
+    c["spec"]["rules"].as_array_mut().unwrap().push(r);
+    let facts = guardengine::load_facts_json(&fb).unwrap();
+    let a = guardengine::evaluate(
+        &guardengine::load_contract_yaml(&serde_json::to_vec(&c).unwrap()).unwrap(),
+        &facts,
+    )
+    .unwrap();
+    c["spec"]["rules"].as_array_mut().unwrap().reverse();
+    let b = guardengine::evaluate(
+        &guardengine::load_contract_yaml(&serde_json::to_vec(&c).unwrap()).unwrap(),
+        &facts,
+    )
+    .unwrap();
+    assert_eq!(a.evaluations[0].rule_id, "deny");
+    assert_eq!(b.evaluations[0].rule_id, "another");
+    assert_ne!(a.contract_digest, b.contract_digest);
+    assert_eq!(a.decision, b.decision);
+}
