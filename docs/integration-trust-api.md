@@ -1,6 +1,6 @@
 # Generic trust ports (local implementation)
 
-The `integration::eligibility` and `integration::attempt_store` modules implement the reviewed GE-TRUST pure library slice. They do not authenticate a real identity service, inspect Git objects, publish hosted checks, issue credentials, or provide durable storage. Production gate 3.6 remains unavailable until a separately reviewed authority adapter and protected controller are integrated. Existing native engine reports, verdicts, CLI behavior and schemas are unchanged.
+The `integration::eligibility` and `integration::attempt_store` modules implement the reviewed GE-TRUST pure library slice. They do not authenticate a real identity service, inspect Git objects, publish hosted checks, issue credentials, or provide durable storage. A test-only trusted-controller integration fixture is documented in [trusted-controller-fixture.md](trusted-controller-fixture.md). It does not supply production authentication; an authoritative hosted gate still requires its own reviewed authority adapter and protected controller. Existing native engine reports, verdicts, CLI behavior and schemas are unchanged.
 
 ## Protected construction and inputs
 
