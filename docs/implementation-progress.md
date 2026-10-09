@@ -54,3 +54,9 @@ See local-consumer-matrix.md for14 actual artifact sets and70 negative checks. T
 ## Frozen six-consumer gate: 17/24 locally accepted
 
 Independent review of `e84b306` accepts tasks1.6 and2.2 for the explicit local profiles. All six consumer changes now point to exact schema/manifest hashes and named positive/negative mappings. The 16-case corpus (15 engine-backed sets and one expressly derived CodeGuard native-only vector) passed61 tests,63 raw-file hashes and15 extra analyzer/source-snapshot mismatch probes. No specialist logic entered the engine. Review evidence: cloud ledger `guardengine-corpus-independent-review.md`. Tasks2.6/4.2 remain partial pending actual command-aware native CodeGuard0/3/error differential mapping; a derived wire vector does not replace this. Production identity, hosted enforcement and public release remain unclaimed.
+
+## Reviewed actual Ruff compatibility: 19/24 locally accepted
+
+Independent review of d251a968 accepts tasks2.6 and4.2 for the exact documented local version pairs. Current corpus:34 cases; immutable extracted c80ec325 consumer:18 additional positives and90 negatives. All90 new raw artifacts match actual SDK captures, while the old manifest and63 artifacts remain unchanged. The command-aware mapping keeps original CodeGuard native exit3 separate from the narrow Ruff F401 SDK profile and rejects stronger native-only qualifications. Full suite62 tests and strict Clippy passed before independent corpus reruns. Evidence: cloud ledger guardengine-ruff-matrix-independent-review.md; maintained profile documentation: ruff-consumer-matrix.md.
+
+This is neither a runtime producer SHA allowlist nor authenticated Git/authority evidence. Fixture candidate bindings stay synthetic; broad CodeGuard CLI coverage,57 real native tools, other platforms and untested version pairs are not qualified. Task2.1 historical timing caveat,3.6 production identity,4.3 rollout,4.4 joint scenarios and4.6 final acceptance remain open.
