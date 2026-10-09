@@ -58,7 +58,7 @@ Exit codes: `0=ALLOW`, `2=BLOCK`, `3=REQUIRE_APPROVAL`, `4=invalid input/verific
 
 Unknown protocol fields, versions, and rule variants are rejected, never ignored. `advise` emits matched facts with a nonblocking advisory detail: `PASS` means the rule did not block, **not** that there was no observation.
 
-See [architecture](docs/architecture.md), [protocol contract](docs/protocol.md), [trust boundaries](docs/security.md), and [OpenSpec plan](openspec/changes/bootstrap-guard-protocol/).
+See [architecture](docs/architecture.md), [technical design](docs/technical-design.md), [protocol contract](docs/protocol.md), [trust boundaries](docs/security.md), and [OpenSpec plan](openspec/changes/bootstrap-guard-protocol/).
 
 ### Scope and limitations
 
