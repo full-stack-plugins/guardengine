@@ -74,7 +74,12 @@ ArchGuard 已通过同级 path 依赖使用引擎。所检查版本的 SpecGuard
 
 ## 验证状态与贡献
 
-本轮检查源码、文档链接和命令声明。云端 PATH 中没有 Cargo/OpenSpec，未运行功能测试或 OpenSpec 验证，不宣称通过。技术方案包含事实清单、边界和分阶段可测验收。
+本轮检查源码、文档链接和命令声明。较早架构审阅阶段的云端 PATH 中没有 Cargo/OpenSpec，该阶段未运行功能测试或 OpenSpec 验证，不宣称通过。后续规划阶段的验证另见下方记录。技术方案包含事实清单、边界和分阶段可测验收。
 
 有对应工具链时运行 `cargo fmt --check`、`cargo clippy --all-targets -- -D warnings`、`cargo test --all-targets`。
 许可证：Apache-2.0。
+
+
+## OpenSpec 实施待办
+
+新增增量 [proposal](openspec/changes/add-versioned-guard-integration-contracts/proposal.md)、[design](openspec/changes/add-versioned-guard-integration-contracts/design.md)、[规范](openspec/changes/add-versioned-guard-integration-contracts/specs/) 与 [tasks](openspec/changes/add-versioned-guard-integration-contracts/tasks.md)，将架构方案拆成待实施工作。参阅[跨仓依赖路线图](openspec/guard-roadmap.md)与[结构验证记录](openspec/validation-2026-10-09.md)。所有新增实施任务保持未勾选；本分支新增规划，不新增产品功能。前文源码树清单和验证限制对应检查基线或较早的架构审阅阶段；本次另行新增 OpenSpec 文档并记录实际 CLI 校验。既有 change 的任务归属和历史完成证据继续保留。

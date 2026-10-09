@@ -86,9 +86,14 @@ Trusted CI must obtain protected policy, independently analyze the exact candida
 
 ## Validation status
 
-Source, documentation links and command declarations were inspected. Cargo and OpenSpec are unavailable on PATH in this cloud environment; no functional test or OpenSpec validation pass is claimed. See the technical design for the source ledger, current limitations and measurable future acceptance gates.
+Source, documentation links and command declarations were inspected. At the earlier architecture-review stage Cargo and OpenSpec were unavailable on PATH, so that stage claimed no functional or OpenSpec validation pass. The later planning-stage validation is recorded separately below. See the technical design for the source ledger, current limitations and measurable future acceptance gates.
 
 ## Contribute
 
 Run `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and `cargo test --all-targets`.
 License: Apache-2.0.
+
+
+## OpenSpec implementation backlog
+
+The incremental [proposal](openspec/changes/add-versioned-guard-integration-contracts/proposal.md), [design](openspec/changes/add-versioned-guard-integration-contracts/design.md), [requirements](openspec/changes/add-versioned-guard-integration-contracts/specs/) and [tasks](openspec/changes/add-versioned-guard-integration-contracts/tasks.md) translate the architecture into pending implementation work. See the [cross-repository dependency roadmap](openspec/guard-roadmap.md) and [structural validation record](openspec/validation-2026-10-09.md). Every new implementation task remains unchecked; this branch adds planning artifacts, not product features. Earlier source-tree inventories and validation limitations describe the inspected baseline or earlier architecture-review stage; this planning stage adds OpenSpec artifacts and separately records actual CLI validation. Existing change ownership and historical completion evidence remain intact.
