@@ -140,3 +140,19 @@ Before E2 schema freeze, resolve canonicalization, capabilities and distribution
 ### Pre-binding transport failures
 
 The target error/cancelled envelope applies only after required invocation identity, producer profile and coverage are frozen. Invalid arguments or unresolved repository/candidate/base use separate transport diagnostics without a GuardRunEnvelope; do not invent identities or empty required fields. Current engine CLI errors remain plain stderr and exit 4. See the shared integration contract for this distinction.
+
+
+## 11. Concurrent upstream documentation reconciliation
+
+During this review, remote main advanced from the inspected source baseline to `653cebce23974114cfd75a9240f62503525f5de4` through three documentation-only commits (`dfdd215`, `3fdd3cd`, `653cebc`). No runtime source changed. This local branch merges that history, preserves both upstream README technical-design links, and keeps the complete new upstream proposal byte-for-byte at [upstream technical design snapshot](technical-design-upstream-653cebc.md). The snapshot is a historical parallel proposal, not a second normative current contract; this document and the shared integration draft explain reconciliation.
+
+| Upstream proposal | Reconciled treatment |
+|---|---|
+| Frozen ValidationPlan and controlled runtime | Retain as a future controller/optional runtime integration; domain obligations remain with each Guard and the synchronous engine stays independent |
+| SDK + CLI + future MCP/CI/optional service | Retained; no mandatory daemon or arbitrary shell/MCP authorization surface |
+| Capabilities, resource budgets and process recovery | Retained as future acceptance requirements, not existing parser/runtime guarantees |
+| Optional OPA/Rego and signed attestations | Retained as candidates requiring separate ADRs; no backend/provider selected by this documentation task |
+| N/N-1 and six-Guard independent releases | Retained as future test matrices; current engine still matches exact protocol versions only |
+| Upstream E0–E5 roadmap | Historical phase labels; use this document's phase table for the reconciled sequence, without treating either table as implementation completion |
+
+The upstream snapshot's broad future input-security and runtime statements are requirements, not new implemented behavior. Full binding is required before draft error envelopes, and approved controller eligibility must not rewrite underlying engine verdicts. This merge only reconciles documentation; it does not assert runtime or OpenSpec validation.
