@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://partme.ai/schemas/guard/v1alpha1/facts.schema.json",
+  "title": "GuardFacts v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "analyzer", "subject", "completeness", "facts"],
+  "properties": {
+    "apiVersion": { "const": "guard.partme.ai/v1alpha1" },
+    "kind": { "const": "GuardFacts" },
+    "analyzer": { "$ref": "#/$defs/analyzer" },
+    "subject": { "$ref": "#/$defs/subject" },
+    "completeness": { "enum": ["complete", "partial"] },
+    "facts": { "type": "array", "items": { "$ref": "#/$defs/fact" } },
+    "diagnostics": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "analyzer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": { "id": {"type": "string", "minLength": 1}, "version": {"type": "string", "minLength": 1} }
+    },
+    "subject": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "snapshotDigest"],
+      "properties": { "id": {"type": "string", "minLength": 1}, "snapshotDigest": {"type": "string", "minLength": 1} }
+    },
+    "fact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["subject", "predicate", "object", "source"],
+      "properties": {
+        "subject": {"type": "string", "minLength": 1},
+        "predicate": {"type": "string", "minLength": 1},
+        "object": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

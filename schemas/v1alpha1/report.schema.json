@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://partme.ai/schemas/guard/v1alpha1/report.schema.json",
+  "title": "GuardReport v1alpha1",
+  "type": "object", "additionalProperties": false,
+  "required": ["apiVersion", "kind", "evaluationId", "engineVersion", "contractId", "contractRevision", "contractDigest", "factsDigest", "analyzer", "subject", "evaluations", "decision", "signed"],
+  "properties": {
+    "apiVersion": {"const": "guard.partme.ai/v1alpha1"},
+    "kind": {"const": "GuardReport"},
+    "evaluationId": {"type": "string"},
+    "engineVersion": {"type": "string"},
+    "contractId": {"type": "string"},
+    "contractRevision": {"type": "string"},
+    "contractDigest": {"type": "string"},
+    "factsDigest": {"type": "string"},
+    "analyzer": {"$ref": "facts.schema.json#/$defs/analyzer"},
+    "subject": {"$ref": "facts.schema.json#/$defs/subject"},
+    "decision": {"enum": ["ALLOW", "BLOCK", "REQUIRE_APPROVAL"]},
+    "signed": {"const": false},
+    "evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["ruleId", "status", "enforcement", "matchedFacts", "detail"],
+        "properties": {
+          "ruleId": {"type": "string"},
+          "status": {"enum": ["PASS", "FAIL", "REVIEW_REQUIRED", "INDETERMINATE", "NOT_APPLICABLE"]},
+          "enforcement": {"enum": ["enforce", "review", "advise"]},
+          "matchedFacts": {"type": "array", "items": {"$ref": "facts.schema.json#/$defs/fact"}},
+          "detail": {"type": "string"}
+        }
+      }
+    }
+  }
+}
