@@ -282,3 +282,29 @@ fn set_fields_are_canonical_but_diagnostic_and_rule_order_is_preserved() {
     assert_ne!(a.contract_digest, b.contract_digest);
     assert_eq!(a.decision, b.decision);
 }
+#[test]
+fn producer_evaluation_is_bounded_before_report_allocation() {
+    use guardengine::integration::evaluate_bounded;
+    let (_, cb, fb, _) = artifacts();
+    let mut c = guardengine::load_contract_yaml(&cb).unwrap();
+    let mut f = guardengine::load_facts_json(&fb).unwrap();
+    assert_eq!(
+        evaluate_bounded(&c, &f).unwrap(),
+        guardengine::evaluate(&c, &f).unwrap()
+    );
+    let rule = c.spec.rules[0].clone();
+    c.spec.rules = (0..200)
+        .map(|n| {
+            let mut r = rule.clone();
+            r.id = format!("rule-{n}");
+            r
+        })
+        .collect();
+    f.completeness = guardengine::Completeness::Partial;
+    f.diagnostics = vec!["x".repeat(100_000)];
+    let error = evaluate_bounded(&c, &f).unwrap_err();
+    assert!(
+        error.to_string().contains("recomputation budget"),
+        "{error}"
+    );
+}
