@@ -11,6 +11,14 @@
         "contract": "sha256:d7d2ac7bbd2f537d2bd6238a09067ea57ae8a245d748139a187b0dd760c474e0",
         "facts": "sha256:769d9dca70217b3f352ba09e3eacf4edee1370676b326f1e07ef139f83706d94",
         "report": "sha256:bd25b73e9743c017d156340731ad5fd6de47908e7ef84394345743175b80a5de"
+      },
+      "directory": "tests/fixtures/consumer-corpus/archguard-allow",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "d7d2ac7bbd2f537d2bd6238a09067ea57ae8a245d748139a187b0dd760c474e0",
+        "envelope.json": "1591f8998cd445bae4600a39288f9d04f716386abbbc8777648f7996e421393c",
+        "facts.json": "769d9dca70217b3f352ba09e3eacf4edee1370676b326f1e07ef139f83706d94",
+        "report.json": "bd25b73e9743c017d156340731ad5fd6de47908e7ef84394345743175b80a5de"
       }
     },
     {
@@ -22,6 +30,14 @@
         "contract": "sha256:d7d2ac7bbd2f537d2bd6238a09067ea57ae8a245d748139a187b0dd760c474e0",
         "facts": "sha256:76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
         "report": "sha256:509ef8462d4a2a88dfd8da10eb955cb8e489d3e8e425d591a9075f438b9ec2c6"
+      },
+      "directory": "tests/fixtures/consumer-corpus/archguard-block",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "d7d2ac7bbd2f537d2bd6238a09067ea57ae8a245d748139a187b0dd760c474e0",
+        "envelope.json": "ef97fc3ec59aa9695ce7b79274a35582d2a283bbf85761c030e955f41e11e527",
+        "facts.json": "76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
+        "report.json": "509ef8462d4a2a88dfd8da10eb955cb8e489d3e8e425d591a9075f438b9ec2c6"
       }
     },
     {
@@ -33,6 +49,14 @@
         "contract": "sha256:5650335ca6454f0b009efaac40cf61ca64e337823da2bbcc1d34d84e798af753",
         "facts": "sha256:76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
         "report": "sha256:a6ae138fa46409ae18db3b3c3a1593ce9aa9f670797c2682b11c7251b040daf6"
+      },
+      "directory": "tests/fixtures/consumer-corpus/archguard-review",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "5650335ca6454f0b009efaac40cf61ca64e337823da2bbcc1d34d84e798af753",
+        "envelope.json": "352a97091836089062958bc42975d7f5b03fe2d317c6e060a37a269d75b00997",
+        "facts.json": "76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
+        "report.json": "a6ae138fa46409ae18db3b3c3a1593ce9aa9f670797c2682b11c7251b040daf6"
       }
     },
     {
@@ -44,6 +68,14 @@
         "contract": "sha256:f459ce4a2a2ca63e8993593c770815c760e2ae2bc07cc42d61e4172757bc5a29",
         "facts": "sha256:76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
         "report": "sha256:8bc2c4772a848f205f030a2e277c25ed0c5c2918946615f86e307ea4b2fb2d00"
+      },
+      "directory": "tests/fixtures/consumer-corpus/archguard-advisory",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "f459ce4a2a2ca63e8993593c770815c760e2ae2bc07cc42d61e4172757bc5a29",
+        "envelope.json": "c1178685bdb7929bbd9f2d0fef625626a0eb04d6464d7ebc0d8793d9de0cf512",
+        "facts.json": "76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
+        "report.json": "8bc2c4772a848f205f030a2e277c25ed0c5c2918946615f86e307ea4b2fb2d00"
       }
     },
     {
@@ -55,6 +87,14 @@
         "contract": "sha256:d7d2ac7bbd2f537d2bd6238a09067ea57ae8a245d748139a187b0dd760c474e0",
         "facts": "sha256:954bf427fcb76b44733cd2c3b5bac8586463df87ff6aa150cf6f3498b920a174",
         "report": "sha256:df152050281a8a55020bfdede12c0177ff027ffc01c6d1891a3482529a3f9557"
+      },
+      "directory": "tests/fixtures/consumer-corpus/archguard-partial",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "d7d2ac7bbd2f537d2bd6238a09067ea57ae8a245d748139a187b0dd760c474e0",
+        "envelope.json": "40663bd0980244aab63791d84ac3f8aa80192b7b09b11d95a831c4d67cec2bd3",
+        "facts.json": "954bf427fcb76b44733cd2c3b5bac8586463df87ff6aa150cf6f3498b920a174",
+        "report.json": "df152050281a8a55020bfdede12c0177ff027ffc01c6d1891a3482529a3f9557"
       }
     },
     {
@@ -66,6 +106,14 @@
         "contract": "sha256:e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
         "facts": "sha256:3d46fc545c0833d6c8f1ffe799952dcf9c2826eaf817f0ecb22c5d9c7861e768",
         "report": "sha256:f24a50ad13e85bb15feed9d0ff937552481797935e122cd788296e420257bf14"
+      },
+      "directory": "tests/fixtures/consumer-corpus/testguard-allow",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
+        "envelope.json": "642bd824c0d11597e91b29e8ce8bd711ca3376a694d379b4fb445167149f67cb",
+        "facts.json": "3d46fc545c0833d6c8f1ffe799952dcf9c2826eaf817f0ecb22c5d9c7861e768",
+        "report.json": "f24a50ad13e85bb15feed9d0ff937552481797935e122cd788296e420257bf14"
       }
     },
     {
@@ -77,6 +125,14 @@
         "contract": "sha256:e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
         "facts": "sha256:77e2f29ca6ae1ed12e5179a6822f8558e36a3cd4f918e1ea43d0bd93f1a772b3",
         "report": "sha256:2c7ce47a1a040d96b4424484acedaf7c72b85eb9cfdf7e58759b6ef5148ea402"
+      },
+      "directory": "tests/fixtures/consumer-corpus/testguard-partial",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
+        "envelope.json": "9093a08825ba3ac8c8fe937c6217fd00beabde9ad38ef8796b338ed30704b498",
+        "facts.json": "77e2f29ca6ae1ed12e5179a6822f8558e36a3cd4f918e1ea43d0bd93f1a772b3",
+        "report.json": "2c7ce47a1a040d96b4424484acedaf7c72b85eb9cfdf7e58759b6ef5148ea402"
       }
     },
     {
@@ -88,6 +144,14 @@
         "contract": "sha256:e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
         "facts": "sha256:3c38356df1aa81d52e3b901be495520f4c4e8d6a94a20c3584a5681f59615c0d",
         "report": "sha256:e9b9fcb3e8a774d8fdf79846fa228d3a2ced531b3affde788571031bff9c9ab8"
+      },
+      "directory": "tests/fixtures/consumer-corpus/testguard-review",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
+        "envelope.json": "faca458e10657e0623ad0b6bcd051fa1b06c4a598fb39273ede4861770af0ca5",
+        "facts.json": "3c38356df1aa81d52e3b901be495520f4c4e8d6a94a20c3584a5681f59615c0d",
+        "report.json": "e9b9fcb3e8a774d8fdf79846fa228d3a2ced531b3affde788571031bff9c9ab8"
       }
     },
     {
@@ -99,6 +163,14 @@
         "contract": "sha256:7e8c18995f25c3a4a9246498c743a5ad49183f5c9442920e57c5532121bd7479",
         "facts": "sha256:3e1b3cf829f18cab570356090e32a6cf2cd56f7c609c6e10caadb1968ac803f8",
         "report": "sha256:4bc507ca180f7083d5776a767b82e123e2c4728a0b66d84c9175468f2cd6527f"
+      },
+      "directory": "tests/fixtures/consumer-corpus/specguard-allow",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "7e8c18995f25c3a4a9246498c743a5ad49183f5c9442920e57c5532121bd7479",
+        "envelope.json": "4c38cbf510020ae4603e19ba090f6c70819332cebd17a5336aaf7cedf9f4d8fd",
+        "facts.json": "3e1b3cf829f18cab570356090e32a6cf2cd56f7c609c6e10caadb1968ac803f8",
+        "report.json": "4bc507ca180f7083d5776a767b82e123e2c4728a0b66d84c9175468f2cd6527f"
       }
     },
     {
@@ -110,6 +182,14 @@
         "contract": "sha256:7e8c18995f25c3a4a9246498c743a5ad49183f5c9442920e57c5532121bd7479",
         "facts": "sha256:be92555a3e63ef7e0fdba75a082faaee629d674becc9d3ef389737ce0516c98b",
         "report": "sha256:456e65b187c12cb3f8e40e3ed3a5a10ce0a8499edbc07f0b8eb87f92fbbd9468"
+      },
+      "directory": "tests/fixtures/consumer-corpus/specguard-block",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "7e8c18995f25c3a4a9246498c743a5ad49183f5c9442920e57c5532121bd7479",
+        "envelope.json": "e35fe8588a10bbc727fc9f9bc803c428a79a4bf866d1ef4c87f9c47b563347d2",
+        "facts.json": "be92555a3e63ef7e0fdba75a082faaee629d674becc9d3ef389737ce0516c98b",
+        "report.json": "456e65b187c12cb3f8e40e3ed3a5a10ce0a8499edbc07f0b8eb87f92fbbd9468"
       }
     },
     {
@@ -121,6 +201,14 @@
         "contract": "sha256:7e8c18995f25c3a4a9246498c743a5ad49183f5c9442920e57c5532121bd7479",
         "facts": "sha256:6dbd1091d3897fe1603b59eabe98989cfd50a02658ae5ce1e0c898d3adf5ad5b",
         "report": "sha256:ec2583e0186c9a5c92683cf9d28cea45bae07ac9de5c6b13511036823cfe92ef"
+      },
+      "directory": "tests/fixtures/consumer-corpus/specguard-partial",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "7e8c18995f25c3a4a9246498c743a5ad49183f5c9442920e57c5532121bd7479",
+        "envelope.json": "9fc9b5e0bf12d55915a5cf1a40c7642a4765a3044b58435ff72e11574220672c",
+        "facts.json": "6dbd1091d3897fe1603b59eabe98989cfd50a02658ae5ce1e0c898d3adf5ad5b",
+        "report.json": "ec2583e0186c9a5c92683cf9d28cea45bae07ac9de5c6b13511036823cfe92ef"
       }
     },
     {
@@ -132,6 +220,14 @@
         "contract": "sha256:693948231e9c4a15a58bf089d0151db7d6373c1e386fe82c505e52437136518c",
         "facts": "sha256:d6f688c0270184d8515ae7b006c2f3f65b1b5920d3f386e6f34e6dd7b0176bca",
         "report": "sha256:c4f9e7b9e091327057471b62985ec69e6a59686858a316184be6704cee2d3946"
+      },
+      "directory": "tests/fixtures/consumer-corpus/codeguard-partial",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "693948231e9c4a15a58bf089d0151db7d6373c1e386fe82c505e52437136518c",
+        "envelope.json": "d88132b48b694d9e6635133ba93c78923f7cef332e1ed90f75f62423878320f4",
+        "facts.json": "d6f688c0270184d8515ae7b006c2f3f65b1b5920d3f386e6f34e6dd7b0176bca",
+        "report.json": "c4f9e7b9e091327057471b62985ec69e6a59686858a316184be6704cee2d3946"
       }
     },
     {
@@ -143,6 +239,14 @@
         "contract": "sha256:a18057fde23d3735957b0c3f49f2c4dc64c6c5620b1967d3345c11dbf4502f65",
         "facts": "sha256:f0cd93211b08d916c0f9dc2f15ba7e6e2af237be940a75e560ef4b245fe675fd",
         "report": "sha256:fc1c71f53e8e2895d895a42237f93760c3cb31801da1136587c1d0223d9e112b"
+      },
+      "directory": "tests/fixtures/consumer-corpus/gitguard-local",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "a18057fde23d3735957b0c3f49f2c4dc64c6c5620b1967d3345c11dbf4502f65",
+        "envelope.json": "b51c17505629bd8e62168e58adee393bbe4af7f078739fce462747a753552dfb",
+        "facts.json": "f0cd93211b08d916c0f9dc2f15ba7e6e2af237be940a75e560ef4b245fe675fd",
+        "report.json": "fc1c71f53e8e2895d895a42237f93760c3cb31801da1136587c1d0223d9e112b"
       }
     },
     {
@@ -154,15 +258,57 @@
         "contract": "sha256:1416357726676c1a6f8b2e2ab632cfb0879ab12cb33e0e164e770052ba57931f",
         "facts": "sha256:a6cdcafe0aa939a4f36f64b82062e4d367a505703168e8b4771238420fc6d8d2",
         "report": "sha256:b20ef4f68e1a1867035539d738f3526a718f64a2dc838cae7e8b8059238014eb"
+      },
+      "directory": "tests/fixtures/consumer-corpus/flowguard-gate",
+      "evidenceProfile": "engineBacked",
+      "fixtureSha256": {
+        "contract.yaml": "1416357726676c1a6f8b2e2ab632cfb0879ab12cb33e0e164e770052ba57931f",
+        "envelope.json": "c8ceafe164182b586d791a35bff27162f45a79073f43c7429efe99d14f04d63c",
+        "facts.json": "a6cdcafe0aa939a4f36f64b82062e4d367a505703168e8b4771238420fc6d8d2",
+        "report.json": "b20ef4f68e1a1867035539d738f3526a718f64a2dc838cae7e8b8059238014eb"
+      }
+    },
+    {
+      "case": "archguard-producer",
+      "scope": "actual cargo-declarations-v1 producer; controller-resolved unverified candidate; local advisory only",
+      "decision": "BLOCK",
+      "coverage": "complete",
+      "hashes": {
+        "contract": "sha256:058417d1f9eb816c108b9e63d2a20f0de0caad6684cddb594276168f076a0169",
+        "facts": "sha256:5eba8fc6ccf0e64651e74d34bb641b22f81b3aa2cef34605a2b663f7fd2ffc7d",
+        "report": "sha256:b483dc7111d3ae557ee79c015237d3387b1df0af3339f5baef3e20b20b0a32c6"
+      },
+      "directory": "tests/fixtures/consumer-corpus/archguard-producer",
+      "evidenceProfile": "engineBacked",
+      "producerCommit": "01f2f1325df1030e661dc27793b043545b31ea2b",
+      "producerEngineCommit": "cc0e4e0773ce797235931f379089408b2bcd3bee",
+      "fixtureSha256": {
+        "contract.yaml": "058417d1f9eb816c108b9e63d2a20f0de0caad6684cddb594276168f076a0169",
+        "domain.json": "03293b99923b0dbe3dabaf1879eaef908c068e63bc90dc68fc44ad20735bc188",
+        "envelope.json": "baf719e59edb0006322542948181e395a5c164b211a79aadfdd092b1834368e7",
+        "facts.json": "5eba8fc6ccf0e64651e74d34bb641b22f81b3aa2cef34605a2b663f7fd2ffc7d",
+        "report.json": "b483dc7111d3ae557ee79c015237d3387b1df0af3339f5baef3e20b20b0a32c6"
+      }
+    },
+    {
+      "case": "codeguard-native-only",
+      "scope": "derived contract vector retaining real SDK native attachment bytes and unqualified partial BLOCK; no native qualification claim",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-native-only",
+      "evidenceProfile": "nativeOnly",
+      "fixtureSha256": {
+        "envelope.json": "d88a542fb27e090220ff507326a28af326e5f133c677e13b3f8e6c0bb60bfbe1",
+        "native.json": "ae61b0aca1b4a734bd8271fb6f1e81402c271b45761ae178f44ab89752f2ce9e"
       }
     }
   ],
-  "note": "Local compatibility observations only; no production identity, hosted enforcement, public release or N/N-1 guarantee. ArchGuard binding is a test-side wrapper pending native integration producer.",
+  "note": "Local compatibility observations only; no production identity, hosted enforcement, public release or N/N-1 guarantee. The first five ArchGuard cases retain historical test-side bindings. archguard-producer is the actual Cargo producer. CodeGuard native-only is an explicit derived contract fixture, not a qualified native producer.",
   "producerCommits": {
     "specguard": "c89c8fa8f7acbf6d63cc19bc2c49a245e94fdc4d",
     "archguard": "c5cb98312ae18fc8702a13dae5d80dbddb6d008e",
     "codeguard": "b8f4a6bdbb0adb4f436cf712eacfb88fd29f1ac4",
-    "testguard": "ca392f77748f",
+    "testguard": "ca392f77748f6db835a51d34bb1bb0652cc2e935",
     "gitguard": "14854ff31fd9c721290a5031bba5806bdcbcd9c7",
     "flowguard": "0a5e91209679cd73b55b969d1cd57a164fdf8238"
   }

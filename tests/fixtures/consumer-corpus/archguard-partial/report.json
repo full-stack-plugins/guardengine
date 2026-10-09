@@ -1,0 +1,29 @@
+{
+  "apiVersion": "guard.partme.ai/v1alpha1",
+  "kind": "GuardReport",
+  "evaluationId": "sha256:eae211df53d7d657fcb0e6f2570ff4be37275382c248f2baa2a47aec5439cd94",
+  "engineVersion": "0.1.0",
+  "contractId": "agent-job-boundary",
+  "contractRevision": "1",
+  "contractDigest": "sha256:6a1b79c82db12ace62bc33ed445df445bd532ebf0a4959fc7178a87a5c68cb2b",
+  "factsDigest": "sha256:7a67fa8e84f2a5716066b8bb49eb407e1e13e48ce199a4611828066e2ebddec2",
+  "analyzer": {
+    "id": "archguard.cargo.workspace",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "id": "/workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/examples",
+    "snapshotDigest": "sha256:90d879f31e3385be5236dd820a9211d8e68da06c2e0376dcee456b544cb103d9"
+  },
+  "evaluations": [
+    {
+      "ruleId": "AGJ-ARCH-001",
+      "status": "INDETERMINATE",
+      "enforcement": "enforce",
+      "matchedFacts": [],
+      "detail": "analyzer did not provide a complete fact set: Cargo.toml not found in project root: /workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/examples"
+    }
+  ],
+  "decision": "BLOCK",
+  "signed": false
+}

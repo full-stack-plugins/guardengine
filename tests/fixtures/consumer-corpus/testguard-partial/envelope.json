@@ -1,0 +1,87 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "approvalRefs": [],
+  "artifacts": {
+    "contract": {
+      "digest": "sha256:e894ac59f516f3d2a83875fd6dad0a0256bf8c1acf0b4c9614aedb822025a634",
+      "mediaType": "application/json",
+      "uri": "artifact://testguard/34e9aedefffddf04c3cf3f9e055ba714e9ebe21b828e6170eeb7b610123d9f7d/contract.json"
+    },
+    "domain": [
+      {
+        "digest": "sha256:7176e805066df512465f9241bb0ca571d2fb4ff93eb3ca59e25b3a51fa6c2e43",
+        "mediaType": "application/json",
+        "uri": "artifact://testguard/34e9aedefffddf04c3cf3f9e055ba714e9ebe21b828e6170eeb7b610123d9f7d/domain.json"
+      },
+      {
+        "digest": "sha256:bcd9b71b2ecb50981acf13fefeb674b50ac9cfb886021019507e1b58f5b3411a",
+        "mediaType": "application/json",
+        "uri": "artifact://testguard/34e9aedefffddf04c3cf3f9e055ba714e9ebe21b828e6170eeb7b610123d9f7d/inputs.json"
+      },
+      {
+        "digest": "sha256:917be654eba0b83cc03f2ccaaf0bfc5640c973c1c76642570945ad006790d220",
+        "mediaType": "application/json",
+        "uri": "artifact://testguard/34e9aedefffddf04c3cf3f9e055ba714e9ebe21b828e6170eeb7b610123d9f7d/plan.json"
+      }
+    ],
+    "facts": {
+      "digest": "sha256:77e2f29ca6ae1ed12e5179a6822f8558e36a3cd4f918e1ea43d0bd93f1a772b3",
+      "mediaType": "application/json",
+      "uri": "artifact://testguard/34e9aedefffddf04c3cf3f9e055ba714e9ebe21b828e6170eeb7b610123d9f7d/facts.json"
+    },
+    "report": {
+      "digest": "sha256:2c7ce47a1a040d96b4424484acedaf7c72b85eb9cfdf7e58759b6ef5148ea402",
+      "mediaType": "application/json",
+      "uri": "artifact://testguard/34e9aedefffddf04c3cf3f9e055ba714e9ebe21b828e6170eeb7b610123d9f7d/report.json"
+    }
+  },
+  "binding": {
+    "baseOid": "2222222222222222222222222222222222222222",
+    "baselineDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "candidateOid": "1111111111111111111111111111111111111111",
+    "mergeGroupId": null,
+    "repoId": "fixture:repo",
+    "requirementIds": [
+      "REQ-1",
+      "REQ-2"
+    ],
+    "sourceSnapshotDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "taskId": "fixture-task",
+    "worktreeId": "fixture-worktree"
+  },
+  "coverage": {
+    "missingScopes": [
+      "testguard:test-environment:4e809e6c434e32a6fc37ca0e6b3be2757bb04a261a3ffaf4600d05425a336551"
+    ],
+    "observedScopes": [
+      "testguard:test-environment:41d7245ffd06840aaa50b9292cea68afdcb57390df4989900d3a57ca471f485c",
+      "testguard:test-environment:5c5e340eb345827b32b9a093a3add737fd4fb9adbff774bca945d6d36807bbab",
+      "testguard:test-environment:b5fc0bcb5bf1bf1f3575d1436a47557371f04888fb3fa1fc37c8397d445c74e4",
+      "testguard:test-environment:ba93755bfa94b5e9647b3ef7abdb9b95062f39b3b91a664a4b830d6705414cfd",
+      "testguard:test-environment:e842152a5866fc3699c98de7c66c9c668f762587f9cd642a64a4065d168a22b6"
+    ],
+    "requiredScopes": [
+      "testguard:test-environment:41d7245ffd06840aaa50b9292cea68afdcb57390df4989900d3a57ca471f485c",
+      "testguard:test-environment:4e809e6c434e32a6fc37ca0e6b3be2757bb04a261a3ffaf4600d05425a336551",
+      "testguard:test-environment:5c5e340eb345827b32b9a093a3add737fd4fb9adbff774bca945d6d36807bbab",
+      "testguard:test-environment:b5fc0bcb5bf1bf1f3575d1436a47557371f04888fb3fa1fc37c8397d445c74e4",
+      "testguard:test-environment:ba93755bfa94b5e9647b3ef7abdb9b95062f39b3b91a664a4b830d6705414cfd",
+      "testguard:test-environment:e842152a5866fc3699c98de7c66c9c668f762587f9cd642a64a4065d168a22b6"
+    ],
+    "status": "partial"
+  },
+  "decision": "BLOCK",
+  "diagnostics": [],
+  "expiresAt": null,
+  "finishedAt": "2026-10-09T10:00:01Z",
+  "kind": "GuardRunEnvelope",
+  "producer": {
+    "analyzerId": "testguard-local-evidence",
+    "analyzerVersion": "testguard.engine-map/v1",
+    "guard": "TestGuard",
+    "version": "0.1.0"
+  },
+  "runId": "run1",
+  "runStatus": "completed",
+  "startedAt": "2026-10-09T10:00:00Z"
+}

@@ -1,0 +1,28 @@
+{
+  "apiVersion": "guard.partme.ai/v1alpha1",
+  "kind": "GuardFacts",
+  "analyzer": {
+    "id": "archguard.cargo.workspace",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "id": "/workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/fixtures/forbidden",
+    "snapshotDigest": "sha256:ddc445c0daf16eb2f8f224acbebfd325e6fa963bb00a848449824c20bba89b1f"
+  },
+  "completeness": "complete",
+  "facts": [
+    {
+      "subject": "agent-job",
+      "predicate": "depends_on",
+      "object": "agent-contracts",
+      "source": "agent-job/Cargo.toml"
+    },
+    {
+      "subject": "agent-job",
+      "predicate": "depends_on",
+      "object": "agent-saas",
+      "source": "agent-job/Cargo.toml"
+    }
+  ],
+  "diagnostics": []
+}

@@ -1,0 +1,1 @@
+{"analyzer":{"id":"gitguard.git-scope","version":"1"},"apiVersion":"guard.partme.ai/v1alpha1","completeness":"complete","diagnostics":[],"facts":[],"kind":"GuardFacts","subject":{"id":"git-scope:097a0ebfec9eb591ca563913365792c741a8e66c498986463fb0f485e944c7e6","snapshotDigest":"sha256:77a9a1f3b587a56264e48dd9e34f5a800471bb9602d01822e94fc66b7efc7452"}}

@@ -1,0 +1,36 @@
+{
+  "apiVersion": "guard.partme.ai/v1alpha1",
+  "kind": "GuardReport",
+  "evaluationId": "sha256:beabab308e8779cca99f699216ca66711314f70009b4c451271d9f44d4053985",
+  "engineVersion": "0.1.0",
+  "contractId": "agent-job-boundary",
+  "contractRevision": "1",
+  "contractDigest": "sha256:8e1d2cfebab7b437c738d9ed66d758858952c614646bd2e8eafa6d709c384b42",
+  "factsDigest": "sha256:76e68490ad85b2d566fead9e60eb01fa639c22bc10d220a00a6f907b4b58adff",
+  "analyzer": {
+    "id": "archguard.cargo.workspace",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "id": "/workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/fixtures/forbidden",
+    "snapshotDigest": "sha256:ddc445c0daf16eb2f8f224acbebfd325e6fa963bb00a848449824c20bba89b1f"
+  },
+  "evaluations": [
+    {
+      "ruleId": "AGJ-ARCH-001",
+      "status": "REVIEW_REQUIRED",
+      "enforcement": "review",
+      "matchedFacts": [
+        {
+          "subject": "agent-job",
+          "predicate": "depends_on",
+          "object": "agent-saas",
+          "source": "agent-job/Cargo.toml"
+        }
+      ],
+      "detail": "1 relation(s) need approval"
+    }
+  ],
+  "decision": "REQUIRE_APPROVAL",
+  "signed": false
+}

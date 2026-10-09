@@ -1,0 +1,17 @@
+{
+  "apiVersion": "guard.partme.ai/v1alpha1",
+  "kind": "GuardFacts",
+  "analyzer": {
+    "id": "archguard.cargo.workspace",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "id": "/workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/examples",
+    "snapshotDigest": "sha256:90d879f31e3385be5236dd820a9211d8e68da06c2e0376dcee456b544cb103d9"
+  },
+  "completeness": "partial",
+  "facts": [],
+  "diagnostics": [
+    "Cargo.toml not found in project root: /workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/examples"
+  ]
+}

@@ -1,0 +1,1 @@
+{"apiVersion":"guard.partme.ai/v1alpha1","kind":"GuardContract","metadata":{"id":"agent-job-boundary","revision":"1"},"spec":{"rules":[{"assertion":{"object":"agent-saas","predicate":"depends_on","subject":"agent-job","type":"forbid_relation"},"description":"Agent Job must not depend on Agent SaaS","enforcement":"enforce","id":"AGJ-ARCH-001"}]}}

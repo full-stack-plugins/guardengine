@@ -1,0 +1,36 @@
+{
+  "apiVersion": "guard.partme.ai/v1alpha1",
+  "kind": "GuardReport",
+  "evaluationId": "sha256:d631ba700387ae66dd62e45035d9ea76932a6b6ba03a1374568c68ce87977dd3",
+  "engineVersion": "0.1.0",
+  "contractId": "agent-job-boundary",
+  "contractRevision": "1",
+  "contractDigest": "sha256:535c9ebab5bedc6cb1f6848f94d3e344d7a14c91273465ea71517e4d47bcc78b",
+  "factsDigest": "sha256:76e68490ad85b2d566fead9e60eb01fa639c22bc10d220a00a6f907b4b58adff",
+  "analyzer": {
+    "id": "archguard.cargo.workspace",
+    "version": "0.1.0"
+  },
+  "subject": {
+    "id": "/workspace/guard-implementation-ledger/ge-archguard-matrix/archguard/fixtures/forbidden",
+    "snapshotDigest": "sha256:ddc445c0daf16eb2f8f224acbebfd325e6fa963bb00a848449824c20bba89b1f"
+  },
+  "evaluations": [
+    {
+      "ruleId": "AGJ-ARCH-001",
+      "status": "PASS",
+      "enforcement": "advise",
+      "matchedFacts": [
+        {
+          "subject": "agent-job",
+          "predicate": "depends_on",
+          "object": "agent-saas",
+          "source": "agent-job/Cargo.toml"
+        }
+      ],
+      "detail": "advisory: found 1 matching relation(s)"
+    }
+  ],
+  "decision": "ALLOW",
+  "signed": false
+}

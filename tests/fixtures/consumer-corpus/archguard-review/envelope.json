@@ -1,0 +1,59 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "kind": "GuardRunEnvelope",
+  "runId": "archguard-matrix-review",
+  "producer": {
+    "guard": "archguard",
+    "version": "0.1.0",
+    "analyzerId": "archguard.cargo.workspace",
+    "analyzerVersion": "0.1.0"
+  },
+  "binding": {
+    "repoId": "repo",
+    "taskId": "task",
+    "worktreeId": "worktree",
+    "requirementIds": [
+      "R1"
+    ],
+    "candidateOid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baseOid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "mergeGroupId": null,
+    "sourceSnapshotDigest": "sha256:ddc445c0daf16eb2f8f224acbebfd325e6fa963bb00a848449824c20bba89b1f",
+    "baselineDigest": null
+  },
+  "runStatus": "completed",
+  "decision": "REQUIRE_APPROVAL",
+  "coverage": {
+    "status": "complete",
+    "requiredScopes": [
+      "lint"
+    ],
+    "observedScopes": [
+      "lint"
+    ],
+    "missingScopes": []
+  },
+  "artifacts": {
+    "contract": {
+      "uri": "artifact://local/contract",
+      "digest": "sha256:5650335ca6454f0b009efaac40cf61ca64e337823da2bbcc1d34d84e798af753",
+      "mediaType": "application/json"
+    },
+    "facts": {
+      "uri": "artifact://local/facts",
+      "digest": "sha256:76c527cc93ecfe9cf9a464d991e72bd73ee32a6c9fab3281d751e2bcab0b4f43",
+      "mediaType": "application/json"
+    },
+    "report": {
+      "uri": "artifact://local/report",
+      "digest": "sha256:a6ae138fa46409ae18db3b3c3a1593ce9aa9f670797c2682b11c7251b040daf6",
+      "mediaType": "application/json"
+    },
+    "domain": []
+  },
+  "approvalRefs": [],
+  "diagnostics": [],
+  "startedAt": "2026-10-09T10:00:00Z",
+  "finishedAt": "2026-10-09T10:00:01Z",
+  "expiresAt": null
+}
