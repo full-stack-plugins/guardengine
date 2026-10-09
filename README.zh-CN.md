@@ -6,7 +6,7 @@ GuardEngine 是六个独立专业守卫共用的**确定性规则、契约、证
 
 ## 本地集成实现（待审阅分支）
 
-本分支已增加独立 `guard.integration/v1alpha1` 信封、绑定尝试生命周期、有界证据重算与生产者评估、借用字段 `FactBudget`、纯资格/尝试存储端口，以及 Unix 私有目录的单次工件发布。原生命令和旧协议保持不变。身份端口不代表真实身份提供方，内存 CAS 不代表持久存储；尚未公开发行或完成六守卫联合兼容验收。
+本分支已增加独立 `guard.integration/v1alpha1` 信封、绑定尝试生命周期、有界证据重算与生产者评估、借用字段 `FactBudget`、纯资格/尝试存储端口，以及 Unix 私有目录的单次工件发布。原生命令和旧协议保持不变。身份端口不代表真实身份提供方，内存 CAS 不代表持久存储；六守卫的冻结本地协议矩阵已核验；生产能力、宿主强制检查与公开发行仍未完成。
 
 参见[实施证据](docs/implementation-progress.md)、[集成 YAML 限制](docs/yaml-integration-profile.md)、[事实构建预算](docs/fact-construction-budget.md)、[信任 API](docs/integration-trust-api.md)、[独立本地制品验证](docs/local-artifact-release-adr.md)。下文原始 main 核验记录保留历史事实，集成能力的当前状态以本节和实施证据为准。
 
@@ -66,9 +66,9 @@ CLI 退出码：`0=ALLOW`、`2=BLOCK`、`3=REQUIRE_APPROVAL`、`4=输入、运�
 
 2026-10-09 核验 main `0284f1ef4bb93e6602d5a65a5341f10e01a63ddf`：已有 v0.1.0 Rust crate 与 CLI，edition 2024、最低 Rust 1.85。依据为 `src/protocol.rs`、`src/engine.rs`、`src/analyzer.rs`、`src/main.rs`；`tests/` 中有 10 个测试函数，本轮未执行。
 
-ArchGuard 已通过同级 path 依赖使用引擎。所检查版本的 SpecGuard、TestGuard、GitGuard、FlowGuard 仍只有设计文档；CodeGuard 保留成熟独立实现，后续通过适配器渐进接入，不能替换其现有命令、Hooks、报告与退出码。
+上述历史 main 核验时，ArchGuard 通过同级 path 使用引擎，另外四个守卫只有设计文档。当前本地分支已有六个独立生产者/适配器，CodeGuard 保留成熟实现。精确版本与能力边界见[冻结本地矩阵](docs/local-consumer-matrix.md)。
 
-可信基线/审批、过期与撤销、并行需求隔离、精确合并队列候选绑定及版本化运行封装均为**待实现目标**。草案 `guard.integration/v1alpha1` 是独立封装，不得传给当前严格协议加载器。保留历史 `guard.partme.ai/v1alpha1` 是兼容要求，不表示项目名称带旧前缀。
+可选集成库已实现版本化信封、精确绑定与通过注入认证记录端口执行的通用资格检查，涵盖过期/撤销和追加/CAS 历史。真实身份服务和生产控制器仍未提供。`load_envelope_json` 接受独立 `guard.integration/v1alpha1`；原生 contract/facts/report 加载器不接受此封装。保留历史 `guard.partme.ai/v1alpha1` 是兼容要求，不表示项目名称带旧前缀。
 
 ## Library 与 CI 集成
 
@@ -88,4 +88,4 @@ ArchGuard 已通过同级 path 依赖使用引擎。所检查版本的 SpecGuard
 
 ## OpenSpec 实施待办
 
-新增增量 [proposal](openspec/changes/add-versioned-guard-integration-contracts/proposal.md)、[design](openspec/changes/add-versioned-guard-integration-contracts/design.md)、[规范](openspec/changes/add-versioned-guard-integration-contracts/specs/) 与 [tasks](openspec/changes/add-versioned-guard-integration-contracts/tasks.md)，将架构方案拆成待实施工作。参阅[跨仓依赖路线图](openspec/guard-roadmap.md)与[结构验证记录](openspec/validation-2026-10-09.md)。所有新增实施任务保持未勾选；本分支新增规划，不新增产品功能。前文源码树清单和验证限制对应检查基线或较早的架构审阅阶段；本次另行新增 OpenSpec 文档并记录实际 CLI 校验。既有 change 的任务归属和历史完成证据继续保留。
+新增增量 [proposal](openspec/changes/add-versioned-guard-integration-contracts/proposal.md)、[design](openspec/changes/add-versioned-guard-integration-contracts/design.md)、[规范](openspec/changes/add-versioned-guard-integration-contracts/specs/) 与 [tasks](openspec/changes/add-versioned-guard-integration-contracts/tasks.md)，将架构方案拆成待实施工作。参阅[跨仓依赖路线图](openspec/guard-roadmap.md)与[结构验证记录](openspec/validation-2026-10-09.md)。任务清单已记录独立复核的本地实现，本检查点为17/24，其他任务保持未勾选。当前61项测试及精确边界见[实施进展](docs/implementation-progress.md)。前文源码树清单和验证限制对应检查基线或较早的架构审阅阶段；本次另行新增 OpenSpec 文档并记录实际 CLI 校验。既有 change 的任务归属和历史完成证据继续保留。
