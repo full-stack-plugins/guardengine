@@ -1,0 +1,928 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "producerCommit": "689a316cf87464d9ec267656e0a673a9516b45b0",
+  "producerEngineCommit": "c80ec325449842d51007db2fd507040c53dc8f51",
+  "consumerEngineArchiveSha256": "da5b30c22c28c9db444a0ca9c214b9441c3b7aebd14c223606298547452189bc",
+  "bindingProvenance": "fixture candidate/base IDs and timestamps; actual captured source bytes and producer/tool identities",
+  "qualification": "local single-file Ruff0.16.8 F401 SDK profile only; original CodeGuard lint python remains native exit3; direct tool exits are a distinct command contract",
+  "cases": [
+    {
+      "case": "codeguard-ruff-bad-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-bad-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "complete",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/bad",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "912a7d63c7ed05c7f34e34b2caa1f10ce2eb5fad3315e21e95ebcb8ed208ada5",
+        "findings": 1,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": true,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 1,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "912a7d63c7ed05c7f34e34b2caa1f10ce2eb5fad3315e21e95ebcb8ed208ada5",
+        "envelope.json": "421f060ea93ea270db4c1e374bb8a491cbee4daace31df0e57c1f68e85fb2350",
+        "facts.json": "1be4cc7b74739f1c515aeb017db5849fabd45d5ad7b4a543d7f28d48599846cb",
+        "report.json": "1dd5e239e92a38ba80db7f605343143f89a67f09e7d1e43c685983af3af64dbe"
+      }
+    },
+    {
+      "case": "codeguard-ruff-bad-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-bad-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "REQUIRE_APPROVAL",
+      "coverage": "complete",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/bad",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "912a7d63c7ed05c7f34e34b2caa1f10ce2eb5fad3315e21e95ebcb8ed208ada5",
+        "findings": 1,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": true,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 1,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "912a7d63c7ed05c7f34e34b2caa1f10ce2eb5fad3315e21e95ebcb8ed208ada5",
+        "envelope.json": "0ad444e97771ab36abea65aa19e744f1999006d0c1e3316f39aa7dab5dcd73f3",
+        "facts.json": "1be4cc7b74739f1c515aeb017db5849fabd45d5ad7b4a543d7f28d48599846cb",
+        "report.json": "a64f7d808072da2f966cb16c0a6c8cddeb3aaf5e20d449dd02fa5d97d8d24ca4"
+      }
+    },
+    {
+      "case": "codeguard-ruff-clean-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-clean-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "ALLOW",
+      "coverage": "complete",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/clean",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "537897bbd6aa10aa65f97e9b41a19b683f32b10994acbdcd861a56890470cc89",
+        "findings": 0,
+        "frozenSourceSha256": "8ade5dc0b99fd2af8b246472c8ed410337fc4a214aa5792b979b49f9dc83ecdf",
+        "narrowComplete": true,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "537897bbd6aa10aa65f97e9b41a19b683f32b10994acbdcd861a56890470cc89",
+        "envelope.json": "257e7816ca9721b0ff712ae049bda6489a82b68b8d363fcb687f0ec93c8cdf9d",
+        "facts.json": "d8eed1c8171662eb2bdc30f6ab92dfc72f12480c9ac373a398080779d57c5a15",
+        "report.json": "ea0631b4e6040457d1c07e33070f9e7fba4f3f89acaa87fbc9a3bee79983fc7e"
+      }
+    },
+    {
+      "case": "codeguard-ruff-clean-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-clean-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "ALLOW",
+      "coverage": "complete",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/clean",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "537897bbd6aa10aa65f97e9b41a19b683f32b10994acbdcd861a56890470cc89",
+        "findings": 0,
+        "frozenSourceSha256": "8ade5dc0b99fd2af8b246472c8ed410337fc4a214aa5792b979b49f9dc83ecdf",
+        "narrowComplete": true,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "537897bbd6aa10aa65f97e9b41a19b683f32b10994acbdcd861a56890470cc89",
+        "envelope.json": "4ce942d3fd3a22bf85780ccadcb843a466064ea251ecd9b8e6690dee94c9ca37",
+        "facts.json": "d8eed1c8171662eb2bdc30f6ab92dfc72f12480c9ac373a398080779d57c5a15",
+        "report.json": "60c8b6d7a91ce279c244954c2efc9f738799e3acbc8e6271e9e0d28252f8ed45"
+      }
+    },
+    {
+      "case": "codeguard-ruff-disabled-rule-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-disabled-rule-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/disabled-rule",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "e3a3296cf33737a6ed86a032a9625740bf6f13c7957f956fe97385c79eec80a2",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "e3a3296cf33737a6ed86a032a9625740bf6f13c7957f956fe97385c79eec80a2",
+        "envelope.json": "906460b9348e6d5f4a8a64040244ff784f9670b23d86c0f9ff5ba4ecad148b49",
+        "facts.json": "62a7d7b8d2127c7626fb451b7c3a6d322849416bdd5cd0fb09f8990b24de047e",
+        "report.json": "aa4eafaa551f0fe2a87f5a4ae0d305c1b79b7034a8a7bcc81fafca033cdae88c"
+      }
+    },
+    {
+      "case": "codeguard-ruff-disabled-rule-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-disabled-rule-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/disabled-rule",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "e3a3296cf33737a6ed86a032a9625740bf6f13c7957f956fe97385c79eec80a2",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "e3a3296cf33737a6ed86a032a9625740bf6f13c7957f956fe97385c79eec80a2",
+        "envelope.json": "2c5e5363c7c4f7b91719cc60d10e01c132c32c12230268aa43729e06fa032ed3",
+        "facts.json": "62a7d7b8d2127c7626fb451b7c3a6d322849416bdd5cd0fb09f8990b24de047e",
+        "report.json": "da339de9a9304edeeec3b8de393e08fd67d0d3b852f427739a5c24c888178ce0"
+      }
+    },
+    {
+      "case": "codeguard-ruff-fixed-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-fixed-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "ALLOW",
+      "coverage": "complete",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/fixed",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "f08e71398577fa120ecf23f7ead831015fb2c0f101889088ebe97054d5ccaa32",
+        "findings": 0,
+        "frozenSourceSha256": "f188129314b856b4c77f46eba1c4fe622e01cf5f96958f5a0f69a7bf4cbbc5cc",
+        "narrowComplete": true,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "f08e71398577fa120ecf23f7ead831015fb2c0f101889088ebe97054d5ccaa32",
+        "envelope.json": "3a502834004171f83dc61db0c299d5fcbb4a7b78774f82fad8c70ecef776aabd",
+        "facts.json": "22814c4b642549b006781c40f8a914ae89598f569b6f4cfd5bc0cf293ab01f9f",
+        "report.json": "d1cd517249037d77accd35c210837989434beee9633dbfb2689908e7e01b3a08"
+      }
+    },
+    {
+      "case": "codeguard-ruff-fixed-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-fixed-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "ALLOW",
+      "coverage": "complete",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/fixed",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "f08e71398577fa120ecf23f7ead831015fb2c0f101889088ebe97054d5ccaa32",
+        "findings": 0,
+        "frozenSourceSha256": "f188129314b856b4c77f46eba1c4fe622e01cf5f96958f5a0f69a7bf4cbbc5cc",
+        "narrowComplete": true,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "f08e71398577fa120ecf23f7ead831015fb2c0f101889088ebe97054d5ccaa32",
+        "envelope.json": "fb1ac1d18094168cdfa2a79c1809244cfa4bd0223b6ac790e4b647d25bae42cf",
+        "facts.json": "22814c4b642549b006781c40f8a914ae89598f569b6f4cfd5bc0cf293ab01f9f",
+        "report.json": "6bab5882310c057aacfbec389816f9b5942434c272a98e5841ded44e7b7e2e61"
+      }
+    },
+    {
+      "case": "codeguard-ruff-missing-tool-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-missing-tool-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/missing-tool",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/tmp/cg-ruff-profile-1289920/missing-tool/missing-ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "213e24268d4409c3f6d495aabb070f1dc0e86537c80e458e64ad6f6bc5b6ee6f",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/tmp/cg-ruff-profile-1289920/missing-tool/missing-ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": null,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "213e24268d4409c3f6d495aabb070f1dc0e86537c80e458e64ad6f6bc5b6ee6f",
+        "envelope.json": "2cb6bc104a088a0d8e1c0f4cc05dabbefd66ce3ae749eb7cc8757c69089f7568",
+        "facts.json": "178c977d4106bdb8869f3dfb6d9fdf762e5ca70d57b02fb35f255374467ca44b",
+        "report.json": "96b0b3138e3e8f7a6f6977dd69a025fa6b031af82becceacc8ad3ad10789f050"
+      }
+    },
+    {
+      "case": "codeguard-ruff-missing-tool-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-missing-tool-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/missing-tool",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/tmp/cg-ruff-profile-1289920/missing-tool/missing-ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "213e24268d4409c3f6d495aabb070f1dc0e86537c80e458e64ad6f6bc5b6ee6f",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/tmp/cg-ruff-profile-1289920/missing-tool/missing-ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": null,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "213e24268d4409c3f6d495aabb070f1dc0e86537c80e458e64ad6f6bc5b6ee6f",
+        "envelope.json": "41c83c39944c38f254ae9bb50122137134964ac431a260c879f1e5e795eb0ca3",
+        "facts.json": "178c977d4106bdb8869f3dfb6d9fdf762e5ca70d57b02fb35f255374467ca44b",
+        "report.json": "65933d05bf7fc83d8ba0184d1edd67ecc426cf64f1c720b938cd33ed4be3e515"
+      }
+    },
+    {
+      "case": "codeguard-ruff-noqa-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-noqa-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/noqa",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "c9ad0de8cc147cd9b3a29b923d0fa3d39f70f8e04e4e9c2cf500ebf67aa7a435",
+        "findings": 0,
+        "frozenSourceSha256": "b15b6f75e5ec44aa81abd72063b2a533ec112e54c88857f6c521318eb9fd44f5",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "c9ad0de8cc147cd9b3a29b923d0fa3d39f70f8e04e4e9c2cf500ebf67aa7a435",
+        "envelope.json": "0abee2f392fd5d69e568d58cd52df337b00df8743497ec92144b6aa784a414b2",
+        "facts.json": "123d984814ada7b4db3cb6d046b7d5cad00d0ea61989767802daad228814abbd",
+        "report.json": "ab1445114501ee7d81ae29c548601ea1c4975b46952571f673622f3784d4d740"
+      }
+    },
+    {
+      "case": "codeguard-ruff-noqa-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-noqa-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/noqa",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "c9ad0de8cc147cd9b3a29b923d0fa3d39f70f8e04e4e9c2cf500ebf67aa7a435",
+        "findings": 0,
+        "frozenSourceSha256": "b15b6f75e5ec44aa81abd72063b2a533ec112e54c88857f6c521318eb9fd44f5",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "c9ad0de8cc147cd9b3a29b923d0fa3d39f70f8e04e4e9c2cf500ebf67aa7a435",
+        "envelope.json": "da078621fa9e95d823843426a5bdcda5bf2bd591c9bd424653789cc07439be0d",
+        "facts.json": "123d984814ada7b4db3cb6d046b7d5cad00d0ea61989767802daad228814abbd",
+        "report.json": "9b449052f38bcb6476d778b8b06a6eeddfc6cb144224240ee38b1fe26acd4a7d"
+      }
+    },
+    {
+      "case": "codeguard-ruff-per-file-ignore-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-per-file-ignore-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/per-file-ignore",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "a7f57c9575ae2aa1f4689ac5ee86d60cd472eca325e61235ad88aaa2ebbb70e5",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "a7f57c9575ae2aa1f4689ac5ee86d60cd472eca325e61235ad88aaa2ebbb70e5",
+        "envelope.json": "e2bd070ddd9d78861edf6fd1f518aafc52f3f39b4ba89a03dfe47efe3340262d",
+        "facts.json": "e7c6ea647421f8ccc790da0e0f48649c0d1ba95dc21d08dcf2cde1b04797139a",
+        "report.json": "1f80248670e897ce6e577271ab5cf607ec99c975d8bde16d9982961199a5f0dd"
+      }
+    },
+    {
+      "case": "codeguard-ruff-per-file-ignore-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-per-file-ignore-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/per-file-ignore",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "a7f57c9575ae2aa1f4689ac5ee86d60cd472eca325e61235ad88aaa2ebbb70e5",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "a7f57c9575ae2aa1f4689ac5ee86d60cd472eca325e61235ad88aaa2ebbb70e5",
+        "envelope.json": "25ff0c48b75796e83acaeee8df589fda5923b13a977c623ff8f4a1b98daf12e3",
+        "facts.json": "e7c6ea647421f8ccc790da0e0f48649c0d1ba95dc21d08dcf2cde1b04797139a",
+        "report.json": "00b2eee3b10117e5e0453ff06a5a3e4819ab4b162b818824f15fde987f1de156"
+      }
+    },
+    {
+      "case": "codeguard-ruff-source-changed-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-source-changed-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/source-changed",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "8aa6264d4ed23a5f7b09951ab077a914767c3dbb61daad90df912315bfb33756",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "8aa6264d4ed23a5f7b09951ab077a914767c3dbb61daad90df912315bfb33756",
+        "envelope.json": "bcb804119fe261327f61fe8f5f24e573d6934297442fdfc64ba4893c26c5df9e",
+        "facts.json": "59c61d036fd79da76cdaaac180ea95b06789a114be6d3f231c1aa8f6d1bfaef5",
+        "report.json": "c7264d17a1d4291fbff496f48dc73ce7b3c6e7de17e13c78a1fcbaf70e8b7f2d"
+      }
+    },
+    {
+      "case": "codeguard-ruff-source-changed-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-source-changed-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/source-changed",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "8aa6264d4ed23a5f7b09951ab077a914767c3dbb61daad90df912315bfb33756",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 0,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "8aa6264d4ed23a5f7b09951ab077a914767c3dbb61daad90df912315bfb33756",
+        "envelope.json": "3d1c1e1bb796a181e55b2f94dd9ed8cca936596a870f3bd4338504db5512761d",
+        "facts.json": "59c61d036fd79da76cdaaac180ea95b06789a114be6d3f231c1aa8f6d1bfaef5",
+        "report.json": "0a89a6b9a316228f26560161274e77f2c701b37dbb3303d8d01539b7c3982e48"
+      }
+    },
+    {
+      "case": "codeguard-ruff-tool-error-enforce",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-tool-error-enforce",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/tool-error",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "fdb09e9eba1937a367d3b3a6c654a62e61fdbdedc64c0aa342da080def8d3811",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 2,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "enforce",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "e81dcbd8d3d6e36e6147419019212a19f636a48777f1cad6d51967d457c81f3e",
+        "domain.json": "fdb09e9eba1937a367d3b3a6c654a62e61fdbdedc64c0aa342da080def8d3811",
+        "envelope.json": "88e1c744143a5e3ee7c605448c3b498b6eabb00134f420f539aebe5b7dd79930",
+        "facts.json": "c66b788ad488efb5885bc02be5e6e586d8d04e96d3c01c682b03861a116f2def",
+        "report.json": "57afb810552d73021342a61d35a560dad619649a0d743947a1d554ba71c5d47c"
+      }
+    },
+    {
+      "case": "codeguard-ruff-tool-error-review",
+      "directory": "tests/fixtures/consumer-corpus/codeguard-ruff-tool-error-review",
+      "evidenceProfile": "engineBacked",
+      "scope": "actual single-file Ruff F401 SDK projection; synthetic candidate/base binding; no aggregate qualification or authentication",
+      "decision": "BLOCK",
+      "coverage": "partial",
+      "nativeCapture": {
+        "argv": [
+          "lint",
+          "python",
+          "/tmp/cg-ruff-profile-1289920/tool-error",
+          "--format=json",
+          "--file",
+          "app.py",
+          "--ruff-tool",
+          "/workspace/guard-toolchain/python-native/bin/ruff"
+        ],
+        "codeguardExit": 3,
+        "codeguardSha256": "d9440c1be01a2eeb23dbe1b10fde823128107695cb515c21eb724ddcfffaf8b4",
+        "executable": "/workspace/guard-implementation/codeguard/target/debug/codeguard",
+        "feedbackSha256": "fdb09e9eba1937a367d3b3a6c654a62e61fdbdedc64c0aa342da080def8d3811",
+        "findings": 0,
+        "frozenSourceSha256": "3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+        "narrowComplete": false,
+        "ruffArgv": [
+          "/workspace/guard-toolchain/python-native/bin/ruff",
+          "check",
+          "--no-cache",
+          "--output-format",
+          "json",
+          "app.py"
+        ],
+        "ruffExit": 2,
+        "toolSha256": "f3eb080f0173e1a5884fabcc2c836f5a0ebea35fccf252e718fc71b17f821ef7"
+      },
+      "enforcement": "review",
+      "domainArtifacts": [
+        {
+          "file": "domain.json",
+          "referenceIndex": 0
+        }
+      ],
+      "fixtureSha256": {
+        "contract.yaml": "724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+        "domain.json": "fdb09e9eba1937a367d3b3a6c654a62e61fdbdedc64c0aa342da080def8d3811",
+        "envelope.json": "5ad02fa5f2d38d3c2c71ff7bf34b5dd00bc02c62cbdd4b3e18da1d94817d8836",
+        "facts.json": "c66b788ad488efb5885bc02be5e6e586d8d04e96d3c01c682b03861a116f2def",
+        "report.json": "399f19e4f8cba1aff0e949aac4412bacd621dba6faa6214396cd815dcbe81f58"
+      }
+    }
+  ]
+}

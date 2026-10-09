@@ -14,6 +14,10 @@ fn frozen_six_consumer_bytes_verify_and_reject_mutations() {
     let manifest = manifest();
     let cases = manifest["cases"].as_array().unwrap();
     assert_eq!(cases.len(), 16);
+    verify_cases(cases);
+}
+
+fn verify_cases(cases: &[Value]) {
     for case in cases {
         let name = case["case"].as_str().unwrap();
         let directory =
@@ -88,5 +92,62 @@ fn frozen_six_consumer_bytes_verify_and_reject_mutations() {
             weak.validate(EvidenceProfile::EngineBacked).is_err(),
             "{name}: stronger capability"
         );
+    }
+}
+
+#[test]
+fn actual_ruff_profile_preserves_command_aware_native_outcomes() {
+    let manifest: Value = serde_json::from_str(include_str!(
+        "../schemas/integration/consumer-matrix-ruff-f401.json"
+    ))
+    .unwrap();
+    let cases = manifest["cases"].as_array().unwrap();
+    assert_eq!(cases.len(), 18);
+    verify_cases(cases);
+    for case in cases {
+        let directory =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(case["directory"].as_str().unwrap());
+        let native_bytes = fs::read(directory.join("domain.json")).unwrap();
+        let native: Value = serde_json::from_slice(&native_bytes).unwrap();
+        let envelope = load_envelope_json(
+            &fs::read(directory.join("envelope.json")).unwrap(),
+            EvidenceProfile::EngineBacked,
+        )
+        .unwrap();
+        assert_eq!(
+            envelope.artifacts.domain[0].digest,
+            format!("sha256:{:x}", Sha256::digest(&native_bytes))
+        );
+        assert_eq!(case["nativeCapture"]["argv"][0], "lint");
+        assert_eq!(case["nativeCapture"]["argv"][1], "python");
+        assert_eq!(case["nativeCapture"]["codeguardExit"], 3);
+        assert_eq!(native["exit_code"], 3);
+        assert_eq!(
+            format!("{:x}", Sha256::digest(&native_bytes)),
+            case["nativeCapture"]["feedbackSha256"].as_str().unwrap()
+        );
+        // CodeGuard's aggregate 3 remains native incomplete. A separately
+        // frozen F401-only observation can be complete; it never upgrades the
+        // aggregate command or interprets its numeric 3 as approval.
+        if case["nativeCapture"]["narrowComplete"] == true {
+            assert_eq!(case["coverage"], "complete");
+            if case["nativeCapture"]["findings"] == 0 {
+                assert_eq!(case["decision"], "ALLOW");
+                assert_eq!(case["nativeCapture"]["ruffExit"], 0);
+            } else {
+                assert_eq!(case["nativeCapture"]["ruffExit"], 1);
+                assert_eq!(
+                    case["decision"],
+                    if case["enforcement"] == "review" {
+                        "REQUIRE_APPROVAL"
+                    } else {
+                        "BLOCK"
+                    }
+                );
+            }
+        } else {
+            assert_eq!(case["coverage"], "partial");
+            assert_eq!(case["decision"], "BLOCK");
+        }
     }
 }

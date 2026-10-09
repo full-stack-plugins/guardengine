@@ -1,0 +1,1 @@
+{"apiVersion":"guard.partme.ai/v1alpha1","kind":"GuardFacts","analyzer":{"id":"codeguard.native-projection","version":"0.1.0"},"subject":{"id":"repo","snapshotDigest":"sha256:f188129314b856b4c77f46eba1c4fe622e01cf5f96958f5a0f69a7bf4cbbc5cc"},"completeness":"complete","facts":[],"diagnostics":[]}

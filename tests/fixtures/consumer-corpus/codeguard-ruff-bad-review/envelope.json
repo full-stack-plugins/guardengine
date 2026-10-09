@@ -1,0 +1,72 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "kind": "GuardRunEnvelope",
+  "runId": "lint-1289983-1791541721443950068",
+  "producer": {
+    "guard": "codeguard",
+    "version": "0.1.4",
+    "analyzerId": "codeguard.native-projection",
+    "analyzerVersion": "0.1.0"
+  },
+  "binding": {
+    "repoId": "repo",
+    "taskId": "task",
+    "worktreeId": "worktree",
+    "requirementIds": [
+      "ruff-f401"
+    ],
+    "candidateOid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baseOid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "mergeGroupId": null,
+    "sourceSnapshotDigest": "sha256:3727adff524e0616022eadd8f4af21a0778b29fc4c77bdfefd1afce2cbf5e4b7",
+    "baselineDigest": null
+  },
+  "runStatus": "completed",
+  "decision": "REQUIRE_APPROVAL",
+  "coverage": {
+    "status": "complete",
+    "requiredScopes": [
+      "python/ruff-f401/a6a3b165ae4d9dd7cf422f3b05e28958d67152036af1e3eb655d91357d6e8d7f"
+    ],
+    "observedScopes": [
+      "python/ruff-f401/a6a3b165ae4d9dd7cf422f3b05e28958d67152036af1e3eb655d91357d6e8d7f"
+    ],
+    "missingScopes": []
+  },
+  "artifacts": {
+    "contract": {
+      "uri": "artifact://lint-1289983-1791541721443950068/contract.json",
+      "digest": "sha256:724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+      "mediaType": "application/json"
+    },
+    "facts": {
+      "uri": "artifact://lint-1289983-1791541721443950068/facts.json",
+      "digest": "sha256:1be4cc7b74739f1c515aeb017db5849fabd45d5ad7b4a543d7f28d48599846cb",
+      "mediaType": "application/json"
+    },
+    "report": {
+      "uri": "artifact://lint-1289983-1791541721443950068/report.json",
+      "digest": "sha256:a64f7d808072da2f966cb16c0a6c8cddeb3aaf5e20d449dd02fa5d97d8d24ca4",
+      "mediaType": "application/json"
+    },
+    "domain": [
+      {
+        "uri": "artifact://lint-1289983-1791541721443950068/native.json",
+        "digest": "sha256:912a7d63c7ed05c7f34e34b2caa1f10ce2eb5fad3315e21e95ebcb8ed208ada5",
+        "mediaType": "application/json"
+      }
+    ]
+  },
+  "approvalRefs": [],
+  "diagnostics": [
+    {
+      "code": "qualified_scope_complete",
+      "message": "qualified_scope_complete",
+      "retryable": false,
+      "source": null
+    }
+  ],
+  "startedAt": "2026-10-09T00:00:00Z",
+  "finishedAt": "2026-10-09T00:01:00Z",
+  "expiresAt": null
+}

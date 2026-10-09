@@ -1,0 +1,72 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "kind": "GuardRunEnvelope",
+  "runId": "lint-1290639-1791541722721468215",
+  "producer": {
+    "guard": "codeguard",
+    "version": "0.1.4",
+    "analyzerId": "codeguard.native-projection",
+    "analyzerVersion": "0.1.0"
+  },
+  "binding": {
+    "repoId": "repo",
+    "taskId": "task",
+    "worktreeId": "worktree",
+    "requirementIds": [
+      "ruff-f401"
+    ],
+    "candidateOid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baseOid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "mergeGroupId": null,
+    "sourceSnapshotDigest": "sha256:b15b6f75e5ec44aa81abd72063b2a533ec112e54c88857f6c521318eb9fd44f5",
+    "baselineDigest": null
+  },
+  "runStatus": "completed",
+  "decision": "BLOCK",
+  "coverage": {
+    "status": "partial",
+    "requiredScopes": [
+      "python/ruff-f401/c2db324936993cd1005a717d3a6bf5df15401e7875ee52f5a29163e6ea11bb98"
+    ],
+    "observedScopes": [],
+    "missingScopes": [
+      "python/ruff-f401/c2db324936993cd1005a717d3a6bf5df15401e7875ee52f5a29163e6ea11bb98"
+    ]
+  },
+  "artifacts": {
+    "contract": {
+      "uri": "artifact://lint-1290639-1791541722721468215/contract.json",
+      "digest": "sha256:724a415b4e23c1a64821836b4a26f1a198750057e6328f69ae854675bb04ebb0",
+      "mediaType": "application/json"
+    },
+    "facts": {
+      "uri": "artifact://lint-1290639-1791541722721468215/facts.json",
+      "digest": "sha256:123d984814ada7b4db3cb6d046b7d5cad00d0ea61989767802daad228814abbd",
+      "mediaType": "application/json"
+    },
+    "report": {
+      "uri": "artifact://lint-1290639-1791541722721468215/report.json",
+      "digest": "sha256:9b449052f38bcb6476d778b8b06a6eeddfc6cb144224240ee38b1fe26acd4a7d",
+      "mediaType": "application/json"
+    },
+    "domain": [
+      {
+        "uri": "artifact://lint-1290639-1791541722721468215/native.json",
+        "digest": "sha256:c9ad0de8cc147cd9b3a29b923d0fa3d39f70f8e04e4e9c2cf500ebf67aa7a435",
+        "mediaType": "application/json"
+      }
+    ]
+  },
+  "approvalRefs": [],
+  "diagnostics": [
+    {
+      "code": "native_profile_unqualified",
+      "message": "native_profile_unqualified",
+      "retryable": false,
+      "source": null
+    }
+  ],
+  "startedAt": "2026-10-09T00:00:00Z",
+  "finishedAt": "2026-10-09T00:01:00Z",
+  "expiresAt": null
+}
