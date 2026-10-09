@@ -1,8 +1,8 @@
 # Native compatibility and local joint acceptance reconciliation
 
-Review candidate, 2026-10-09. GE source `b0e4b445e1a20a9354d55ebb41bbedaf16ec8a74`.
+Reviewed and accepted for tasks 2.1/4.4, 2026-10-09. GE source `b0e4b445e1a20a9354d55ebb41bbedaf16ec8a74`.
 This evidence-only change adds no runtime implementation, changes no specialist
-repository, reruns no producer/matrix, and does not change task checkboxes.
+repository, reruns no producer/matrix, and its follow-up registration checks only tasks 2.1/4.4 under the explicit ruling below.
 The [machine-readable index](evidence/2026-10-09-native-and-joint-reconciliation.json)
 pins original evidence paths and SHA-256 values; those retained ledger files are
 required for independent reinspection. The index is not a self-contained release
@@ -24,7 +24,7 @@ Original evidence: ledger `guardengine-native-retrospective-report.md` and
 Fixed pre-adapter sources were GE `e9261e6164291662eb402421b5d73278c8637155`
 and AG `9ed191acf3c3b1f9c0ca9edf3d0621b6a7c53f04`; compared sources were
 extracted GE `c80ec325449842d51007db2fd507040c53dc8f51` and matrix AG
-`c5cb983` (the original ledger retains precise binary hashes). Old suites recorded
+`c5cb98312ae18fc8702a13dae5d80dbddb6d008e` (the original ledger retains precise binary hashes). Old suites recorded
 10 GE and 5 AG passes; the retrospective matrix executed 56 actual CLI calls.
 
 For each allow/block/review/advisory/partial case, both generations ran AG check
@@ -78,3 +78,14 @@ Root review inputs: ledger `flowguard-joint-independent-review.md`, original
 `flowguard-joint-drift-independent-capture/{result.json,drift-isolation.json}`.
 All are digest-pinned by the index. No rollout/rollback claim is inferred here;
 that is task 4.3 and remains open.
+
+## Independent review and root ruling
+
+Independent review of `c5f156e4fe7f11f649c3dbad3519d9ca928b27b4` passed;
+ledger `guardengine-native-joint-doc-independent-review.md` and its machine check
+are digest-pinned in the index. Root accepted 4.4 for its original local
+queue/concurrency/expiry scope and accepted 2.1 functional compatibility using
+retrospective fixed-source verification as an explicit historical process exception.
+The pre-adapter capture chronology remains unsatisfied, not retroactively rewritten.
+Only these two boxes are registered; GE is 22/24, with 4.3 and 4.6 still open.
+Earlier review-pending text above records the evidence submission, not the final ruling.

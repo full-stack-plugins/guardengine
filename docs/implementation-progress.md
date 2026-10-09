@@ -73,3 +73,12 @@ task 4.4 reuses independently executed local queue/concurrency/expiry evidence w
 exact GE `b0e4b445`. Both await root acceptance. Task 4.3 still needs the explicit
 all-adapter rollout progression; 4.6 still needs documentation reconciliation and
 final acceptance. No checkboxes changed and no production release/trust claim added.
+
+## Accepted remaining native/joint evidence: 22/24
+
+Root accepted independent review of c5f156e; see
+[the acceptance record](reviews/accepted-2-1-4-4-20261009.md). Task 2.1 uses an
+explicit retrospective functional substitute with its irrecoverable pre-change
+timing deviation retained. Task 4.4 is accepted for the original local joint
+queue/concurrency/expiry profile. Only these two task boxes changed. Tasks 4.3
+and 4.6 remain open, as do the separate publication/signing/capability umbrellas.

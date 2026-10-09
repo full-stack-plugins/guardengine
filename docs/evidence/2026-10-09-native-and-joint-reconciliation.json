@@ -47,6 +47,18 @@
     {
       "path": "/workspace/guard-implementation-ledger/flowguard-joint-independent-review.md",
       "sha256": "0adb5a5d4033b44a7b80c20514c2d2ca0fda3545202a2ea0f56bd52253157f13"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/ge-archguard-matrix/pins.json",
+      "sha256": "0a48244af0b24ba10a8c89ecbc2cd429eb63f8802e90a5842e1cffde7aceea96"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/guardengine-native-joint-doc-independent-check.json",
+      "sha256": "42e4385b376c89717ac17ee7215ca273ec58fdc3d80a569ed21ed0f24b0e4bb9"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/guardengine-native-joint-doc-independent-review.md",
+      "sha256": "4f9b9ffd07a9c22759e6791f6980e277e14e7f721c789d256c07bc224d8816ed"
     }
   ],
   "joint_source_pins": {
