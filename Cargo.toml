@@ -3,7 +3,8 @@ name = "guardengine"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.85"
-description = "Deterministic contract and evidence engine for Partme Guard"
+description = "Deterministic contract and evidence engine for independent Guards"
+repository = "https://github.com/full-stack-plugins/guardengine"
 license = "Apache-2.0"
 
 [dependencies]

@@ -1,4 +1,4 @@
-//! Partme GuardEngine: a deterministic core for rule, contract and evidence evaluation.
+//! GuardEngine: a deterministic core for rule, contract and evidence evaluation.
 //! Domain-specific analyzers stay in individual Guard projects.
 pub mod analyzer;
 pub mod engine;
