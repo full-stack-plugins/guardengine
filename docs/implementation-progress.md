@@ -24,3 +24,9 @@ Branch `impl/guard-roadmap-20261009`; source baseline `e9261e6164291662eb402421b
 - Preserved native engine evaluation code. Golden compact typed serialization pinned separately from historical core digests.
 - `cargo test --all-targets`: 16 passed (10 historical, 6 integration); `cargo clippy --all-targets -- -D warnings`: passed. Python Draft 2020-12 schema-vector test passed. RED logs show missing semantic validation and missing artifact verification failing before implementation; initial artifact fixture error was corrected before the behavioral RED run.
 - Tasks 1.1–1.5 and 2.2 have substantial implementation, but reviewer approval, all named acceptance fixtures and consumer matrix remain pending. 1.6, 2.1/2.3–2.6, trust, publication and end-to-end gates are not complete. No task boxes changed.
+
+## Independent contract review and corrections
+
+Review of 4e881ba identified an important multiplicative recomputation budget issue. Commit36d63a5 adds conservative expansion/comparison preflight before unchanged core evaluation; the same reviewer reproduction now rejects early and peak memory fell from133MiB to8.4MiB (environment-specific observation, not capacity guarantee). A schema URI-control discrepancy was fixed, and final-newline lexical vectors were added. Final core+integration suite17tests, schema vectors and strict clippy pass. Original16tests also pass on declared MSRV Rust1.85.0.
+
+Independent review accepted full tasks1.1 and1.2 locally; those two boxes are checked. Tasks1.3–1.5 remain partial, task2.2 behavior is accepted but its staged prerequisites remain open. The GE-CONTRACT gate is not complete, no production trust/release/queue acceptance is claimed. Review artifacts live in cloud execution ledger guardengine-contract-review.md; implementation fixes remain local and unpushed.

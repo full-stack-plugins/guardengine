@@ -116,11 +116,11 @@
         },
         "candidateOid": {
           "type": "string",
-          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$(?![\\s\\S])"
         },
         "baseOid": {
           "type": "string",
-          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$(?![\\s\\S])"
         },
         "mergeGroupId": {
           "anyOf": [
@@ -137,13 +137,13 @@
         },
         "sourceSnapshotDigest": {
           "type": "string",
-          "pattern": "^sha256:[0-9a-f]{64}$"
+          "pattern": "^sha256:[0-9a-f]{64}$(?![\\s\\S])"
         },
         "baselineDigest": {
           "anyOf": [
             {
               "type": "string",
-              "pattern": "^sha256:[0-9a-f]{64}$"
+              "pattern": "^sha256:[0-9a-f]{64}$(?![\\s\\S])"
             },
             {
               "type": "null"
@@ -332,14 +332,14 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 4096,
-      "pattern": "(?:Z|\\+00:00|-00:00)$",
+      "pattern": "(?:Z|\\+00:00|-00:00)$(?![\\s\\S])",
       "format": "date-time"
     },
     "finishedAt": {
       "type": "string",
       "minLength": 1,
       "maxLength": 4096,
-      "pattern": "(?:Z|\\+00:00|-00:00)$",
+      "pattern": "(?:Z|\\+00:00|-00:00)$(?![\\s\\S])",
       "format": "date-time"
     },
     "expiresAt": {
@@ -348,7 +348,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "(?:Z|\\+00:00|-00:00)$",
+          "pattern": "(?:Z|\\+00:00|-00:00)$(?![\\s\\S])",
           "format": "date-time"
         },
         {
@@ -371,7 +371,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^artifact://[^\\s\\u0000-\\u001f\\u007f-\\u009f%\\\\?#@:/]+(?:/[^\\s\\u0000-\\u001f\\u007f-\\u009f%\\\\?#@:/]+)+$",
+          "pattern": "^artifact://[^\\s\\u0000-\\u001f\\u007f-\\u009f%\\\\?#@:/]+(?:/[^\\s\\u0000-\\u001f\\u007f-\\u009f%\\\\?#@:/]+)+$(?![\\s\\S])",
           "allOf": [
             {
               "not": {
@@ -382,7 +382,7 @@
         },
         "digest": {
           "type": "string",
-          "pattern": "^sha256:[0-9a-f]{64}$"
+          "pattern": "^sha256:[0-9a-f]{64}$(?![\\s\\S])"
         },
         "mediaType": {
           "type": "string",

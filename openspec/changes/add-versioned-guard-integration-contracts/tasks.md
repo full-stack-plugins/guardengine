@@ -5,7 +5,7 @@
 **Tech Stack:** existing Rust 2024/Serde/sha2; new dependencies and provider choices require review, not assumed installation.
 **Spec:** [envelope](specs/guard-integration-envelope/spec.md), [eligibility](specs/guard-evidence-eligibility/spec.md), [compatibility](specs/guard-adapter-compatibility/spec.md), [design](design.md), [roadmap](../../guard-roadmap.md).
 
-All 24 tasks below are **pending implementation**. Existing bootstrap work is evidence to preserve, not work to repeat or check again. Documentation/strict validation does not complete any runtime task. Implementation begins only under a later authorized implementation scope; no code is added by this change.
+Tasks 1.1 and 1.2 are locally implemented and independently accepted; 22 tasks remain pending full acceptance. Existing bootstrap work is evidence to preserve, not work to repeat or check again. Documentation/strict validation does not complete any runtime task. Implementation was subsequently authorized; evidence and remaining limits are recorded in docs/implementation-progress.md.
 
 ## Global constraints and review focus
 
@@ -15,8 +15,8 @@ Each implementation item includes a testable artifact. For each runtime item, fi
 
 ## 1. GE-CONTRACT — freeze contracts before consumers
 
-- [ ] 1.1 Record `schemas/integration/decisions.md` with approved envelope field types, nullable fields, producer profiles, resource limits, canonicalization and semantic-version policy; acceptance: every field in docs/integration-contract.md is mapped or explicitly resolved, with reviewer decision references and no implicit N/N-1 claim.
-- [ ] 1.2 Define proposed Rust input/output types in `src/integration/model.rs` and schema in `schemas/integration/v1alpha1/guard-run-envelope.schema.json`; test `required_fields_and_profiles` accepts complete engine/native profiles and rejects missing required fields without altering existing schemas.
+- [x] 1.1 Record `schemas/integration/decisions.md` with approved envelope field types, nullable fields, producer profiles, resource limits, canonicalization and semantic-version policy; acceptance: every field in docs/integration-contract.md is mapped or explicitly resolved, with reviewer decision references and no implicit N/N-1 claim.
+- [x] 1.2 Define proposed Rust input/output types in `src/integration/model.rs` and schema in `schemas/integration/v1alpha1/guard-run-envelope.schema.json`; test `required_fields_and_profiles` accepts complete engine/native profiles and rejects missing required fields without altering existing schemas.
 - [ ] 1.3 Create `tests/fixtures/integration-envelope/` vectors for valid, unknown version/field, invalid enum, native-only capability mismatch and malformed reference; test `closed_schema_rejects_extensions` rejects every negative vector before evaluation.
 - [ ] 1.4 Define independent pre-binding transport diagnostics and bound-attempt lifecycle in `src/integration/validation.rs`; test `unresolved_candidate_has_no_envelope` proves no fabricated OID, scope or producer profile and error/cancelled decisions are null after binding.
 - [ ] 1.5 Freeze deterministic envelope fixture serialization and artifact reference verification in `tests/integration_contract.rs`; test `golden_vectors_are_repeatable` repeats normalization and distinguishes rule/diagnostic order from unordered requirement IDs without modifying current engine digests.
