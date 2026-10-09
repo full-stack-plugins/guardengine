@@ -47,6 +47,7 @@ fn bound_failure_keeps_null_verdict_and_original_binding() {
     for status in [RunStatus::Error, RunStatus::Cancelled] {
         let attempt = prepare_attempt(draft()).unwrap();
         let output = AttemptOutput {
+            coverage: draft().coverage.unwrap(),
             run_status: status.clone(),
             decision: None,
             artifacts: Artifacts {
@@ -70,4 +71,44 @@ fn bound_failure_keeps_null_verdict_and_original_binding() {
         assert_eq!(e.decision, None);
         assert_eq!(e.run_status, status);
     }
+}
+
+#[test]
+fn required_scope_freezes_but_observed_coverage_is_an_outcome() {
+    use guardengine::{Decision, integration::CoverageStatus};
+    let original: GuardRunEnvelope = serde_json::from_slice(include_bytes!(
+        "fixtures/integration-envelope/valid-native.json"
+    ))
+    .unwrap();
+    let mut initial = draft();
+    let coverage = initial.coverage.as_mut().unwrap();
+    coverage.status = CoverageStatus::Partial;
+    coverage.observed_scopes.clear();
+    coverage.missing_scopes = coverage.required_scopes.clone();
+    let output = AttemptOutput {
+        coverage: original.coverage.clone(),
+        run_status: RunStatus::Completed,
+        decision: Some(Decision::Allow),
+        artifacts: original.artifacts.clone(),
+        approval_refs: vec![],
+        diagnostics: vec![],
+        finished_at: original.finished_at.clone(),
+        expires_at: None,
+    };
+    let completed = prepare_attempt(initial).unwrap().finish(output).unwrap();
+    assert_eq!(completed.coverage.status, CoverageStatus::Complete);
+    let mut weaker = original.coverage.clone();
+    weaker.required_scopes = vec!["other".into()];
+    weaker.observed_scopes = vec!["other".into()];
+    let output = AttemptOutput {
+        coverage: weaker,
+        run_status: RunStatus::Completed,
+        decision: Some(Decision::Allow),
+        artifacts: original.artifacts,
+        approval_refs: vec![],
+        diagnostics: vec![],
+        finished_at: original.finished_at,
+        expires_at: None,
+    };
+    assert!(prepare_attempt(draft()).unwrap().finish(output).is_err());
 }

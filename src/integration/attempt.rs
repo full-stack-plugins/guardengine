@@ -10,6 +10,7 @@ pub struct InvocationDraft {
     pub started_at: String,
 }
 pub struct AttemptOutput {
+    pub coverage: Coverage,
     pub run_status: RunStatus,
     pub decision: Option<crate::Decision>,
     pub artifacts: Artifacts,
@@ -79,6 +80,13 @@ impl BoundAttempt {
         mut self,
         output: AttemptOutput,
     ) -> Result<GuardRunEnvelope, TransportDiagnostic> {
+        if output.coverage.required_scopes != self.envelope.coverage.required_scopes {
+            return Err(transport(
+                "coverage.changed",
+                "attempt outcome changed frozen required scopes",
+            ));
+        }
+        self.envelope.coverage = output.coverage;
         self.envelope.run_status = output.run_status;
         self.envelope.decision = output.decision;
         self.envelope.artifacts = output.artifacts;
