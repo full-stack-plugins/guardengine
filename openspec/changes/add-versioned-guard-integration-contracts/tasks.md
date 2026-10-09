@@ -5,7 +5,7 @@
 **Tech Stack:** existing Rust 2024/Serde/sha2; new dependencies and provider choices require review, not assumed installation.
 **Spec:** [envelope](specs/guard-integration-envelope/spec.md), [eligibility](specs/guard-evidence-eligibility/spec.md), [compatibility](specs/guard-adapter-compatibility/spec.md), [design](design.md), [roadmap](../../guard-roadmap.md).
 
-Tasks 1.1–1.5, 2.5, 3.1–3.5, 4.1 (local artifact) and 4.5 are locally implemented and independently accepted; 11 tasks remain pending full acceptance. Existing bootstrap work is evidence to preserve, not work to repeat or check again. Documentation/strict validation does not complete any runtime task. Implementation was subsequently authorized; evidence and remaining limits are recorded in docs/implementation-progress.md.
+Tasks 1.1–1.5, 2.3–2.5, 3.1–3.5, 4.1 (local artifact) and 4.5 are locally implemented and independently accepted; 9 tasks remain pending full acceptance. Existing bootstrap work is evidence to preserve, not work to repeat or check again. Documentation/strict validation does not complete any runtime task. Implementation was subsequently authorized; evidence and remaining limits are recorded in docs/implementation-progress.md.
 
 ## Global constraints and review focus
 
@@ -26,8 +26,8 @@ Each implementation item includes a testable artifact. For each runtime item, fi
 
 - [ ] 2.1 Capture current evaluate/verify and ArchGuard command fixtures in `tests/adapter_compatibility.rs`; assert 0/2/3/4, --report output destination and consistent BLOCK verification exit 2 before any adapter change; keep old test suite green.
 - [ ] 2.2 Implement the reviewed opt-in adapter contracts in `src/integration/adapter.rs` after GE-CONTRACT; test `envelope_report_decisions_agree` checks exact artifact digests and rejects mismatched envelope/report outcomes.
-- [ ] 2.3 Add `completed_partial_vs_execution_error` fixtures for valid partial BLOCK, crash, cancellation, serialization failure and stale output files; assert runStatus/nullable decision distinctions and diagnostic-only artifact preservation.
-- [ ] 2.4 Add bounded input/reference validation and atomic per-attempt output publication to the **new adapter surface**; tests `oversized_input_rejected` and `interrupted_publish_not_current` cover budgets, allowed paths and failed writes without silently changing old CLI flags.
+- [x] 2.3 Add `completed_partial_vs_execution_error` fixtures for valid partial BLOCK, crash, cancellation, serialization failure and stale output files; assert runStatus/nullable decision distinctions and diagnostic-only artifact preservation.
+- [x] 2.4 Add bounded input/reference validation and atomic per-attempt output publication to the **new adapter surface**; tests `oversized_input_rejected` and `interrupted_publish_not_current` cover budgets, allowed paths and failed writes without silently changing old CLI flags.
 - [x] 2.5 Test neutral-rule parity through adapter against `evaluate`: `exact_relation_parity`, `source_preserved`, `advisory_matches_visible`, `partial_dominates`; no requirement graph, language parser or workflow policy may be imported into engine modules.
 - [ ] 2.6 Run differential integration with a pinned ArchGuard producer and CodeGuard native-only fixtures; assert command-aware mapping, declared coverage and rejected stronger profiles; record GE-ADAPTER artifacts and keep specialist implementations independent.
 

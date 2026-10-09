@@ -44,3 +44,9 @@ Added optional private-store staging/no-clobber immutable publication, cancellat
 ## Reviewed checkpoint: parity and deferred decisions
 
 Tasks 2.5 and 4.5 accepted by independent publication review: neutral-rule differential tests preserve exact relations, sources, advisory visibility and partial dominance; optional services, signing, OPA and canonicalization changes have separate explicit deferrals. The later YAML alias P1 was corrected in 4af3853 and independently retested; this does not close unrelated adapter or release tasks. FactBudget in 0907beb has four additional regression tests and remains separately reviewed before consumer acceptance.
+
+## Reviewed fault boundary and compatibility work
+
+Tasks2.3/2.4 accepted after6ae9bb4a: real child crash/cancel, partial serialization sink failure, no new final successful file, old attempt preservation and explicit recovery diagnostics. Full60tests independently repeated; this is private Linux/local adapter publication, not a current pointer or supervisor. Local acceptance is now15/24.
+
+See local-consumer-matrix.md for14 actual artifact sets and70 negative checks. This does not yet complete all-six native producer, authenticated trust, hosted enforcement or release gates. Task2.1 historical ordering caveat remains explicit; retrospective compatibility evidence is preserved rather than labelled historical RED.
