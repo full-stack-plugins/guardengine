@@ -127,21 +127,7 @@ pub fn evaluate_eligibility(
         },
     };
     let code = (|| {
-        if policy.action.trim().is_empty()
-            || policy.producer_principals.is_empty()
-            || policy
-                .producer_principals
-                .iter()
-                .any(|p| p.trim().is_empty())
-            || policy
-                .approval_principals
-                .iter()
-                .any(|(purpose, principals)| {
-                    purpose.trim().is_empty()
-                        || principals.is_empty()
-                        || principals.iter().any(|p| p.trim().is_empty())
-                })
-        {
+        if !policy.valid() {
             return InvalidPolicy;
         }
         if envelope.validate(EvidenceProfile::EngineBacked).is_err() {
@@ -214,14 +200,7 @@ pub fn evaluate_eligibility(
                         Err(AuthorityError::Unavailable) => return ProviderUnavailable,
                         Err(AuthorityError::Untrusted) => return InvalidApproval,
                     };
-                    if approval.action != policy.action
-                        || approval.binding != policy.binding
-                        || approval.contract_digest != policy.contract_digest
-                        || !approval.validity.current(now)
-                        || !policy
-                            .approval_principals
-                            .get(&approval.purpose)
-                            .is_some_and(|p| p.contains(&approval.principal))
+                    if validate_approval_record(&approval, policy, &approval.purpose, now).is_err()
                     {
                         return InvalidApproval;
                     }
@@ -246,7 +225,47 @@ pub fn evaluate_eligibility(
     result.audit.code = code;
     result
 }
+/// Validate an already authenticated approval against a protected controller policy.
+/// The caller obtains the record from its authority provider and supplies trusted UTC
+/// Unix seconds. This does not authenticate the record, grant execution, or change a
+/// technical decision. Validity is inclusive at issuance and exclusive at expiry.
+pub fn validate_approval_record(
+    record: &ApprovalRecord,
+    policy: &EligibilityPolicy,
+    purpose: &str,
+    now: i64,
+) -> Result<(), EligibilityCode> {
+    if !policy.valid() {
+        return Err(EligibilityCode::InvalidPolicy);
+    }
+    if record.purpose != purpose
+        || record.action != policy.action
+        || record.binding != policy.binding
+        || record.contract_digest != policy.contract_digest
+        || !record.validity.current(now)
+        || !policy
+            .approval_principals
+            .get(purpose)
+            .is_some_and(|principals| principals.contains(&record.principal))
+    {
+        return Err(EligibilityCode::InvalidApproval);
+    }
+    Ok(())
+}
 impl EligibilityPolicy {
+    fn valid(&self) -> bool {
+        !(self.action.trim().is_empty()
+            || self.producer_principals.is_empty()
+            || self.producer_principals.iter().any(|p| p.trim().is_empty())
+            || self
+                .approval_principals
+                .iter()
+                .any(|(purpose, principals)| {
+                    purpose.trim().is_empty()
+                        || principals.is_empty()
+                        || principals.iter().any(|p| p.trim().is_empty())
+                }))
+    }
     /// Versioned local Rust canonical key: compact typed Serde JSON in declaration
     /// order, with BTree collections sorted. Includes current authorization policy.
     pub fn content_digest(&self) -> String {

@@ -401,3 +401,91 @@ fn content_key_binds_configuration_and_authorization_not_attempt_id() {
         assert_ne!(key, p.content_digest(), "variant {variant}");
     }
 }
+
+#[test]
+fn public_approval_validator_matches_exact_purpose_binding_and_validity() {
+    let (f, _) = Fixture::approved();
+    let record = f.approval("security");
+    assert_eq!(
+        validate_approval_record(&record, &f.p, "security", NOW),
+        Ok(())
+    );
+    assert_eq!(
+        validate_approval_record(&record, &f.p, "release", NOW),
+        Err(EligibilityCode::InvalidApproval)
+    );
+    for field in 0..16 {
+        let mut changed = record.clone();
+        match field {
+            0 => changed.principal = "stranger".into(),
+            1 => changed.purpose = "release".into(),
+            2 => changed.action = "deploy".into(),
+            3 => changed.contract_digest = digest(b"other"),
+            4 => changed.binding.repo_id = "other".into(),
+            5 => changed.binding.task_id = "other".into(),
+            6 => changed.binding.worktree_id = "other".into(),
+            7 => changed.binding.requirement_ids = vec!["other".into()],
+            8 => changed.binding.candidate_oid = "f".repeat(40),
+            9 => changed.binding.base_oid = "f".repeat(40),
+            10 => changed.binding.merge_group_id = Some("other".into()),
+            11 => changed.binding.source_snapshot_digest = digest(b"other"),
+            12 => changed.binding.baseline_digest = Some(digest(b"other")),
+            13 => changed.validity.revoked = true,
+            14 => changed.validity.issued_at = NOW + 1,
+            _ => changed.validity.expires_at = NOW,
+        }
+        assert_eq!(
+            validate_approval_record(&changed, &f.p, "security", NOW),
+            Err(EligibilityCode::InvalidApproval),
+            "field {field}"
+        );
+    }
+    let mut endpoints = record.clone();
+    endpoints.validity.issued_at = NOW;
+    endpoints.validity.expires_at = NOW + 1;
+    assert_eq!(
+        validate_approval_record(&endpoints, &f.p, "security", NOW),
+        Ok(())
+    );
+    assert_eq!(
+        validate_approval_record(&endpoints, &f.p, "security", NOW + 1),
+        Err(EligibilityCode::InvalidApproval)
+    );
+    endpoints.validity.expires_at = NOW;
+    assert!(validate_approval_record(&endpoints, &f.p, "security", NOW).is_err());
+    let mut policy = f.p.clone();
+    policy.approval_principals.remove("security");
+    assert_eq!(
+        validate_approval_record(&record, &policy, "security", NOW),
+        Err(EligibilityCode::InvalidApproval)
+    );
+}
+
+#[test]
+fn public_approval_validator_rejects_malformed_protected_policy() {
+    let (f, _) = Fixture::approved();
+    let record = f.approval("security");
+    for variant in 0..4 {
+        let mut policy = f.p.clone();
+        match variant {
+            0 => policy.action = " ".into(),
+            1 => policy.producer_principals.clear(),
+            2 => policy
+                .approval_principals
+                .get_mut("security")
+                .unwrap()
+                .clear(),
+            _ => {
+                policy
+                    .approval_principals
+                    .get_mut("security")
+                    .unwrap()
+                    .insert(" ".into());
+            }
+        }
+        assert_eq!(
+            validate_approval_record(&record, &policy, "security", NOW),
+            Err(EligibilityCode::InvalidPolicy)
+        );
+    }
+}
