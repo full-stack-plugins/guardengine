@@ -20,6 +20,8 @@ pub struct IntegrationError(pub String);
 fn fail<T>(message: &str) -> Result<T, IntegrationError> {
     Err(IntegrationError(message.into()))
 }
+pub mod attempt_store;
+pub mod eligibility;
 
 mod attempt;
 pub use attempt::{AttemptOutput, BoundAttempt, InvocationDraft, prepare_attempt};
