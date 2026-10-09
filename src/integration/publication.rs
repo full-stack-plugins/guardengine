@@ -139,7 +139,13 @@ mod failure_tests {
             "../../tests/fixtures/integration-envelope/valid-native.json"
         ))
         .unwrap();
-        let root = tempfile::tempdir().unwrap();
+        let mut builder = tempfile::Builder::new();
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            builder.permissions(fs::Permissions::from_mode(0o700));
+        }
+        let root = builder.tempdir().unwrap();
         let old = stage_attempt(root.path(), &envelope, EvidenceProfile::NativeOnly)
             .unwrap()
             .publish()

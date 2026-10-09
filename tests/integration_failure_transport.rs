@@ -12,6 +12,15 @@ use std::{
     time::{Duration, Instant},
 };
 
+// The child process inherits a private fixture root, not a process-wide umask fix.
+fn private_root_fixture() -> tempfile::TempDir {
+    use std::os::unix::fs::PermissionsExt;
+    tempfile::Builder::new()
+        .permissions(fs::Permissions::from_mode(0o700))
+        .tempdir()
+        .unwrap()
+}
+
 fn base() -> GuardRunEnvelope {
     serde_json::from_slice(include_bytes!(
         "fixtures/integration-envelope/valid-native.json"
@@ -99,7 +108,7 @@ fn process_fixture_entry() {
 #[test]
 fn actual_crash_and_cancel_preserve_diagnostics_without_publishing_or_overwriting() {
     for mode in ["crash-after-stage", "cancel-after-stage"] {
-        let root = tempfile::tempdir().unwrap();
+        let root = private_root_fixture();
         let old = stage_attempt(root.path(), &base(), EvidenceProfile::NativeOnly)
             .unwrap()
             .publish()
@@ -259,7 +268,7 @@ fn completed_partial_is_block_while_failed_outcome_is_null() {
     let mut invalid = outcome(&value);
     invalid.decision = Some(Decision::Allow);
     assert!(bound(&value).finish(invalid).is_err());
-    let root = tempfile::tempdir().unwrap();
+    let root = private_root_fixture();
     let published = stage_attempt(root.path(), &value, EvidenceProfile::NativeOnly)
         .unwrap()
         .publish()

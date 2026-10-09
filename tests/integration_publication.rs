@@ -1,5 +1,15 @@
 use guardengine::integration::{EvidenceProfile, GuardRunEnvelope, stage_attempt};
 use std::fs;
+// Publication requires caller-protected storage, independent of the runner's umask.
+fn private_root_fixture() -> tempfile::TempDir {
+    let mut builder = tempfile::Builder::new();
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        builder.permissions(fs::Permissions::from_mode(0o700));
+    }
+    builder.tempdir().unwrap()
+}
 fn envelope() -> GuardRunEnvelope {
     serde_json::from_slice(include_bytes!(
         "fixtures/integration-envelope/valid-native.json"
@@ -8,7 +18,7 @@ fn envelope() -> GuardRunEnvelope {
 }
 #[test]
 fn interrupted_publish_is_not_current_and_existing_attempt_is_immutable() {
-    let root = tempfile::tempdir().unwrap();
+    let root = private_root_fixture();
     let staged = stage_attempt(root.path(), &envelope(), EvidenceProfile::NativeOnly).unwrap();
     assert!(!staged.destination().exists());
     let destination = staged.destination().to_path_buf();
@@ -34,7 +44,7 @@ fn interrupted_publish_is_not_current_and_existing_attempt_is_immutable() {
 }
 #[test]
 fn publication_rejects_invalid_data_and_does_not_interpret_run_id_as_path() {
-    let root = tempfile::tempdir().unwrap();
+    let root = private_root_fixture();
     let victim = root
         .path()
         .parent()
@@ -61,7 +71,7 @@ fn publication_rejects_invalid_data_and_does_not_interpret_run_id_as_path() {
 fn publication_rejects_symlink_and_public_storage_roots() {
     use std::os::unix::fs::{PermissionsExt, symlink};
     let outer = tempfile::tempdir().unwrap();
-    let root = tempfile::tempdir().unwrap();
+    let root = private_root_fixture();
     let alias = outer.path().join("alias");
     symlink(root.path(), &alias).unwrap();
     assert!(stage_attempt(&alias, &envelope(), EvidenceProfile::NativeOnly).is_err());
