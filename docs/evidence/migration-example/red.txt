@@ -1,0 +1,24 @@
+   Compiling guardengine v0.1.0 (/workspace/guard-implementation/guardengine)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running unittests examples/native_evidence_migration.rs (target/debug/examples/native_evidence_migration-b02f99a7a6691b8a)
+
+running 1 test
+test tests::native_allow_never_substitutes_for_authority_or_required_originals ... FAILED
+
+failures:
+
+---- tests::native_allow_never_substitutes_for_authority_or_required_originals stdout ----
+
+thread 'tests::native_allow_never_substitutes_for_authority_or_required_originals' (2650207) panicked at examples/native_evidence_migration.rs:14:9:
+assertion `left == right` failed
+  left: Null
+ right: "ALLOW"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::native_allow_never_substitutes_for_authority_or_required_originals
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--example native_evidence_migration`

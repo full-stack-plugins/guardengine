@@ -1,0 +1,46 @@
+   Compiling guardengine v0.1.0 (/workspace/guard-implementation/guardengine)
+    Finished `test` profile [unoptimized] target(s) in 0.93s
+     Running tests/adapter_compatibility.rs (target/debug/deps/adapter_compatibility-0f7240e0beb0f313)
+
+running 2 tests
+test invalid_native_input_has_execution_exit_and_no_stdout_report ... ok
+test native_cli_and_opt_in_adapter_preserve_neutral_rule_matrix ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/integration_attempt_store.rs (target/debug/deps/integration_attempt_store-6389f9547914a6fb)
+
+running 4 tests
+test cas_binds_registered_content_target_and_generation ... ok
+test replay_is_idempotent_but_collision_and_unregistered_records_reject ... ok
+test late_pass_does_not_replace_current_block ... ok
+test targets_isolate_requirements_repo_and_task ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/integration_eligibility.rs (target/debug/deps/integration_eligibility-49501e1891cd84f1)
+
+running 13 tests
+test booleans_and_native_only_cannot_supply_authority ... ok
+test artifacts_are_reverified_and_audit_omits_freeform_secrets ... ok
+test allow_requires_current_authenticated_authorized_producer ... ok
+test content_key_binds_configuration_and_authorization_not_attempt_id ... ok
+test existing_eligibility_retains_structural_error_precedence ... ok
+test expiry_endpoints_and_per_call_revocation_are_enforced ... ok
+test partial_error_cancelled_and_technical_block_never_qualify ... ok
+test public_approval_validator_matches_exact_purpose_binding_and_validity ... ok
+test public_approval_validator_rejects_malformed_protected_policy ... ok
+test approval_cannot_rewrite_report ... ok
+test purpose_coverage_unavailability_and_fractional_time_fail_closed ... ok
+test changed_binding_is_stale ... ok
+test standalone_approval_rejects_matching_malformed_bindings_and_contracts ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests examples/native_evidence_migration.rs (target/debug/examples/native_evidence_migration-b02f99a7a6691b8a)
+
+running 1 test
+test tests::native_allow_never_substitutes_for_authority_or_required_originals ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

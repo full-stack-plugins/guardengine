@@ -82,3 +82,15 @@ explicit retrospective functional substitute with its irrecoverable pre-change
 timing deviation retained. Task 4.4 is accepted for the original local joint
 queue/concurrency/expiry profile. Only these two task boxes changed. Tasks 4.3
 and 4.6 remain open, as do the separate publication/signing/capability umbrellas.
+
+## Migration example and rollout inventory (4.6 partial, review pending)
+
+Added executable `examples/native_evidence_migration.rs` using only existing APIs:
+native report/evidence recomputation, deliberate unavailable-authority denial,
+missing required-original denial, immutable attempt history and recheck invalidation.
+Behavioral RED then GREEN, 20 focused tests, actual example execution and strict
+example Clippy pass; no product `src/` changes or full matrix rerun. See
+[migration/retention operations](migration-and-retention.md) and
+[all-participant rollout inventory](adapter-rollout-status.md). SG/CG/AG/FG local
+rollout gaps remain; existing accepted TG/GG slices are reused. Tasks 4.3/4.6 remain
+unchecked and this change is not archived.
