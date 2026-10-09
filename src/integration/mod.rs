@@ -25,3 +25,6 @@ pub mod eligibility;
 
 mod attempt;
 pub use attempt::{AttemptOutput, BoundAttempt, InvocationDraft, prepare_attempt};
+
+mod publication;
+pub use publication::{PublishedAttempt, StagedAttempt, stage_attempt};
