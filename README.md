@@ -5,6 +5,12 @@
 GuardEngine is a **deterministic rule, contract, and evidence evaluation library** for six independent specialist Guards.
 It does **not** parse Java/Rust source, call an LLM, authorize a Git merge, or claim that an architecture is optimal.
 
+## Local integration implementation (review branch)
+
+This branch adds the separate `guard.integration/v1alpha1` envelope, bound-attempt lifecycle, bounded verification and producer evaluation, borrowed `FactBudget`, pure eligibility/attempt-store ports, and private Unix per-attempt publication. Native commands and the legacy wire remain unchanged. Authority ports are not a real identity provider; in-memory CAS is not durable storage. No public release or all-six compatibility is claimed.
+
+See [implementation evidence](docs/implementation-progress.md), [YAML integration limits](docs/yaml-integration-profile.md), [fact construction budget](docs/fact-construction-budget.md), [trust API](docs/integration-trust-api.md), and [verified independent local artifact](docs/local-artifact-release-adr.md). The source-baseline sections below describe the original main inspection; this local implementation supersedes their integration-feature availability statements.
+
 ## v0.1.0 / Guard Protocol v1alpha1
 
 - **Contract Engine:** load/validate strict versioned YAML contracts.

@@ -1,0 +1,15 @@
+{
+  "sourceCommit": "c80ec325449842d51007db2fd507040c53dc8f51",
+  "archiveSha256": "da5b30c22c28c9db444a0ca9c214b9441c3b7aebd14c223606298547452189bc",
+  "sourceLockSha256": "dcc7bfffdfccc2304e2800bfc94fced7e94a44703696dcd101393314683960dc",
+  "package": "guardengine",
+  "version": "0.1.0",
+  "profile": "Linux local review artifact; not registry release",
+  "directory": "/workspace/guard-local-artifacts/da5b30c22c28c9db444a0ca9c214b9441c3b7aebd14c223606298547452189bc",
+  "consumerLockSha256": "6388b17a9e33c629c75e609097720d9acd4a211fdce445a20783b791cb318ee1",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "cargo": "cargo 1.99.0 (5f94df478 2026-08-27)",
+  "platform": "Linux x86_64",
+  "consumerValidated": true,
+  "extractedCliMatrixPassed": true
+}

@@ -1,5 +1,7 @@
 # GuardEngine technical design
 
+Current local branch supplement: [implementation evidence](implementation-progress.md) records the implemented integration envelope, bounded adapter, pure trust/CAS ports and Unix publication. [Local artifact provenance](local-artifact-provenance.json) pins the independently tested Linux package. Main-baseline statements below are historical source inspection, not claims that these local modules are still unimplemented. Real identity services, signed attestations, durable production storage and hosted enforcement remain absent. Runtime dependencies additionally include pinned time, tempfile and yaml-rust2; see Cargo.toml.
+
 Status: source-grounded current implementation plus proposed evolution. Inspected main: `0284f1ef4bb93e6602d5a65a5341f10e01a63ddf` (2026-10-09). This documentation change adds no runtime features. [Architecture](architecture.md), [wire protocol](protocol.md), [integration draft](integration-contract.md), [security](security.md).
 
 ## 1. Source and implementation ledger

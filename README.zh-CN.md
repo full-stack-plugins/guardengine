@@ -4,6 +4,12 @@
 
 GuardEngine 是六个独立专业守卫共用的**确定性规则、契约、证据评估内核**。它不负责解析 Java/Rust 代码，不调用大模型，也不自行决定 Git 合并或宣称架构设计最优。
 
+## 本地集成实现（待审阅分支）
+
+本分支已增加独立 `guard.integration/v1alpha1` 信封、绑定尝试生命周期、有界证据重算与生产者评估、借用字段 `FactBudget`、纯资格/尝试存储端口，以及 Unix 私有目录的单次工件发布。原生命令和旧协议保持不变。身份端口不代表真实身份提供方，内存 CAS 不代表持久存储；尚未公开发行或完成六守卫联合兼容验收。
+
+参见[实施证据](docs/implementation-progress.md)、[集成 YAML 限制](docs/yaml-integration-profile.md)、[事实构建预算](docs/fact-construction-budget.md)、[信任 API](docs/integration-trust-api.md)、[独立本地制品验证](docs/local-artifact-release-adr.md)。下文原始 main 核验记录保留历史事实，集成能力的当前状态以本节和实施证据为准。
+
 ## V0.1 / Guard Protocol v1alpha1
 
 - **Contract Engine**：加载和校验带版本的 YAML 工程契约。
