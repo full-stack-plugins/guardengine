@@ -5,7 +5,7 @@
 **Tech Stack:** existing Rust 2024/Serde/sha2; new dependencies and provider choices require review, not assumed installation.
 **Spec:** [envelope](specs/guard-integration-envelope/spec.md), [eligibility](specs/guard-evidence-eligibility/spec.md), [compatibility](specs/guard-adapter-compatibility/spec.md), [design](design.md), [roadmap](../../guard-roadmap.md).
 
-Tasks 1.1–1.5 and 3.1–3.5 are locally implemented and independently accepted; 14 tasks remain pending full acceptance. Existing bootstrap work is evidence to preserve, not work to repeat or check again. Documentation/strict validation does not complete any runtime task. Implementation was subsequently authorized; evidence and remaining limits are recorded in docs/implementation-progress.md.
+Tasks 1.1–1.5, 2.5, 3.1–3.5 and 4.5 are locally implemented and independently accepted; 12 tasks remain pending full acceptance. Existing bootstrap work is evidence to preserve, not work to repeat or check again. Documentation/strict validation does not complete any runtime task. Implementation was subsequently authorized; evidence and remaining limits are recorded in docs/implementation-progress.md.
 
 ## Global constraints and review focus
 
@@ -28,7 +28,7 @@ Each implementation item includes a testable artifact. For each runtime item, fi
 - [ ] 2.2 Implement the reviewed opt-in adapter contracts in `src/integration/adapter.rs` after GE-CONTRACT; test `envelope_report_decisions_agree` checks exact artifact digests and rejects mismatched envelope/report outcomes.
 - [ ] 2.3 Add `completed_partial_vs_execution_error` fixtures for valid partial BLOCK, crash, cancellation, serialization failure and stale output files; assert runStatus/nullable decision distinctions and diagnostic-only artifact preservation.
 - [ ] 2.4 Add bounded input/reference validation and atomic per-attempt output publication to the **new adapter surface**; tests `oversized_input_rejected` and `interrupted_publish_not_current` cover budgets, allowed paths and failed writes without silently changing old CLI flags.
-- [ ] 2.5 Test neutral-rule parity through adapter against `evaluate`: `exact_relation_parity`, `source_preserved`, `advisory_matches_visible`, `partial_dominates`; no requirement graph, language parser or workflow policy may be imported into engine modules.
+- [x] 2.5 Test neutral-rule parity through adapter against `evaluate`: `exact_relation_parity`, `source_preserved`, `advisory_matches_visible`, `partial_dominates`; no requirement graph, language parser or workflow policy may be imported into engine modules.
 - [ ] 2.6 Run differential integration with a pinned ArchGuard producer and CodeGuard native-only fixtures; assert command-aware mapping, declared coverage and rejected stronger profiles; record GE-ADAPTER artifacts and keep specialist implementations independent.
 
 ## 3. GE-TRUST — generic eligibility ports, external authority
@@ -48,7 +48,7 @@ GE-RELEASE closes after 4.1–4.2 for explicitly supported profiles. Tasks 4.3�
 - [ ] 4.2 Execute supported producer/consumer matrix using frozen schema vectors, native CodeGuard parity and engine/ArchGuard regressions; unsupported combinations reject; only tested version pairs enter GE-RELEASE compatibility documentation.
 - [ ] 4.3 Exercise advisory → shadow → opt-in enforcement → rollback with all participating adapters; acceptance: rollback preserves native commands, original artifacts and task history, and does not weaken required policies silently.
 - [ ] 4.4 With SG-BASELINE, AG-EVIDENCE, CG-ADAPTER, TG-EVIDENCE, GG-CANDIDATE and FG-GATE available, execute END-TO-END queue/concurrency/expiry fixtures; record actual output/exit, exact candidate and authority binding rather than checklist-only success.
-- [ ] 4.5 Write separate decision records for optional runtime service, attestation signing, OPA/other operators and language-neutral canonicalization changes; acceptance: each is explicitly deferred or has its own scoped change/threat model, never enabled by this integration rollout alone.
+- [x] 4.5 Write separate decision records for optional runtime service, attestation signing, OPA/other operators and language-neutral canonicalization changes; acceptance: each is explicitly deferred or has its own scoped change/threat model, never enabled by this integration rollout alone.
 - [ ] 4.6 Complete documentation/API migration examples, audit/retention operating guidance and release acceptance review; reconcile old bootstrap umbrella TODOs only against completed evidence, leave unimplemented signing/capability work unchecked, and archive this change only after actual task evidence exists.
 
 ## Requirement-to-task traceability

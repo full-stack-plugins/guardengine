@@ -40,3 +40,7 @@ Full locally accepted tasks now1.1–1.5 and3.1–3.5 (10/24). Trust acceptance 
 ## Local publication and native compatibility slice (review pending)
 
 Added optional private-store staging/no-clobber immutable publication, cancellation cleanup and root-replacement protection. Initial missing publisher RED recorded; additional root-replacement RED exposed unsafe pathname cleanup and is fixed. Added actual CLI/library/adapter matrix preserving 0/2/3/4, output destinations, source attribution, advisory observations and partial precedence. Full suite41tests and strict clippy pass. See integration-publication.md for private-directory assumptions, Linux validation, uncertain post-link durability and no production storage authority claim. This slice does not yet check additional task boxes; ArchGuard/CodeGuard differential evidence and consumer capability freeze remain separate.
+
+## Reviewed checkpoint: parity and deferred decisions
+
+Tasks 2.5 and 4.5 accepted by independent publication review: neutral-rule differential tests preserve exact relations, sources, advisory visibility and partial dominance; optional services, signing, OPA and canonicalization changes have separate explicit deferrals. The later YAML alias P1 was corrected in 4af3853 and independently retested; this does not close unrelated adapter or release tasks. FactBudget in 0907beb has four additional regression tests and remains separately reviewed before consumer acceptance.
