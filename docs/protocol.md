@@ -59,3 +59,14 @@ No rule may execute shell commands or arbitrary scripts in this version.
 ## Verifying evidence
 
 `guardengine verify --contract ... --facts ... --report ...` recalculates all rule results and digests. A successful consistency check is **not** a cryptographic signature or proof that the analyzer ran on the expected Git revision. Trusted CI must rerun analysis and bind the result to its protected checkout.
+
+
+## Scope, compatibility and exact normalization
+
+This is the implemented engine wire protocol, not the proposed [integration envelope](integration-contract.md). `GuardContract`, `GuardFacts`, `GuardReport` and their nested structs use strict fields; unknown additions are rejected. Keep `guard.partme.ai/v1alpha1` unchanged until an explicit schema migration. The engine has no automatic N/N-1 negotiation.
+
+Before hashing, `evaluate` sorts and deduplicates complete fact records, including `source`. It preserves contract rule order and diagnostics order. Digests are SHA-256 over Rust Serde JSON bytes with `sha256:` prefix; this is not a published cross-language canonicalization standard. `evaluationId` hashes the tuple of API version, engine package version, contract digest and normalized facts digest. Verification compares the entire recomputed report.
+
+Current validation requires nonblank identifiers and snapshotDigest, but does not authenticate them or verify snapshotDigest syntax. A complete fact set may be empty. Domain scope and required coverage are analyzer/controller responsibilities. `NOT_APPLICABLE` is reserved and not emitted by current evaluation paths.
+
+`evaluate --report` writes a file instead of stdout; without it JSON goes to stdout. `verify` writes a stderr consistency message and returns the report decision code. Runtime I/O failures also use exit 4; no machine-readable error envelope exists today. File presence alone does not establish that the latest attempt completed.

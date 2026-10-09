@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-GuardEngine is a **deterministic rule, contract, and evidence evaluation library** for Partme Guard.
+GuardEngine is a **deterministic rule, contract, and evidence evaluation library** for six independent specialist Guards.
 It does **not** parse Java/Rust source, call an LLM, authorize a Git merge, or claim that an architecture is optimal.
 
 ## v0.1.0 / Guard Protocol v1alpha1
@@ -35,14 +35,14 @@ cargo run -- verify --contract ../archguard/examples/agent-job-contract.yaml --f
 # Expected exit code: 2: evidence is consistent but the rule BLOCKS.
 ```
 
-Alternatively generate facts from any `GuardAnalyzer` and call:
+Alternatively generate facts from a `GuardAnalyzer` implementation and, after building/installing the binary on PATH, call:
 
 ```sh
 guardengine evaluate --contract contract.yaml --facts facts.json --report report.json
 guardengine verify --contract contract.yaml --facts facts.json --report report.json
 ```
 
-Exit codes: `0=ALLOW`, `2=BLOCK`, `3=REQUIRE_APPROVAL`, `4=invalid input/verification failure`.
+Exit codes: `0=ALLOW`, `2=BLOCK`, `3=REQUIRE_APPROVAL`, `4=invalid input/runtime/verification failure`.
 
 ## Guard Protocol
 
@@ -58,7 +58,7 @@ Exit codes: `0=ALLOW`, `2=BLOCK`, `3=REQUIRE_APPROVAL`, `4=invalid input/verific
 
 Unknown protocol fields, versions, and rule variants are rejected, never ignored. `advise` emits matched facts with a nonblocking advisory detail: `PASS` means the rule did not block, **not** that there was no observation.
 
-See [architecture](docs/architecture.md), [protocol contract](docs/protocol.md), [trust boundaries](docs/security.md), and [OpenSpec plan](openspec/changes/bootstrap-guard-protocol/).
+See [architecture](docs/architecture.md), [technical design](docs/technical-design.md), [shared integration draft](docs/integration-contract.md), [protocol contract](docs/protocol.md), [trust boundaries](docs/security.md), and [OpenSpec plan](openspec/changes/bootstrap-guard-protocol/).
 
 ### Scope and limitations
 
@@ -67,6 +67,26 @@ See [architecture](docs/architecture.md), [protocol contract](docs/protocol.md),
 3. ArchGuard's current snapshot digest covers examined **Cargo manifests**, not the entire Git tree.
 4. Reports are unsigned and not attestations. Signing, approvals, policy exception registries, Git branch control, and semantic code graphs are future integrations.
 5. This source uses a local sibling path dependency until both repositories are published and the dependency is replaced by a pinned, independently released GuardEngine artifact.
+
+## Implementation and target design
+
+Reviewed source baseline: main `0284f1ef4bb93e6602d5a65a5341f10e01a63ddf` (2026-10-09). The crate and CLI exist at v0.1.0, using Rust edition 2024 with minimum Rust 1.85. Source evidence: `src/protocol.rs`, `src/engine.rs`, `src/analyzer.rs`, `src/main.rs`; 10 test functions exist under `tests/`. This documentation review did not execute them.
+
+ArchGuard is the current embedded consumer through a sibling path dependency. SpecGuard, TestGuard, GitGuard and FlowGuard are documentation-only designs at the inspected revisions. CodeGuard retains its mature independent implementation; its future adapter must preserve existing commands, hooks, reports and exit codes.
+
+Target integrations include authenticated baseline/approval records, expiration/revocation, isolated parallel requirement runs, exact merge-queue candidate binding and versioned run envelopes. These are **not implemented** in the engine. The draft `guard.integration/v1alpha1` envelope is separate from existing strict objects and cannot be passed to today's loaders. The historical `guard.partme.ai/v1alpha1` wire namespace is retained for compatibility; it is not a project-name prefix.
+
+## Library and CI integration
+
+Library callers use `load_contract_yaml`, `load_facts_json`, `evaluate` and `verify_report`, with typed errors. Specialist analyzers implement `GuardAnalyzer`; domain parsing and policy meaning stay outside the engine.
+
+`evaluate` emits JSON to stdout only when `--report` is omitted; with that flag it writes the file. `verify` writes a consistency message to stderr, returns the report's decision code, and emits no JSON success envelope. Errors are currently plain stderr. A consistent BLOCK report therefore exits 2, not 0. Use fresh per-attempt output paths and inspect exit status; file existence alone is insufficient.
+
+Trusted CI must obtain protected policy, independently analyze the exact candidate, verify scope and bind artifacts to that candidate. Current engine reports do not enforce branch protection, authenticate approvals or invalidate stale runs automatically. CodeGuard's existing exit codes differ and require a command-aware adapter.
+
+## Validation status
+
+Source, documentation links and command declarations were inspected. Cargo and OpenSpec are unavailable on PATH in this cloud environment; no functional test or OpenSpec validation pass is claimed. See the technical design for the source ledger, current limitations and measurable future acceptance gates.
 
 ## Contribute
 

@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-GuardEngine 是 Partme Guard 的**确定性规则、契约、证据评估内核**。它不负责解析 Java/Rust 代码，不调用大模型，也不自行决定 Git 合并或宣称架构设计最优。
+GuardEngine 是六个独立专业守卫共用的**确定性规则、契约、证据评估内核**。它不负责解析 Java/Rust 代码，不调用大模型，也不自行决定 Git 合并或宣称架构设计最优。
 
 ## V0.1 / Guard Protocol v1alpha1
 
@@ -34,7 +34,7 @@ cargo run -- verify --contract ../archguard/examples/agent-job-contract.yaml --f
 # 能重新验证内容一致，但决策仍是 BLOCK。
 ```
 
-CLI 退出码：`0=ALLOW`、`2=BLOCK`、`3=REQUIRE_APPROVAL`、`4=输入或验证失败`。
+CLI 退出码：`0=ALLOW`、`2=BLOCK`、`3=REQUIRE_APPROVAL`、`4=输入、运行或验证失败`。
 
 ## 协议边界
 
@@ -46,7 +46,7 @@ CLI 退出码：`0=ALLOW`、`2=BLOCK`、`3=REQUIRE_APPROVAL`、`4=输入或验�
 - 未知字段/版本/算子一律拒绝，不默认忽略。
 - `advise` 只产生提醒及事实，非阻断；`PASS` 只说明未触发阻断，并不表示没有设计风险。
 
-详见 [架构](docs/architecture.md)、[协议](docs/protocol.md)、[信任边界](docs/security.md) 与 [OpenSpec](openspec/changes/bootstrap-guard-protocol/)。
+详见 [架构](docs/architecture.md)、[技术方案](docs/technical-design.md)、[共享集成契约草案](docs/integration-contract.md)、[协议](docs/protocol.md)、[信任边界](docs/security.md) 与 [OpenSpec](openspec/changes/bootstrap-guard-protocol/)。
 
 ## 现阶段限制
 
@@ -56,5 +56,25 @@ CLI 退出码：`0=ALLOW`、`2=BLOCK`、`3=REQUIRE_APPROVAL`、`4=输入或验�
 4. 现阶段没有签名与权威审批机制。
 5. 两个独立仓库首次联调采用同级 `path` 依赖，发布后应迁移到固定版本的 GuardEngine 包。
 
-运行 `cargo fmt --check`、`cargo clippy --all-targets -- -D warnings`、`cargo test --all-targets`。
+## 当前实现与目标设计
+
+2026-10-09 核验 main `0284f1ef4bb93e6602d5a65a5341f10e01a63ddf`：已有 v0.1.0 Rust crate 与 CLI，edition 2024、最低 Rust 1.85。依据为 `src/protocol.rs`、`src/engine.rs`、`src/analyzer.rs`、`src/main.rs`；`tests/` 中有 10 个测试函数，本轮未执行。
+
+ArchGuard 已通过同级 path 依赖使用引擎。所检查版本的 SpecGuard、TestGuard、GitGuard、FlowGuard 仍只有设计文档；CodeGuard 保留成熟独立实现，后续通过适配器渐进接入，不能替换其现有命令、Hooks、报告与退出码。
+
+可信基线/审批、过期与撤销、并行需求隔离、精确合并队列候选绑定及版本化运行封装均为**待实现目标**。草案 `guard.integration/v1alpha1` 是独立封装，不得传给当前严格协议加载器。保留历史 `guard.partme.ai/v1alpha1` 是兼容要求，不表示项目名称带旧前缀。
+
+## Library 与 CI 集成
+
+库调用使用 `load_contract_yaml`、`load_facts_json`、`evaluate`、`verify_report` 及类型化错误。专业分析器实现 `GuardAnalyzer`；领域解析与策略含义不进入引擎。
+
+`evaluate` 不传 `--report` 才向 stdout 输出 JSON，传入时写入该文件。`verify` 向 stderr 输出一致性消息，不输出 JSON 成功封装，退出码仍反映原报告决策；一致的 BLOCK 报告退出 2。当前错误为 stderr 文本。每次运行使用新输出路径并检查退出状态，不能因旧报告文件存在便判断成功。
+
+可信 CI 应从受保护来源加载契约，独立分析精确候选并核实覆盖范围。引擎目前不自动执行分支保护、认证审批或使过期结果失效。CodeGuard 现有退出语义不同，需要按命令适配。
+
+## 验证状态与贡献
+
+本轮检查源码、文档链接和命令声明。云端 PATH 中没有 Cargo/OpenSpec，未运行功能测试或 OpenSpec 验证，不宣称通过。技术方案包含事实清单、边界和分阶段可测验收。
+
+有对应工具链时运行 `cargo fmt --check`、`cargo clippy --all-targets -- -D warnings`、`cargo test --all-targets`。
 许可证：Apache-2.0。
