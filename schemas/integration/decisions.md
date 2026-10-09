@@ -17,3 +17,5 @@ Scope: approved `add-versioned-guard-integration-contracts`, tasks 1.1–1.6. Th
 - GE-TRUST ports will accept provider-verified records via a caller-implemented authentication trait, never a public deserialized trusted=true flag. No issuer, key, storage service or policy backend selected. Production identity, signing, publication and real-host activation need separate authority and evidence.
 
 Review references and accepted task statuses are maintained in docs/implementation-progress.md; this record alone is not task completion.
+
+Review correction: the new artifact verifier also caps conservative per-rule fact/diagnostic expansion at 16 MiB and relation comparisons at 1,000,000 before calling the unchanged core. These are workload bounds, not an RSS/SLA claim; large valid evidence may be rejected. Input byte limits alone did not prevent multiplicative expansion. URI schemas additionally reject Unicode control characters (C0/C1), matching the runtime.

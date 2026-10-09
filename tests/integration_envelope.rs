@@ -173,3 +173,36 @@ fn closed_schema_rejects_extensions() {
         }
     }
 }
+#[test]
+fn recomputation_expansion_rejected_before_evaluation() {
+    use sha2::{Digest, Sha256};
+    let (v, cb, fb, rb) = artifacts();
+    let mut e = load_envelope_json(
+        &serde_json::to_vec(&v).unwrap(),
+        EvidenceProfile::EngineBacked,
+    )
+    .unwrap();
+    let mut c: Value = serde_json::from_slice(&cb).unwrap();
+    let rule = c["spec"]["rules"][0].clone();
+    c["spec"]["rules"] = Value::Array(
+        (0..200)
+            .map(|n| {
+                let mut r = rule.clone();
+                r["id"] = json!(format!("rule-{n}"));
+                r
+            })
+            .collect(),
+    );
+    let mut f: Value = serde_json::from_slice(&fb).unwrap();
+    f["completeness"] = json!("partial");
+    f["diagnostics"] = json!(["x".repeat(100_000)]);
+    let cb = serde_json::to_vec(&c).unwrap();
+    let fb = serde_json::to_vec(&f).unwrap();
+    e.artifacts.contract.as_mut().unwrap().digest = format!("sha256:{:x}", Sha256::digest(&cb));
+    e.artifacts.facts.as_mut().unwrap().digest = format!("sha256:{:x}", Sha256::digest(&fb));
+    let error = guardengine::integration::verify_engine_artifacts(&e, &cb, &fb, &rb).unwrap_err();
+    assert!(
+        error.to_string().contains("recomputation budget"),
+        "{error}"
+    );
+}

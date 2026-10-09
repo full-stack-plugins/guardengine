@@ -371,7 +371,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^artifact://[^\\s%\\\\?#@:/]+(?:/[^\\s%\\\\?#@:/]+)+$",
+          "pattern": "^artifact://[^\\s\\u0000-\\u001f\\u007f-\\u009f%\\\\?#@:/]+(?:/[^\\s\\u0000-\\u001f\\u007f-\\u009f%\\\\?#@:/]+)+$",
           "allOf": [
             {
               "not": {

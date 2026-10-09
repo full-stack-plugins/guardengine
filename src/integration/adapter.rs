@@ -30,6 +30,26 @@ pub fn verify_engine_artifacts(
     let contract =
         crate::load_contract_yaml(contract_yaml).map_err(|e| IntegrationError(e.to_string()))?;
     let facts = crate::load_facts_json(facts_json).map_err(|e| IntegrationError(e.to_string()))?;
+    // Existing evaluate may clone matched facts and joined diagnostics once per rule.
+    // Cap this new surface before invoking it; input-byte limits alone do not bound expansion.
+    let rules = contract.spec.rules.len();
+    let per_rule = facts_json
+        .len()
+        .saturating_add(
+            facts
+                .facts
+                .len()
+                .saturating_mul(std::mem::size_of::<crate::GuardFact>()),
+        )
+        .saturating_add(facts.diagnostics.len().saturating_mul(2))
+        .saturating_add(std::mem::size_of::<crate::RuleEvaluation>())
+        .saturating_add(128);
+    let expansion = rules
+        .saturating_mul(per_rule)
+        .saturating_add(contract_yaml.len());
+    if expansion > MAX_ARTIFACT_BYTES || rules.saturating_mul(facts.facts.len()) > 1_000_000 {
+        return fail("recomputation budget exceeded");
+    }
     let report: crate::GuardReport =
         serde_json::from_slice(report_json).map_err(|e| IntegrationError(e.to_string()))?;
     if !crate::verify_report(&report, &contract, &facts)
