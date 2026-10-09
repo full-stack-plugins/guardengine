@@ -83,7 +83,7 @@ timing deviation retained. Task 4.4 is accepted for the original local joint
 queue/concurrency/expiry profile. Only these two task boxes changed. Tasks 4.3
 and 4.6 remain open, as do the separate publication/signing/capability umbrellas.
 
-## Migration example and rollout inventory (4.6 partial, review pending)
+## Migration example and rollout inventory (4.6 partial, independently accepted)
 
 Added executable `examples/native_evidence_migration.rs` using only existing APIs:
 native report/evidence recomputation, deliberate unavailable-authority denial,
@@ -91,6 +91,11 @@ missing required-original denial, immutable attempt history and recheck invalida
 Behavioral RED then GREEN, 20 focused tests, actual example execution and strict
 example Clippy pass; no product `src/` changes or full matrix rerun. See
 [migration/retention operations](migration-and-retention.md) and
-[all-participant rollout inventory](adapter-rollout-status.md). SG/CG/AG/FG local
-rollout gaps remain; existing accepted TG/GG slices are reused. Tasks 4.3/4.6 remain
-unchecked and this change is not archived.
+[all-participant rollout inventory](adapter-rollout-status.md). SG/CG rollout has since been independently accepted alongside TG/GG; AG/FG owner routing remains open. The fixed68f3c1f migration example/retention guide was independently accepted as a partial deliverable (ledger `ge-migration-independent-review.md`), not final4.6 acceptance. Tasks4.3/4.6 remain unchecked and this change is not archived.
+
+
+## Reconciled current adapter rollout evidence (documentation only)
+
+The [all-participant inventory](adapter-rollout-status.md) now records SG final registration `ac580fd` (30/30 local tasks), CG final registration `65403d3` (26/26 local adapter tasks), accepted TG `cc741976` and GG required-specialist/source-package acceptance `85a9743`/`2dd5c20` (registration `231bf93`). Each points to its actual independent report. SG367cc4b and CG9337cf2 close the earlier local rollout gaps; no new GE product, phase model or runtime tests were added. GE runtime/Cargo bytes at68f3c1f remain equal to reviewedb0e4b445. Historical CG594644d and GGdf8 packages keep their original contents and limitations; later accepted entries are not silently assigned to old packages.
+
+Only AG/FG actual owner routing/rollback and their outstanding design/product decisions block the remaining all-participant local exercise. Task4.6 still requires that4.3 evidence plus final supported-version/release/documentation reconciliation before archival. GE stays22/24 with4.3/4.6 unchecked; no production identity, hosted enforcement, native sandbox, broad language/platform or public release qualification is inferred.
