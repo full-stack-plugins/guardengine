@@ -29,3 +29,6 @@ pub use attempt::{AttemptOutput, BoundAttempt, InvocationDraft, prepare_attempt}
 
 mod publication;
 pub use publication::{PublishedAttempt, StagedAttempt, stage_attempt};
+
+mod fact_budget;
+pub use fact_budget::FactBudget;

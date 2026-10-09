@@ -88,7 +88,7 @@ fn check_evaluation_budget(
     }
     Ok(())
 }
-fn bounded_json_size<T: serde::Serialize>(value: &T) -> Result<usize, IntegrationError> {
+pub(super) fn bounded_json_size<T: serde::Serialize>(value: &T) -> Result<usize, IntegrationError> {
     struct Counter(usize);
     impl std::io::Write for Counter {
         fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
