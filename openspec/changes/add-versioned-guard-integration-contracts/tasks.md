@@ -38,7 +38,7 @@ Each implementation item includes a testable artifact. For each runtime item, fi
 - [x] 3.3 Implement approval-record scope/expiry/revocation checks against externally authenticated records; `approval_cannot_rewrite_report` preserves REQUIRE_APPROVAL and rejects stale/unverifiable authority or approval used to waive incomplete analysis.
 - [x] 3.4 Define append-only attempt storage port and compare-and-set publication contract; `late_pass_does_not_replace_current_block` plus two-requirement tests prove isolation and deterministic retry/deduplication keys without selecting a storage backend implicitly.
 - [x] 3.5 Add audit serialization/redaction/access requirements and tests in `tests/integration_eligibility.rs`; assert records bind digests/identity/action/cause, secrets are absent, and expired or missing required artifacts never qualify solely by a cached green status.
-- [ ] 3.6 Run a trusted-controller integration fixture with protected policies and exact synthetic merge candidate; forged producer, candidate drift, revoked authority and provider failure all deny required eligibility; record GE-TRUST with identity adapter/version and no domain side-effect authority.
+- [x] 3.6 Run a trusted-controller integration fixture with protected policies and exact synthetic merge candidate; forged producer, candidate drift, revoked authority and provider failure all deny required eligibility; record GE-TRUST with identity adapter/version and no domain side-effect authority.
 
 ## 4. GE-RELEASE and joint acceptance — independent adoption
 
