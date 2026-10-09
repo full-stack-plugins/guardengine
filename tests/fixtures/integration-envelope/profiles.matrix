@@ -1,0 +1,22 @@
+[
+  {
+    "file": "valid-native.json",
+    "profile": "native-only",
+    "accept": true
+  },
+  {
+    "file": "valid-native.json",
+    "profile": "engine-backed",
+    "accept": false
+  },
+  {
+    "file": "valid-engine.json",
+    "profile": "engine-backed",
+    "accept": true
+  },
+  {
+    "file": "valid-engine.json",
+    "profile": "native-only",
+    "accept": false
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "apiVersion": "guard.integration/v1alpha1",
+  "kind": "GuardRunEnvelope",
+  "runId": "attempt-1",
+  "producer": {
+    "guard": "CodeGuard",
+    "version": "0.1.0",
+    "analyzerId": "native",
+    "analyzerVersion": "1"
+  },
+  "binding": {
+    "repoId": "repo",
+    "taskId": "task",
+    "worktreeId": "worktree",
+    "requirementIds": [
+      "R1"
+    ],
+    "candidateOid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baseOid": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "mergeGroupId": null,
+    "sourceSnapshotDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "baselineDigest": null
+  },
+  "runStatus": "completed",
+  "decision": "ALLOW",
+  "coverage": {
+    "status": "complete",
+    "requiredScopes": [
+      "lint"
+    ],
+    "observedScopes": [
+      "lint"
+    ],
+    "missingScopes": []
+  },
+  "artifacts": {
+    "contract": {
+      "uri": "artifact://local/contract",
+      "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "mediaType": "application/json"
+    },
+    "facts": {
+      "uri": "artifact://local/facts",
+      "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "mediaType": "application/json"
+    },
+    "report": {
+      "uri": "artifact://local/report",
+      "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "mediaType": "application/json"
+    },
+    "domain": []
+  },
+  "approvalRefs": [],
+  "diagnostics": [],
+  "startedAt": "2026-10-09T10:00:00Z",
+  "finishedAt": "2026-10-09T10:00:01Z",
+  "expiresAt": null
+}

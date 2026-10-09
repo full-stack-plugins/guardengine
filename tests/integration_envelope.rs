@@ -164,8 +164,15 @@ fn closed_schema_rejects_extensions() {
                 .unwrap()
                 .starts_with("invalid-");
             assert_eq!(
-                load_envelope_json(&std::fs::read(&path).unwrap(), EvidenceProfile::NativeOnly)
-                    .is_ok(),
+                load_envelope_json(
+                    &std::fs::read(&path).unwrap(),
+                    if path.file_name().unwrap() == "valid-engine.json" {
+                        EvidenceProfile::EngineBacked
+                    } else {
+                        EvidenceProfile::NativeOnly
+                    }
+                )
+                .is_ok(),
                 expected,
                 "{}",
                 path.display()
@@ -205,4 +212,25 @@ fn recomputation_expansion_rejected_before_evaluation() {
         error.to_string().contains("recomputation budget"),
         "{error}"
     );
+}
+
+#[test]
+fn profile_aware_capability_vectors() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("tests/fixtures/integration-envelope");
+    let cases: Vec<Value> =
+        serde_json::from_slice(&std::fs::read(root.join("profiles.matrix")).unwrap()).unwrap();
+    for case in cases {
+        let profile = match case["profile"].as_str().unwrap() {
+            "native-only" => EvidenceProfile::NativeOnly,
+            "engine-backed" => EvidenceProfile::EngineBacked,
+            _ => panic!("unknown fixture profile"),
+        };
+        let file = root.join(case["file"].as_str().unwrap());
+        assert_eq!(
+            load_envelope_json(&std::fs::read(file).unwrap(), profile).is_ok(),
+            case["accept"].as_bool().unwrap(),
+            "{case}"
+        );
+    }
 }
