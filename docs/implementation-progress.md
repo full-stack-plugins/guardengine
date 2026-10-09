@@ -60,3 +60,16 @@ Independent review of `e84b306` accepts tasks1.6 and2.2 for the explicit local p
 Independent review of d251a968 accepts tasks2.6 and4.2 for the exact documented local version pairs. Current corpus:34 cases; immutable extracted c80ec325 consumer:18 additional positives and90 negatives. All90 new raw artifacts match actual SDK captures, while the old manifest and63 artifacts remain unchanged. The command-aware mapping keeps original CodeGuard native exit3 separate from the narrow Ruff F401 SDK profile and rejects stronger native-only qualifications. Full suite62 tests and strict Clippy passed before independent corpus reruns. Evidence: cloud ledger guardengine-ruff-matrix-independent-review.md; maintained profile documentation: ruff-consumer-matrix.md.
 
 This is neither a runtime producer SHA allowlist nor authenticated Git/authority evidence. Fixture candidate bindings stay synthetic; broad CodeGuard CLI coverage,57 real native tools, other platforms and untested version pairs are not qualified. Task2.1 historical timing caveat,3.6 production identity,4.3 rollout,4.4 joint scenarios and4.6 final acceptance remain open.
+
+## Remaining native and joint evidence reconciliation (review pending)
+
+At source `b0e4b445`, the [native/joint acceptance note](native-and-joint-acceptance.md)
+and its digest-pinned index reconcile original tasks 2.1, 4.3, 4.4 and 4.6.
+Read-only checks confirm 56 retained native CLI observations, 15 old/new byte pairs,
+304 original producer artifacts in each of two joint captures, 18 CLI streams and
+18 request/authority digests. No producer or full matrix was rerun. Task 2.1 has
+functional retrospective evidence but an irrecoverable pre-change timing deviation;
+task 4.4 reuses independently executed local queue/concurrency/expiry evidence with
+exact GE `b0e4b445`. Both await root acceptance. Task 4.3 still needs the explicit
+all-adapter rollout progression; 4.6 still needs documentation reconciliation and
+final acceptance. No checkboxes changed and no production release/trust claim added.

@@ -1,0 +1,162 @@
+{
+  "profile": "guardengine.local-evidence-reconciliation/v1",
+  "guardengine_source": "b0e4b445e1a20a9354d55ebb41bbedaf16ec8a74",
+  "verification": "read-only artifact rehash; no new native producer execution",
+  "native_cli_records": 56,
+  "native_byte_pairs": 15,
+  "joint_producer_artifacts_per_capture": 304,
+  "joint_cli_streams": 18,
+  "joint_request_authority_digests": 18,
+  "evidence": [
+    {
+      "path": "/workspace/guard-implementation-ledger/ge-native-retrospective/observations.json",
+      "sha256": "47863673c1c9de9b0232460ec80c0f4e00e5f32f727de20a7af4d818ee101e3b"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/ge-native-retrospective/pins.json",
+      "sha256": "e82ed30ff0d543144eb8f8f12ba0785da5c5780879cc1e0c0a568e736f287983"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/ge-native-retrospective/binary-sha256.json",
+      "sha256": "5154a9f5dcf7a435f384903de90fc639c7736d3b5cf536ffc23f4c4e143a9cca"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/ge-native-retrospective/run_matrix.py",
+      "sha256": "82375fcff88c0217e623300abcd1329f6c948e2b2dcc9b96a4a25ef58778a3bc"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/guardengine-native-retrospective-report.md",
+      "sha256": "8e7c21e1229fdc40753ef79d49afb15c5558e3516c991ae299216a158e61fcee"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/flowguard-joint-independent-capture/producer-manifest.json",
+      "sha256": "fc4f990a93e64fdfeb5ea6e04faf10d6ac968286ba344df570ad4e7f8afb4744"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/flowguard-joint-independent-capture/independent-source-and-artifact-verification.json",
+      "sha256": "457ef8409f6f0d1e9f06d135771c0212ac2cef5988f9f81c1f733533d01717ec"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/flowguard-joint-drift-independent-capture/result.json",
+      "sha256": "7ebe727468b6404fb5738a77c15bbf5770ce8755231495b499b836d45381e5d0"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/flowguard-joint-drift-independent-capture/drift-isolation.json",
+      "sha256": "cf4dd17174163548f1e1926f304ceb0e3342b267a1c837c092c550b69b35ca9b"
+    },
+    {
+      "path": "/workspace/guard-implementation-ledger/flowguard-joint-independent-review.md",
+      "sha256": "0adb5a5d4033b44a7b80c20514c2d2ca0fda3545202a2ea0f56bd52253157f13"
+    }
+  ],
+  "joint_source_pins": {
+    "flowguard": "1fd70a11ac0e874ca1bf21801987320c237647de",
+    "gitguard": "f6c7368c146d8549e54acbe17e0cba86c7cb8e80",
+    "guardengine": "b0e4b445e1a20a9354d55ebb41bbedaf16ec8a74",
+    "specguard": "8fc3f9b0df0df388b8f4ec6cdedab64f89d1d033",
+    "archguard": "d6c8235d9a02e6039a5b5212cf0cadede8b53a3d"
+  },
+  "joint_profiles": {
+    "A": {
+      "task": "joint-A",
+      "requirements": [
+        "demo:A"
+      ],
+      "base": "0b28b17245ec04d13126a1e97d33cca155f1eef5",
+      "group": null,
+      "members": [],
+      "approved_baseline": "/workspace/guard-implementation-ledger/flowguard-joint-independent-capture/A/specguard/baseline.json",
+      "candidate": "4d9110171961373d040645cba679c5e48479e3b0"
+    },
+    "B": {
+      "task": "joint-B",
+      "requirements": [
+        "demo:B"
+      ],
+      "base": "0b28b17245ec04d13126a1e97d33cca155f1eef5",
+      "group": null,
+      "members": [],
+      "approved_baseline": "/workspace/guard-implementation-ledger/flowguard-joint-independent-capture/B/specguard/baseline.json",
+      "candidate": "7bdc690c52bc3a666029e95c2d4df0a1f078f75c"
+    },
+    "M1": {
+      "task": "joint-queue",
+      "requirements": [
+        "demo:A",
+        "demo:B"
+      ],
+      "base": "0b28b17245ec04d13126a1e97d33cca155f1eef5",
+      "group": "M1",
+      "members": [
+        "4d9110171961373d040645cba679c5e48479e3b0",
+        "7bdc690c52bc3a666029e95c2d4df0a1f078f75c"
+      ],
+      "approved_baseline": "/workspace/guard-implementation-ledger/flowguard-joint-independent-capture/M1/specguard/baseline.json",
+      "candidate": "66fa44d56348ee2ca570112c0407f1830b99d732"
+    },
+    "M2": {
+      "task": "joint-queue",
+      "requirements": [
+        "demo:A",
+        "demo:B"
+      ],
+      "base": "11822b591aae229dba514f471c74bcdc91721f63",
+      "group": "M2",
+      "members": [
+        "7bdc690c52bc3a666029e95c2d4df0a1f078f75c",
+        "4d9110171961373d040645cba679c5e48479e3b0"
+      ],
+      "approved_baseline": "/workspace/guard-implementation-ledger/flowguard-joint-independent-capture/M2/specguard/baseline.json",
+      "candidate": "2449d16a51c9f27c85bcd305217c2a30f4dd8332"
+    }
+  },
+  "joint_cases": {
+    "A": {
+      "exit": 0,
+      "stdout": "sha256:94959ad306872b78fb0876ebf2c3e2908fbc7f3ec9732c714d667aaa7663c98b",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "B": {
+      "exit": 0,
+      "stdout": "sha256:98b3435de17fb2c332a0467c50593a59d7e7b4e63275e647ca8d1009dadc3d8e",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "M1": {
+      "exit": 0,
+      "stdout": "sha256:a40ddf23e296e20c1a612c9ed33e81dcd5a099c969113602d0ae62e49ceb7ea6",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "M2": {
+      "exit": 0,
+      "stdout": "sha256:1e6752ac096b43de0d9e3104fb65ecc65ea3f246ef1955d56fcf9dea17956997",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "A_to_B": {
+      "exit": 4,
+      "stdout": "sha256:38b5cab09cd8974c6a19e724ddd1dccc626c5e563f7fcd69ac7038bd32a28ad2",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "A_to_M1": {
+      "exit": 4,
+      "stdout": "sha256:6e797c7de5bce8dd925463664833a8b8efafe0ac762942d2bd440a9c05f91147",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "M1_to_M2": {
+      "exit": 4,
+      "stdout": "sha256:6d86372dc6f36ec651ef145b78f7067bcfe2193439f3362333f3ce55c136bc09",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "A_expired": {
+      "exit": 4,
+      "stdout": "sha256:3eb982d9b9776321e4674d949b2d1d6112039a38494a97dfbc6f27b801bdd327",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "B_revoked": {
+      "exit": 4,
+      "stdout": "sha256:8e4a38a60b2d9d832222498220049ce0bf8e332b3390751b0988a2caa20325f9",
+      "stderr": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "production_authenticated": false,
+  "execution_authorized": false
+}
