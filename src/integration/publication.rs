@@ -4,7 +4,7 @@ use super::*;
 use sha2::{Digest, Sha256};
 use std::{
     fs,
-    io::Write,
+    io::{Read, Seek},
     path::{Path, PathBuf},
 };
 use tempfile::NamedTempFile;
@@ -45,13 +45,24 @@ pub fn stage_attempt(
     envelope: &GuardRunEnvelope,
     profile: EvidenceProfile,
 ) -> Result<StagedAttempt, IntegrationError> {
+    stage_with_encoder(root, envelope, profile, |envelope, file| {
+        serde_json::to_writer(file.as_file_mut(), envelope)
+            .map_err(|e| IntegrationError(format!("publication encoding: {e}")))
+    })
+}
+// Private seam: fault tests can exercise real encoder sink I/O errors without adding a public knob.
+fn stage_with_encoder(
+    root: &Path,
+    envelope: &GuardRunEnvelope,
+    profile: EvidenceProfile,
+    encode: impl FnOnce(&GuardRunEnvelope, &mut NamedTempFile) -> Result<(), IntegrationError>,
+) -> Result<StagedAttempt, IntegrationError> {
     envelope.validate(profile)?;
     let identity = private_root(root)?;
     let root = fs::canonicalize(root).map_err(io_error)?;
     if private_root(&root)? != identity {
         return fail("publication root changed");
     }
-    let bytes = serde_json::to_vec(envelope).map_err(|e| IntegrationError(e.to_string()))?;
     let destination = root.join(format!(
         "attempt-{:x}.json",
         Sha256::digest(envelope.run_id.as_bytes())
@@ -60,14 +71,25 @@ pub fn stage_attempt(
         .prefix(".guard-attempt-")
         .tempfile_in(&root)
         .map_err(io_error)?;
-    file.write_all(&bytes).map_err(io_error)?;
+    encode(envelope, &mut file)?;
     file.as_file().sync_all().map_err(io_error)?;
+    // Hash the staged descriptor's actual bytes, not a separate serialization or pathname lookup.
+    file.rewind().map_err(io_error)?;
+    let mut hasher = Sha256::new();
+    let mut buffer = [0; 8192];
+    loop {
+        let count = file.read(&mut buffer).map_err(io_error)?;
+        if count == 0 {
+            break;
+        }
+        hasher.update(&buffer[..count]);
+    }
     Ok(StagedAttempt {
         file: Some(file),
         destination,
         root,
         root_identity: identity,
-        content_digest: format!("sha256:{:x}", Sha256::digest(&bytes)),
+        content_digest: format!("sha256:{:x}", hasher.finalize()),
     })
 }
 impl StagedAttempt {
@@ -102,6 +124,98 @@ impl Drop for StagedAttempt {
             if let Some(file) = self.file.take() {
                 let _ = file.keep();
             }
+        }
+    }
+}
+
+#[cfg(test)]
+mod failure_tests {
+    use super::*;
+    use std::io::Write;
+
+    #[test]
+    fn serialization_sink_failure_removes_partial_stage_and_preserves_old_final() {
+        let envelope: GuardRunEnvelope = serde_json::from_slice(include_bytes!(
+            "../../tests/fixtures/integration-envelope/valid-native.json"
+        ))
+        .unwrap();
+        let root = tempfile::tempdir().unwrap();
+        let old = stage_attempt(root.path(), &envelope, EvidenceProfile::NativeOnly)
+            .unwrap()
+            .publish()
+            .unwrap();
+        let original = fs::read(&old.path).unwrap();
+        let mut new_envelope = envelope;
+        new_envelope.run_id = "encoder-failure".into();
+        let mut prefix = Vec::new();
+        let mut encoding_error = None;
+        let result = stage_with_encoder(
+            root.path(),
+            &new_envelope,
+            EvidenceProfile::NativeOnly,
+            |value, file| {
+                struct FailAfterPrefix<'a> {
+                    writable: &'a mut fs::File,
+                    read_only: fs::File,
+                    remaining: usize,
+                }
+                impl Write for FailAfterPrefix<'_> {
+                    fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
+                        if self.remaining == 0 {
+                            // Real OS EBADF/permission error, even when test runs as root.
+                            return self.read_only.write(bytes);
+                        }
+                        let size = bytes.len().min(self.remaining);
+                        let n = self.writable.write(&bytes[..size])?;
+                        self.remaining -= n;
+                        Ok(n)
+                    }
+                    fn flush(&mut self) -> std::io::Result<()> {
+                        self.writable.flush()
+                    }
+                }
+                let read_only = fs::File::open(file.path()).unwrap();
+                let mut sink = FailAfterPrefix {
+                    writable: file.as_file_mut(),
+                    read_only,
+                    remaining: 4,
+                };
+                let error = serde_json::to_writer(&mut sink, value).unwrap_err();
+                assert!(
+                    error.is_io(),
+                    "typed envelope has no fabricated semantic serialization failure"
+                );
+                prefix = fs::read(file.path()).unwrap();
+                let message = format!("publication encoding: {error}");
+                encoding_error = Some(message.clone());
+                Err(IntegrationError(message))
+            },
+        );
+        assert!(
+            result.is_err(),
+            "a failed encoding sink must never return a publishable stage"
+        );
+        assert_eq!(
+            prefix.len(),
+            4,
+            "actual partial bytes reached the temporary file"
+        );
+        assert_eq!(fs::read(&old.path).unwrap(), original);
+        assert_eq!(fs::read_dir(root.path()).unwrap().count(), 1);
+        if let Some(capture_root) = std::env::var_os("GE_FAULT_CAPTURE_DIR") {
+            let capture = Path::new(&capture_root).join("serialization-sink-failure");
+            fs::create_dir_all(&capture).unwrap();
+            fs::write(capture.join("partial-encoded.bin"), &prefix).unwrap();
+            fs::write(capture.join("old-final.json"), &original).unwrap();
+            fs::write(capture.join("error.txt"), encoding_error.unwrap()).unwrap();
+            fs::write(capture.join("capture.json"), serde_json::to_vec_pretty(&serde_json::json!({
+                "fault_injection": "serde_json encoder writes four bytes to real stage then writes via read-only descriptor",
+                "partial_bytes_written": prefix.len(), "io_error": true,
+                "typed_semantic_serialization_failure_claimed": false,
+                "new_stage_returned": false, "old_final_preserved": true,
+                "partial_sha256": format!("{:x}", Sha256::digest(&prefix)),
+                "old_final_sha256": format!("{:x}", Sha256::digest(&original))
+            })).unwrap()).unwrap();
         }
     }
 }
