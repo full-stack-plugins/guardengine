@@ -46,7 +46,7 @@ CLI 退出码：`0=ALLOW`、`2=BLOCK`、`3=REQUIRE_APPROVAL`、`4=输入或验�
 - 未知字段/版本/算子一律拒绝，不默认忽略。
 - `advise` 只产生提醒及事实，非阻断；`PASS` 只说明未触发阻断，并不表示没有设计风险。
 
-详见 [架构](docs/architecture.md)、[协议](docs/protocol.md)、[信任边界](docs/security.md) 与 [OpenSpec](openspec/changes/bootstrap-guard-protocol/)。
+详见 [架构](docs/architecture.md)、[详细技术方案](docs/technical-design.md)、[协议](docs/protocol.md)、[信任边界](docs/security.md) 与 [OpenSpec](openspec/changes/bootstrap-guard-protocol/)。
 
 ## 现阶段限制
 
