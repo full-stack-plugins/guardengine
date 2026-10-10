@@ -1,5 +1,7 @@
 # Native compatibility and local joint acceptance reconciliation
 
+Current status, 2026-10-10: GE4.3/4.6 are accepted for the exact local profiles in the [final rollout/release record](reviews/local-rollout-release-acceptance-20261010.md), bringing GE to24/24. The dated22/24 discussion below records the earlier acceptance state; its pending AG/FG and4.6 statements are superseded by that final evidence. GE2.1's historical timing exception remains unchanged.
+
 Reviewed and accepted for tasks 2.1/4.4, 2026-10-09. GE source `b0e4b445e1a20a9354d55ebb41bbedaf16ec8a74`.
 This evidence-only change adds no runtime implementation, changes no specialist
 repository, reruns no producer/matrix, and its follow-up registration checks only tasks 2.1/4.4 under the explicit ruling below.

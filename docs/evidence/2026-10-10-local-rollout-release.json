@@ -1,0 +1,42 @@
+{
+  "scope": "accepted local rollout and release reconciliation; retained evidence, no new producer run",
+  "ge_tested_source": "a47ae91811f2f31f9d6438f382affbccd9cf4426",
+  "ge_runtime_equal": "b0e4b445e1a20a9354d55ebb41bbedaf16ec8a74",
+  "ag_tested_source": "6b24d1080f48257cf96fbc3aeeb5439ca9e0bc88",
+  "fg_joint_tested_source": "8b27b4e7be7f96d50533aa769e9554a39f6b7f94",
+  "fg_route_tested_source": "63b38cd3cae3d758d4b18bd2283cb8a0ab02d23d",
+  "joint_dependency_pins": {
+    "archguard": "6b24d1080f48257cf96fbc3aeeb5439ca9e0bc88",
+    "guardengine": "a47ae91811f2f31f9d6438f382affbccd9cf4426",
+    "gitguard": "6be082a4b1ae91fce1075ba4fadcb7c17bbc21bc",
+    "specguard": "ac580fd643e36a35bdfdfbb1e5001f3a47745214"
+  },
+  "joint_command": "CARGO_TARGET_DIR=target CARGO_INCREMENTAL=0 cargo test --test published_archguard --test scoped_specialist -- --nocapture",
+  "joint_log_paths": [
+    "/workspace/guard-local-closure-20261010/flowguard-archguard-capture.log"
+  ],
+  "files": {
+    "/workspace/guard-local-closure-20261010/archguard-clippy.log": "01c7f54ecba6d133c4e572a2d963e9b3aa72d39a1cc5132feb515b9a2ca2bca1",
+    "/workspace/guard-local-closure-20261010/archguard-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/workspace/guard-local-closure-20261010/archguard-focused.log": "fd450ebf87d2038edc2236f45db01e97a385d0d35656c39eb7379a2537107e24",
+    "/workspace/guard-local-closure-20261010/archguard-optional-trust.log": "e0d112dd16f352aadc0d7a474e78f3d3e4c534f093615314d435b725d09f107c",
+    "/workspace/guard-local-closure-20261010/archguard-rollout-green.log": "6d0ad8c9e186fe455b22447c1f847a2954e33618fedc9c59513378291c02c310",
+    "/workspace/guard-local-closure-20261010/archguard-rollout-red.log": "7aa42756eec003dac20b25debe2412b279669c737c57f2ebe83aa14249474e23",
+    "/workspace/guard-local-closure-20261010/archguard-rollout.json": "cc76591a48927ad0d013f13fec52d794c2f51165e6d336639358115a2d9137f3",
+    "/workspace/guard-local-closure-20261010/archguard-source-pins.json": "a90c1ebc5a07d73de4531350154b8be3ca70c37b97e979ee7b54c32f938e94c0",
+    "/workspace/guard-local-closure-20261010/archguard-trust-green.log": "19e47126f0718d287c2f07e0e9461256b30c069216640d8463939eeb3acb0151",
+    "/workspace/guard-local-closure-20261010/archguard-trust-red.log": "619ef3b863dad71df8162d9b4e71783377ba9257850e3cb2ad967ebca99696d6",
+    "/workspace/guard-local-closure-20261010/flowguard-archguard-capture.log": "28c51d6819f1824e68c6a40aaf99cb34948749a33c19d457a20858aa607e10a6",
+    "/workspace/guard-local-closure-20261010/flowguard-archguard-joint.json": "b55a445d615efadc853d2bb557a7f748248b7b56d1110d9643d74ab490425970",
+    "/workspace/guard-local-closure-20261010/flowguard-archguard-mutations.log": "5da000a2ed97ed6ea2c3e370c101dacd2316d39e86587b8c7cdd4528fed45de9",
+    "/workspace/guard-local-closure-20261010/flowguard-archguard-promotion.log": "75359b755c709bdc507434e848558ce7171826fc4d9d0fdeb63bb1dd143c0444",
+    "/workspace/guard-local-closure-20261010/flowguard-closure-report.md": "6144f680ad7c4f8fe642d3cd856c7b88378d861daf233bb7184211d976191e73",
+    "/workspace/guard-local-closure-20261010/flowguard-evidence-index.json": "4dccfbe8c25d24de19da743703319aba9521aff2facac44bfe0bfe2f18ffd940",
+    "/workspace/guard-local-closure-20261010/flowguard-focused.log": "54d04a09bcafb7820003661bf8fb42ae9d07b14eeb86534355c7e96f07d8024b",
+    "/workspace/guard-local-closure-20261010/flowguard-rollout.json": "053fa8d8e20ba3bd9a6a978810092c3feea18f227e4aecb5a5ff240dec9a744e",
+    "/workspace/guard-local-closure-20261010/guardengine-retained-evidence.json": "57bd7beffcb2a1dc67043553821c297983a58332527f519036a1f8d9e43b8bd0",
+    "/workspace/guard-local-closure-20261010/guardengine-verify-retained.py": "73611d92c84e8508707b70e3670af99b53fd6b0c117fae1f1c90b68bb99bbea9",
+    "/workspace/guard-local-closure-20261010/guardengine-accepted-independent-review.md": "33b6870ce8045f10ddab2ebeefbfa39346726bfa9f3c9ab07d13d740e379e751",
+    "/workspace/guard-local-closure-20261010/guardengine-accepted-coordinator-rulings.md": "e356bcd86889098cb33af0ad5326adfa75b4008d33dcc44d87fb610755188651"
+  }
+}

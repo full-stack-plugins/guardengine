@@ -12,7 +12,7 @@ openspec validate add-versioned-guard-integration-contracts --strict --no-intera
 
 实际退出码：**0**；`valid: true`；`issues: []`。
 
-新 change：[add-versioned-guard-integration-contracts](changes/add-versioned-guard-integration-contracts/proposal.md)。包含 3 个 capability、9 条 Requirement、19 个 Scenario、24 个未完成任务；已勾选任务为 0。proposal/design/specs/tasks 和 change 元数据均存在。
+新 change：[add-versioned-guard-integration-contracts](changes/archive/2026-10-10-add-versioned-guard-integration-contracts/proposal.md)。包含 3 个 capability、9 条 Requirement、19 个 Scenario、24 个未完成任务；已勾选任务为 0。proposal/design/specs/tasks 和 change 元数据均存在。
 
 ## Existing changes
 
@@ -25,3 +25,5 @@ openspec validate add-versioned-guard-integration-contracts --strict --no-intera
 逐仓读取旧 change/config/源码依据，保留原任务归属；跨仓复审修正 SG-BASELINE 本地契约与生产认证的区分、TestGuard 队列生产者与 FlowGuard 消费者的顺序、以及 signed-attestation 仍需真实签发/验签证据的条件。完整顺序见[路线图](guard-roadmap.md)。
 
 本轮另检查新文件相对链接、任务无虚假勾选、规范性 Scenario、文档差异与共享路线图副本。计划中的执行器、生产权限和供应商选择未启用；未决项保持为显式任务。
+
+2026-10-10 archival note: the integration change is now archived after local acceptance. The command and counts above preserve the original validation observation; current acceptance is recorded in [the release review](../docs/reviews/local-rollout-release-acceptance-20261010.md).

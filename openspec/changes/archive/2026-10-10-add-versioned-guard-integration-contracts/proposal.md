@@ -30,7 +30,7 @@ None. `guard-protocol` remains unchanged. Existing package publication/capabilit
 
 Future surfaces include `src/integration/` (new, proposed), `schemas/integration/v1alpha1/` (new, proposed), compatibility tests and opt-in adapters. Existing `src/protocol.rs`, `src/engine.rs` and `src/main.rs` behavior must remain covered by differential fixtures. No new runtime dependency or privileged service is selected in this proposal.
 
-Inputs: [architecture](../../../docs/architecture.md), [technical design](../../../docs/technical-design.md), [shared draft](../../../docs/integration-contract.md), [cross-project roadmap](../../guard-roadmap.md). This change is the first shared dependency; specialist discovery and native fixture work can run in parallel. GE-CONTRACT precedes integrated producer schemas, GE-ADAPTER precedes interoperability, GE-TRUST precedes authoritative eligibility, and GE-RELEASE precedes independent production distribution.
+Inputs: [architecture](../../../../docs/architecture.md), [technical design](../../../../docs/technical-design.md), [shared draft](../../../../docs/integration-contract.md), [cross-project roadmap](../../../guard-roadmap.md). This change is the first shared dependency; specialist discovery and native fixture work can run in parallel. GE-CONTRACT precedes integrated producer schemas, GE-ADAPTER precedes interoperability, GE-TRUST precedes authoritative eligibility, and GE-RELEASE precedes independent production distribution.
 
 ## Risks and unresolved decisions
 

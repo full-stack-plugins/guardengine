@@ -1,9 +1,7 @@
 # Native migration, audit and required-original retention
 
 This guide uses existing GE APIs; it introduces no controller, database, authority
-issuer, rollout flag or retention default. It advances the documentation/example
-part of task 4.6. Final release acceptance, original task 4.3 and change archival
-remain separate. Signing, public publishing and typed vocabulary bootstrap TODOs
+issuer, rollout flag or retention default. Its documentation/example slice and final local tasks4.3/4.6 are now accepted; see the [release acceptance record](reviews/local-rollout-release-acceptance-20261010.md). Signing, public publishing and typed vocabulary bootstrap TODOs
 remain unchecked.
 
 ## Run the concrete migration example
@@ -89,5 +87,4 @@ composition of the existing APIs. Targeted native compatibility, eligibility and
 attempt-store tests also pass (20 tests total including the example). Raw [RED](evidence/migration-example/red.txt), [GREEN](evidence/migration-example/green.txt), [related tests](evidence/migration-example/related-tests.txt) and [actual output](evidence/migration-example/observation.json) are retained. Production
 GE `src/` and native commands are unchanged. Existing full consumer matrices were
 not repeated. This example does not close all-adapter rollout, prove external
-identity, change retention policy or archive the OpenSpec change. Final 4.6 review
-must reconcile actual accepted 4.3/4.4 evidence and the remaining bootstrap TODOs.
+identity, change retention policy or archive the OpenSpec change. Final4.6 review reconciled accepted4.3/4.4 and the bootstrap TODOs in the linked acceptance record.

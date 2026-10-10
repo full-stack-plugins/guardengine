@@ -24,7 +24,7 @@ These paths do not exist yet and are proposed organization, not implemented APIs
 
 ## Contract and lifecycle decisions
 
-Use existing `guard.partme.ai/v1alpha1` exactly. The draft envelope `guard.integration/v1alpha1` is external and closed; package semver, policy revision, analyzer version and schema version are separate. Required fields are defined by [shared draft](../../../docs/integration-contract.md). Unsupported schema/profile fails without fallback. Raw CodeGuard evidence can use a declared native-only profile but cannot fulfill an obligation requiring an engine report.
+Use existing `guard.partme.ai/v1alpha1` exactly. The draft envelope `guard.integration/v1alpha1` is external and closed; package semver, policy revision, analyzer version and schema version are separate. Required fields are defined by [shared draft](../../../../docs/integration-contract.md). Unsupported schema/profile fails without fallback. Raw CodeGuard evidence can use a declared native-only profile but cannot fulfill an obligation requiring an engine report.
 
 Before repo/task/candidate/base/producer/required coverage binding is resolved, a transport error has no GuardRunEnvelope. Do not invent an OID or fill required fields with empty strings. After binding, runStatus completed carries a decision; error/cancelled carries null. Valid partial facts can complete engine evaluation with INDETERMINATE/BLOCK; a crashed tool does not become a completed run merely because an old partial artifact exists. Engine-backed completed envelope decision equals its referenced GuardReport.
 
