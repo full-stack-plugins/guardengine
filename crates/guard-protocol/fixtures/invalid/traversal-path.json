@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "TaskBinding",
+  "taskId": "REQ-1",
+  "requirementRefs": [
+    {
+      "repoId": "repo-example",
+      "path": {
+        "encoding": "base64",
+        "bytes": "Li4vc2VjcmV0"
+      },
+      "ref": "main",
+      "contentDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "contractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "scope": {
+    "repositoryIds": [
+      "repo-example"
+    ],
+    "paths": [
+      {
+        "encoding": "base64",
+        "bytes": "Li4vc2VjcmV0"
+      }
+    ],
+    "actions": [
+      "MERGE"
+    ]
+  },
+  "sessionId": "session-1",
+  "worktreeId": "worktree-1",
+  "authorizationRefs": [
+    "user-authorization-1"
+  ],
+  "dependsOn": []
+}

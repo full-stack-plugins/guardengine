@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "2.0.0",
+  "ruleId": "ARCH-1",
+  "revision": "1",
+  "owner": "archguard",
+  "mode": "ENFORCE",
+  "severity": "HIGH",
+  "applicability": {
+    "predicate": "java-source",
+    "parameters": {}
+  },
+  "parameters": {
+    "maxCycles": 0,
+    "thresholdDecimal": "0.99"
+  },
+  "verifierId": "java-package-check",
+  "requiredEvidence": [
+    "source-report"
+  ],
+  "waiverPolicy": {
+    "allowed": false,
+    "maxAgeSeconds": 0
+  },
+  "extensions": {},
+  "documentType": "RuleDefinition"
+}

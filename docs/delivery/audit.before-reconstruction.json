@@ -1,0 +1,259 @@
+{
+  "schema_version": "guard.delivery-inventory-result/v1",
+  "status": "FAIL",
+  "task_count": 62,
+  "product_count": 12,
+  "ledgers": [
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/add-agents-context-governance/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 5,
+      "completed": 5
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/add-guard-agent-installation/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/bootstrap-guard-protocol/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 10,
+      "completed": 7
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/execution-trace-evidence/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/integrate-architecture-methods/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/professional-guard-checks/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 7,
+      "completed": 7
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/add-cargo-workspace-guard/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 10,
+      "completed": 7
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/add-maven-architecture-loop/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/java-source-architecture/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/project-model-baseline/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/tasks.md",
+      "ledger_kind": "stable_ids",
+      "total": 62,
+      "completed": 0
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/introduce-rust-codeguard-cli/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 354,
+      "completed": 322
+    },
+    {
+      "repository": "codeguard-plugin",
+      "path": "openspec/changes/2026-09-22-gate-toolchain-unverified/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 30,
+      "completed": 29
+    },
+    {
+      "repository": "gitflow-plugin",
+      "path": "docs/superpowers/plans/2026-10-07-gitflow.md",
+      "ledger_kind": "native_tasks",
+      "total": 23,
+      "completed": 23
+    }
+  ],
+  "unresolved_dependencies": [
+    {
+      "task_id": "EG-J01",
+      "dependency": "EG-G01"
+    },
+    {
+      "task_id": "EG-J02",
+      "dependency": "EG-G04"
+    },
+    {
+      "task_id": "EG-J03",
+      "dependency": "EG-G06"
+    },
+    {
+      "task_id": "EG-J04",
+      "dependency": "EG-G07"
+    },
+    {
+      "task_id": "EG-J05",
+      "dependency": "EG-G10"
+    },
+    {
+      "task_id": "EG-K12",
+      "dependency": "EG-G06"
+    },
+    {
+      "task_id": "EG-K12",
+      "dependency": "EG-H04"
+    },
+    {
+      "task_id": "EG-K12",
+      "dependency": "EG-R04"
+    },
+    {
+      "task_id": "EG-K12",
+      "dependency": "EG-W05"
+    },
+    {
+      "task_id": "EG-K19",
+      "dependency": "EG-H07"
+    },
+    {
+      "task_id": "EG-K20",
+      "dependency": "EG-F03"
+    },
+    {
+      "task_id": "EG-K20",
+      "dependency": "EG-G07"
+    },
+    {
+      "task_id": "EG-K20",
+      "dependency": "EG-H08"
+    },
+    {
+      "task_id": "EG-K20",
+      "dependency": "EG-R07"
+    },
+    {
+      "task_id": "EG-K20",
+      "dependency": "EG-W08"
+    },
+    {
+      "task_id": "EG-K21",
+      "dependency": "EG-F05"
+    },
+    {
+      "task_id": "EG-K22",
+      "dependency": "EG-R05"
+    },
+    {
+      "task_id": "EG-K23",
+      "dependency": "EG-G08"
+    },
+    {
+      "task_id": "EG-K27",
+      "dependency": "EG-G10"
+    },
+    {
+      "task_id": "EG-K27",
+      "dependency": "EG-W10"
+    },
+    {
+      "task_id": "EG-K28",
+      "dependency": "EG-F08"
+    },
+    {
+      "task_id": "EG-K28",
+      "dependency": "EG-H10"
+    },
+    {
+      "task_id": "EG-K28",
+      "dependency": "EG-R10"
+    },
+    {
+      "task_id": "EG-K28",
+      "dependency": "EG-W12"
+    },
+    {
+      "task_id": "EG-L01",
+      "dependency": "EG-W01"
+    },
+    {
+      "task_id": "EG-L02",
+      "dependency": "EG-W03"
+    },
+    {
+      "task_id": "EG-L03",
+      "dependency": "EG-W05"
+    },
+    {
+      "task_id": "EG-L04",
+      "dependency": "EG-W08"
+    },
+    {
+      "task_id": "EG-L04",
+      "dependency": "EG-W13"
+    },
+    {
+      "task_id": "EG-L05",
+      "dependency": "EG-W12"
+    },
+    {
+      "task_id": "EG-P04",
+      "dependency": "EG-H08"
+    }
+  ],
+  "unresolved_dependency_ids": [
+    "EG-F03",
+    "EG-F05",
+    "EG-F08",
+    "EG-G01",
+    "EG-G04",
+    "EG-G06",
+    "EG-G07",
+    "EG-G08",
+    "EG-G10",
+    "EG-H04",
+    "EG-H07",
+    "EG-H08",
+    "EG-H10",
+    "EG-R04",
+    "EG-R05",
+    "EG-R07",
+    "EG-R10",
+    "EG-W01",
+    "EG-W03",
+    "EG-W05",
+    "EG-W08",
+    "EG-W10",
+    "EG-W12",
+    "EG-W13"
+  ],
+  "limitation": "Inventory consistency only; evidence content, semantic completeness and acceptance require independent review."
+}

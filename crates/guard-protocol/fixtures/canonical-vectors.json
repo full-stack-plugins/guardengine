@@ -1,0 +1,33 @@
+[
+  {
+    "input": "{ \"b\": [true,null], \"a\":\"\\u0061\" }",
+    "canonical": "{\"a\":\"a\",\"b\":[true,null]}"
+  },
+  {
+    "input": "{\"\\ue000\":1,\"😀\":2,\"a\":0}",
+    "canonical": "{\"a\":0,\"😀\":2,\"\":1}"
+  },
+  {
+    "input": "{\"limits\":[-9007199254740991,0,9007199254740991]}",
+    "canonical": "{\"limits\":[-9007199254740991,0,9007199254740991]}"
+  },
+  {
+    "input": "{\"text\":\"line\\nquote\\\"slash/\"}",
+    "canonical": "{\"text\":\"line\\nquote\\\"slash/\"}"
+  },
+  {
+    "input": "[333333333.33333329,1E30,4.50,2e-3,0.000000000000000000000000001]",
+    "canonical": "[333333333.3333333,1e+30,4.5,0.002,1e-27]",
+    "source": "RFC8785 section 3.2.2"
+  },
+  {
+    "input": "[-0,-0.0,1.0,1e0,1e21,1e20,1e-6,1e-7]",
+    "canonical": "[0,0,1,1,1e+21,100000000000000000000,0.000001,1e-7]",
+    "source": "ECMAScript Number serialization boundaries"
+  },
+  {
+    "input": "9007199254740993",
+    "canonical": "9007199254740992",
+    "source": "RFC8785 IEEE754 rounding, not arbitrary precision integer identity"
+  }
+]

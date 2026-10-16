@@ -4,6 +4,23 @@
 
 GuardEngine 是 Partme Guard 的**确定性规则、契约、证据评估内核**。它不负责解析 Java/Rust 代码，不调用大模型，也不自行决定 Git 合并或宣称架构设计最优。
 
+## 工程内核候选模块
+
+GuardEngine是逻辑GuardCore角色的实现仓库，既有alpha CLI继续保持原行为。以下独立库处于候选实施阶段，其API不建立生产信任或执行获授权的交付动作。
+
+| 包 | 职责 | 说明 |
+|---|---|---|
+| guard-protocol | 闭合版本化文档、严格原始JSON、JCS和无损路径 | [协议](crates/guard-protocol/README.md) |
+| guard-contract | Draft2020-12校验、批准规则组合和验证器准备检查 | [契约](crates/guard-contract/README.md) |
+| guard-subject | 实际工作树/暂存区/提交/合入输入及Git对象完整性 | [候选](crates/guard-subject/README.md) |
+| guard-store | 私有SQLite/原件存储、幂等及进程中断恢复 | [存储](crates/guard-store/README.md) |
+| guard-plan | 批准任务基线、完整冻结义务与显式CAS迁移 | [计划](crates/guard-plan/README.md) |
+| guard-runner | 有界原生argv、聚合输出预算与受管进程树清理 | [进程](crates/guard-runner/README.md) |
+| guard-run-ledger | 本地持久运行序号、单飞与迟到结果拒绝 | [运行账本](crates/guard-run-ledger/README.md) |
+| guard-runtime | 注册计划派发与私有原始输出落盘 | [运行接线](crates/guard-runtime/README.md) |
+
+跨仓[交付清单](docs/delivery/status.md)保留原生需求、场景和任务归属。库存一致性或局部库测试不能关闭全部架构路线；CLI/MCP、可信授权、隔离执行与受控交付仍须分别实现并取得证据。
+
 ## V0.1 / Guard Protocol v1alpha1
 
 - **Contract Engine**：加载和校验带版本的 YAML 工程契约。

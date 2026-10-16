@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "ExecutionGrant",
+  "grantId": "G-1",
+  "operationId": "OP-1",
+  "decisionDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "principal": "release-controller",
+  "audience": "git-executor",
+  "action": "MERGE",
+  "resource": {
+    "repositoryId": "repo-example",
+    "targetRef": "refs/heads/main"
+  },
+  "subjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "expectedTargetOid": "1111111111111111111111111111111111111111",
+  "authorizationRef": "authorization-1",
+  "issuedAt": "2026-10-17T00:00:00Z",
+  "expiresAt": "2026-10-17T00:05:00Z",
+  "nonce": "nonce-1",
+  "issuerProof": {
+    "algorithm": "ED25519",
+    "keyId": "external-key-1",
+    "signature": "AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQ==",
+    "provenanceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "FactEnvelope",
+  "factType": "SYMBOL",
+  "symbol": {
+    "repositoryId": "repo-example",
+    "symbolId": "org.example.Example",
+    "sourceSpan": {
+      "path": {
+        "encoding": "base64",
+        "bytes": "c3JjL0V4YW1wbGUuamF2YQ=="
+      },
+      "startLine": 1,
+      "startColumn": 1,
+      "endLine": 3,
+      "endColumn": 2
+    }
+  },
+  "sourceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "producerIdentity": {
+    "schemaVersion": "1.0.0",
+    "producerId": "testguard",
+    "version": "0.2.0",
+    "artifactDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "configDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "adapterVersion": "testguard/v1",
+    "executionEnvironmentDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "extensions": {}
+  },
+  "indexIdentity": {
+    "indexId": "idx-1",
+    "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "subjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "resolutionKind": "STATIC",
+  "coverage": "PARTIAL",
+  "limitations": [
+    "graph-does-not-authorize"
+  ],
+  "trusted": true
+}

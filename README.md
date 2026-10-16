@@ -5,6 +5,23 @@
 GuardEngine is a **deterministic rule, contract, and evidence evaluation library** for Partme Guard.
 It does **not** parse Java/Rust source, call an LLM, authorize a Git merge, or claim that an architecture is optimal.
 
+## Engineering kernel candidates
+
+GuardEngine is the implementation repository for the logical GuardCore role. The existing alpha CLI keeps its behavior. The following separate library candidates are under development; their APIs do not establish production trust or execute authorized delivery actions.
+
+| Package | Responsibility | Detail |
+|---|---|---|
+| guard-protocol | Closed versioned documents, strict raw JSON, JCS and lossless paths | [Protocol](crates/guard-protocol/README.md) |
+| guard-contract | Draft2020-12 validation, approved rule composition and verifier readiness | [Contracts](crates/guard-contract/README.md) |
+| guard-subject | Actual worktree/index/commit/merge inputs and Git object integrity | [Subjects](crates/guard-subject/README.md) |
+| guard-store | Private SQLite/artifact storage, idempotency and interruption recovery | [Storage](crates/guard-store/README.md) |
+| guard-plan | Approved task baselines, complete frozen obligations and explicit CAS migration | [Plans](crates/guard-plan/README.md) |
+| guard-runner | Bounded native argv, aggregate output limits and managed process-tree cleanup | [Processes](crates/guard-runner/README.md) |
+| guard-run-ledger | Durable local run sequences, single-flight and late-result rejection | [Run ledger](crates/guard-run-ledger/README.md) |
+| guard-runtime | Registered-plan dispatch and private raw-output persistence | [Runtime](crates/guard-runtime/README.md) |
+
+The cross-repository [delivery inventory](docs/delivery/status.md) preserves native requirements, scenarios and task ownership. Inventory consistency and local library tests do not close the full architecture roadmap. CLI/MCP, trusted authority, isolated execution and controlled delivery still require their own implementation and evidence.
+
 ## v0.1.0 / Guard Protocol v1alpha1
 
 - **Contract Engine:** load/validate strict versioned YAML contracts.

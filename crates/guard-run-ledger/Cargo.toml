@@ -1,0 +1,17 @@
+[package]
+name = "guard-run-ledger"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "Local persistent ordered run ledger; no authority or process control"
+
+[dependencies]
+guard-protocol = { path = "../guard-protocol" }
+guard-store = { path = "../guard-store" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"

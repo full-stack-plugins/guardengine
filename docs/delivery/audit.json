@@ -1,0 +1,147 @@
+{
+  "schema_version": "guard.delivery-inventory-result/v2",
+  "status": "PASS",
+  "task_count": 113,
+  "product_count": 12,
+  "ledgers": [
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/add-agents-context-governance/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 5,
+      "completed": 5
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/add-guard-agent-installation/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/bootstrap-guard-protocol/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 10,
+      "completed": 7
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/execution-trace-evidence/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/integrate-architecture-methods/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/professional-guard-checks/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 7,
+      "completed": 7
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/add-cargo-workspace-guard/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 10,
+      "completed": 7
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/add-maven-architecture-loop/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/java-source-architecture/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/project-model-baseline/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 6,
+      "completed": 6
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/tasks.md",
+      "ledger_kind": "stable_ids",
+      "total": 62,
+      "completed": 7
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/introduce-rust-codeguard-cli/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 354,
+      "completed": 322
+    },
+    {
+      "repository": "codeguard-plugin",
+      "path": "openspec/changes/2026-09-22-gate-toolchain-unverified/tasks.md",
+      "ledger_kind": "native_tasks",
+      "total": 30,
+      "completed": 29
+    },
+    {
+      "repository": "gitflow-plugin",
+      "path": "docs/superpowers/plans/2026-10-07-gitflow.md",
+      "ledger_kind": "native_tasks",
+      "total": 23,
+      "completed": 23
+    },
+    {
+      "repository": "codegraph-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md",
+      "ledger_kind": "stable_ids",
+      "total": 8,
+      "completed": 0
+    },
+    {
+      "repository": "codeguard-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-host/tasks.md",
+      "ledger_kind": "stable_ids",
+      "total": 10,
+      "completed": 0
+    },
+    {
+      "repository": "codereview-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-review/tasks.md",
+      "ledger_kind": "stable_ids",
+      "total": 10,
+      "completed": 0
+    },
+    {
+      "repository": "gitflow-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-git/tasks.md",
+      "ledger_kind": "stable_ids",
+      "total": 10,
+      "completed": 0
+    },
+    {
+      "repository": "flowguard-plugin",
+      "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md",
+      "ledger_kind": "stable_ids",
+      "total": 13,
+      "completed": 0
+    }
+  ],
+  "requirement_count": 66,
+  "scenario_count": 94,
+  "acceptance_case_count": 43,
+  "unresolved_dependencies": [],
+  "unresolved_dependency_ids": [],
+  "limitation": "Inventory consistency only; evidence content, semantic completeness and acceptance require independent review."
+}

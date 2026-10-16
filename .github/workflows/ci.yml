@@ -26,8 +26,47 @@ jobs:
         run: cargo clippy --manifest-path crates/guard-evidence/Cargo.toml --locked --all-targets -- -D warnings
       - name: Test shared evidence
         run: cargo test --manifest-path crates/guard-evidence/Cargo.toml --locked
+      - name: Verify protocol formatting
+        run: cargo fmt --manifest-path crates/guard-protocol/Cargo.toml -- --check
+      - name: Check protocol
+        run: cargo clippy --manifest-path crates/guard-protocol/Cargo.toml --locked --all-targets -- -D warnings
+      - name: Test protocol
+        run: cargo test --manifest-path crates/guard-protocol/Cargo.toml --locked
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare JCS bytes with ECMAScript
+        env:
+          CARGO_TARGET_DIR: target/protocol
+        run: |
+          cargo build --manifest-path crates/guard-protocol/Cargo.toml --locked --example canonicalize
+          node crates/guard-protocol/scripts/verify_jcs_ecmascript.mjs target/protocol/debug/examples/canonicalize
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Test offline skill bundles
         run: python -B -m unittest discover -s scripts/tests -p test_skill_bundle.py
+      - name: Verify protocol schemas
+        run: python -B crates/guard-protocol/scripts/generate_schemas.py --check
+      - name: Test delivery inventory validator
+        run: python -B -m unittest discover -s scripts/tests -p test_delivery_inventory.py
+
+  kernel-components:
+    name: ${{ matrix.component }} / ${{ matrix.os }} / MSRV
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.85.0
+        with:
+          components: rustfmt, clippy
+      - name: Verify component formatting
+        run: cargo fmt --manifest-path crates/${{ matrix.component }}/Cargo.toml -- --check
+      - name: Check component
+        run: cargo clippy --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features --all-targets -- -D warnings
+      - name: Test component with real local tools and storage
+        run: cargo test --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features

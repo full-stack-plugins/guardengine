@@ -1,0 +1,15 @@
+[package]
+name = "guard-subject"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "Read-only exact Git candidate capture; caller-declared identity grants no trust"
+
+[dependencies]
+guard-protocol = { path = "../guard-protocol" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+sha1 = "0.10"
+tempfile = "3"

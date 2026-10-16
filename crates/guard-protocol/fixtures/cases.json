@@ -1,0 +1,482 @@
+[
+  {
+    "file": "valid/contract-snapshot.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/rule-definition.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/task-binding.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/subject-snapshot.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/producer-identity.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/verification-plan.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/fact-envelope.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/guard-result.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/gate-decision.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/approval-receipt.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/execution-grant.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/subject-worktree.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/subject-index.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/subject-commit.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/timeout-preserves-violation.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/zero-diagnostics-unknown.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/not-applicable-with-evidence.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/allow-declaration-unverified.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/fact-edge.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/fact-source-span.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "valid/extension-has-no-authority.json",
+    "valid": true,
+    "reason": "declared structure only; ingress remains UNVERIFIED"
+  },
+  {
+    "file": "invalid/unknown-field-contract-snapshot.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-contract-snapshot.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-rule-definition.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-rule-definition.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-task-binding.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-task-binding.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-subject-snapshot.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-subject-snapshot.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-producer-identity.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-producer-identity.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-verification-plan.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-verification-plan.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-fact-envelope.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-fact-envelope.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-guard-result.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-guard-result.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-gate-decision.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-gate-decision.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-approval-receipt.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-approval-receipt.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-field-execution-grant.json",
+    "valid": false,
+    "reason": "closed root rejects unknown trust field"
+  },
+  {
+    "file": "invalid/unknown-version-execution-grant.json",
+    "valid": false,
+    "reason": "unknown major never defaults to allow"
+  },
+  {
+    "file": "invalid/unknown-nested-producer.json",
+    "valid": false,
+    "reason": "nested closed object"
+  },
+  {
+    "file": "invalid/unknown-guard.json",
+    "valid": false,
+    "reason": "generic core is not a domain owner"
+  },
+  {
+    "file": "invalid/unknown-execution.json",
+    "valid": false,
+    "reason": "unknown execution enum"
+  },
+  {
+    "file": "invalid/unknown-coverage.json",
+    "valid": false,
+    "reason": "unknown coverage enum"
+  },
+  {
+    "file": "invalid/self-asserted-trust.json",
+    "valid": false,
+    "reason": "trust cannot be producer supplied"
+  },
+  {
+    "file": "invalid/unsafe-big-number.json",
+    "valid": false,
+    "reason": "large integers must use string identity"
+  },
+  {
+    "file": "valid/floating-number.json",
+    "valid": true,
+    "reason": "finite floating parameters follow RFC8785 IEEE754 semantics; no authority granted"
+  },
+  {
+    "file": "invalid/unscoped-extension.json",
+    "valid": false,
+    "reason": "extensions require namespace"
+  },
+  {
+    "file": "invalid/traversal-path.json",
+    "valid": false,
+    "reason": "decoded traversal refused"
+  },
+  {
+    "file": "invalid/absolute-path.json",
+    "valid": false,
+    "reason": "decoded absolute path refused"
+  },
+  {
+    "file": "invalid/invalid-calendar.json",
+    "valid": false,
+    "reason": "invalid non-leap day"
+  },
+  {
+    "file": "invalid/non-utc-time.json",
+    "valid": false,
+    "reason": "explicit UTC Z required"
+  },
+  {
+    "file": "invalid/invalid-oid-format.json",
+    "valid": false,
+    "reason": "OID size must match object format"
+  },
+  {
+    "file": "invalid/missing-merge-identity.json",
+    "valid": false,
+    "reason": "merge target identity required"
+  },
+  {
+    "file": "invalid/satisfied-with-partial-coverage.json",
+    "valid": false,
+    "reason": "partial zero diagnostics cannot satisfy obligation"
+  },
+  {
+    "file": "invalid/satisfied-timeout.json",
+    "valid": false,
+    "reason": "timeout cannot be satisfied"
+  },
+  {
+    "file": "invalid/not-applicable-without-evidence.json",
+    "valid": false,
+    "reason": "N/A requires applicability evidence"
+  },
+  {
+    "file": "invalid/violation-without-finding.json",
+    "valid": false,
+    "reason": "known violations retain findings"
+  },
+  {
+    "file": "invalid/plan-shrinks-targets.json",
+    "valid": false,
+    "reason": "plan targets equal obligation union"
+  },
+  {
+    "file": "invalid/zero-budget.json",
+    "valid": false,
+    "reason": "cannot fake execution with zero budget"
+  },
+  {
+    "file": "invalid/duplicate-obligation.json",
+    "valid": false,
+    "reason": "duplicate frozen identity"
+  },
+  {
+    "file": "invalid/contract-missing-rule.json",
+    "valid": false,
+    "reason": "obligation must resolve to frozen rule"
+  },
+  {
+    "file": "invalid/allow-missing-obligations.json",
+    "valid": false,
+    "reason": "missing obligations cannot allow"
+  },
+  {
+    "file": "invalid/candidate-approval-without-subject.json",
+    "valid": false,
+    "reason": "candidate-bound approval requires subject"
+  },
+  {
+    "file": "invalid/approval-intent-mismatch.json",
+    "valid": false,
+    "reason": "scope and candidate approval are distinct"
+  },
+  {
+    "file": "invalid/expired-reversed-window.json",
+    "valid": false,
+    "reason": "grant window cannot reverse"
+  },
+  {
+    "file": "invalid/signature-invalid.json",
+    "valid": false,
+    "reason": "signature shape must be exact; validation still not verification"
+  },
+  {
+    "file": "invalid/duplicate-root-key.json",
+    "valid": false,
+    "reason": "duplicate root key"
+  },
+  {
+    "file": "invalid/duplicate-nested-key.json",
+    "valid": false,
+    "reason": "duplicate nested key cannot be collapsed"
+  },
+  {
+    "file": "invalid/escaped-duplicate-key.json",
+    "valid": false,
+    "reason": "escaped equivalent keys also duplicate"
+  },
+  {
+    "file": "invalid/identifier-whitespace.json",
+    "valid": false,
+    "reason": "Unicode whitespace-only identity is empty"
+  },
+  {
+    "file": "invalid/identifier-c1-control.json",
+    "valid": false,
+    "reason": "C1 controls are not valid identity data"
+  },
+  {
+    "file": "invalid/identifier-byte-budget.json",
+    "valid": false,
+    "reason": "UTF-8 bytes exceed 4096 although codepoint maxLength alone accepts"
+  },
+  {
+    "file": "valid/contract-protected-selection.json",
+    "valid": true,
+    "reason": "approved protected selection distinct from actual execution target"
+  },
+  {
+    "file": "invalid/contract-candidate-input-digest.json",
+    "valid": false,
+    "reason": "candidate-only inputDigest cannot freeze ordinary source in approved contract"
+  },
+  {
+    "file": "invalid/contract-duplicate-selection.json",
+    "valid": false,
+    "reason": "same repository/path/selector cannot be repeated with a different protection pin"
+  },
+  {
+    "file": "invalid/contract-empty-selection.json",
+    "valid": false,
+    "reason": "approved obligations require nonempty target selection sets"
+  },
+  {
+    "file": "invalid/plan-unbound-target.json",
+    "valid": false,
+    "reason": "execution plan obligations require bound actual inputDigest"
+  },
+  {
+    "file": "invalid/plan-protected-selection-instead-of-input.json",
+    "valid": false,
+    "reason": "contract-only protectedDigest cannot replace bound plan inputDigest"
+  },
+  {
+    "file": "valid/subject-release-artifact.json",
+    "valid": true,
+    "reason": "distinct release artifact declaration; remains UNVERIFIED"
+  },
+  {
+    "file": "valid/subject-release-artifact-sha256.json",
+    "valid": true,
+    "reason": "release source full SHA256 OIDs; no actual artifact capture claim"
+  },
+  {
+    "file": "invalid/release-missing-content-digest.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-missing-content-digest"
+  },
+  {
+    "file": "invalid/release-missing-build-definition.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-missing-build-definition"
+  },
+  {
+    "file": "invalid/release-missing-build-producer.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-missing-build-producer"
+  },
+  {
+    "file": "invalid/release-missing-source-tree.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-missing-source-tree"
+  },
+  {
+    "file": "invalid/release-source-format-mismatch.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-source-format-mismatch"
+  },
+  {
+    "file": "invalid/release-unsafe-artifact-name.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-unsafe-artifact-name"
+  },
+  {
+    "file": "invalid/release-reserved-artifact-name.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-reserved-artifact-name"
+  },
+  {
+    "file": "invalid/release-media-type-injection.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-media-type-injection"
+  },
+  {
+    "file": "invalid/release-size-unsafe-integer.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-size-unsafe-integer"
+  },
+  {
+    "file": "invalid/release-git-field-masquerade.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-git-field-masquerade"
+  },
+  {
+    "file": "invalid/release-producer-self-trust.json",
+    "valid": false,
+    "reason": "release closed identity rejected: release-producer-self-trust"
+  },
+  {
+    "file": "invalid/release-relabeled-git-commit.json",
+    "valid": false,
+    "reason": "Git commit identity cannot be relabeled as release artifact"
+  }
+]

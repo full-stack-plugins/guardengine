@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "2.0.0",
+  "extensions": {},
+  "documentType": "SubjectSnapshot",
+  "kind": "merge_candidate",
+  "repositoryId": "repo-example",
+  "objectFormat": "sha1",
+  "base": "1111111111111111111111111111111111111111",
+  "head": "1111111111111111111111111111111111111111",
+  "tree": "1111111111111111111111111111111111111111",
+  "targetRef": "refs/heads/main",
+  "expectedTargetOid": "1111111111111111111111111111111111111111",
+  "inputManifestDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "diffDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

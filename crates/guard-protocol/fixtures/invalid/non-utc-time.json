@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "GuardResult",
+  "resultId": "RESULT-1",
+  "runId": "RUN-1",
+  "operationId": "OP-1",
+  "taskId": "REQ-1",
+  "subjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "contractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "policyDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "producer": {
+    "schemaVersion": "1.0.0",
+    "producerId": "testguard",
+    "version": "0.2.0",
+    "artifactDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "configDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "adapterVersion": "testguard/v1",
+    "executionEnvironmentDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "extensions": {}
+  },
+  "guard": "archguard",
+  "ruleId": "ARCH-1",
+  "mode": "ENFORCE",
+  "severity": "HIGH",
+  "execution": {
+    "status": "COMPLETED",
+    "startedAt": "2026-10-17T00:00:00+00:00",
+    "finishedAt": "2026-10-17T00:00:01Z",
+    "exitCode": 0,
+    "sequence": "1",
+    "lineageId": "LINE-1"
+  },
+  "assessment": {
+    "verdict": "SATISFIED",
+    "coverage": "COMPLETE",
+    "applicabilityEvidenceRefs": [],
+    "findingIds": []
+  },
+  "evidenceRefs": [
+    {
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mediaType": "application/json",
+      "size": 100,
+      "classification": "PRIVATE",
+      "retention": {
+        "policyId": "private-evidence-30d",
+        "retainUntil": "2026-11-17T00:00:00Z"
+      }
+    }
+  ],
+  "remediation": {
+    "summary": "No change suggested",
+    "argv": []
+  },
+  "limitations": [
+    "source-identity-and-signature-still-unverified"
+  ]
+}

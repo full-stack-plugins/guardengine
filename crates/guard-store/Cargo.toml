@@ -1,0 +1,24 @@
+[package]
+name = "guard-store"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "Private transactional evidence storage; grants no trust or authority"
+
+[dependencies]
+guard-protocol = { path = "../guard-protocol" }
+rusqlite = { version = "=0.37.0", features = ["bundled"] }
+fs2 = "=0.4.3"
+sha2 = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "=0.61.2", features = ["Win32_Foundation", "Win32_Storage_FileSystem"] }
+
+[dev-dependencies]
+tempfile = "3"

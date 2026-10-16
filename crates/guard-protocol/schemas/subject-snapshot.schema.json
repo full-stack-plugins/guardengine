@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.partme.ai/guard/v1/subject-snapshot.schema.json",
+  "$ref": "engineering.schema.json#/$defs/SubjectSnapshotDocument"
+}

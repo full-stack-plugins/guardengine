@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "VerificationPlan",
+  "planId": "P-1",
+  "subjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "contractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "policyDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "action": "MERGE",
+  "obligations": [
+    {
+      "obligationId": "OB-1",
+      "ruleId": "ARCH-1",
+      "verifierId": "java-package-check",
+      "required": true,
+      "targets": [
+        {
+          "repositoryId": "repo-example",
+          "path": {
+            "encoding": "base64",
+            "bytes": "c3JjL0V4YW1wbGUuamF2YQ=="
+          }
+        }
+      ],
+      "requiredEvidence": [
+        "source-report"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "repositoryId": "repo-example",
+      "path": {
+        "encoding": "base64",
+        "bytes": "c3JjL0V4YW1wbGUuamF2YQ=="
+      },
+      "inputDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "budget": {
+    "timeoutMs": 30000,
+    "maxOutputBytes": 65536,
+    "maxConcurrency": 2
+  }
+}

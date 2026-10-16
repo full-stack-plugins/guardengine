@@ -1,0 +1,238 @@
+{
+  "schema_version": "guard.repository-discovery/v1",
+  "captured_date": "2026-10-17",
+  "scope": "EG-M01 inventory and ownership registration; not product implementation or final runtime ownership migration",
+  "repositories": [
+    {
+      "id": "guardcore",
+      "repository": "guardengine",
+      "head": "55b0a643a732b0ba46a1479f7b1e631fd57b8bb7",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "openspec/changes/add-agents-context-governance/tasks.md",
+        "openspec/changes/add-guard-agent-installation/tasks.md",
+        "openspec/changes/bootstrap-guard-protocol/tasks.md",
+        "openspec/changes/execution-trace-evidence/tasks.md",
+        "openspec/changes/integrate-architecture-methods/tasks.md",
+        "openspec/changes/professional-guard-checks/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "archguard",
+      "repository": "archguard",
+      "head": "151b99b95a17710e9e5a4319a35dae95f5d61ab3",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "openspec/changes/add-cargo-workspace-guard/tasks.md",
+        "openspec/changes/add-maven-architecture-loop/tasks.md",
+        "openspec/changes/java-source-architecture/tasks.md",
+        "openspec/changes/project-model-baseline/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "codeguard",
+      "repository": "codeguard",
+      "head": "8d7c0e997bf21b3306573b3be89ff8c312c9de38",
+      "branch": "feat/rust-hook-prompt-guidance",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "openspec/changes/add-engineering-guard-core/tasks.md",
+        "openspec/changes/introduce-rust-codeguard-cli/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "gitguard",
+      "repository": "gitguard",
+      "head": "6d017a43c270e768360c6abc2e1f69568c210f86",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": false,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "flowguard",
+      "repository": "flowguard",
+      "head": "d690c367b697ba686c8e41cfe081ffbca56a9f03",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": false,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "specguard",
+      "repository": "specguard",
+      "head": "cfdc676a5e2fd1f7449ba09d42f5e06c920b392f",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": false,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "testguard",
+      "repository": "testguard",
+      "head": "2100f3e4d5ea079aa91579bdfa5140b99591c90b",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": false,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "stable_product_tasks_retained_in_codeguard_temporary_ledger"
+    },
+    {
+      "id": "codegraph-plugin",
+      "repository": "codegraph-plugin",
+      "head": "16aefa1da49e4aec4e7ec70333843a58cb5e4872",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "integration_tasks_in_this_repository_native_ledger"
+    },
+    {
+      "id": "codeguard-plugin",
+      "repository": "codeguard-plugin",
+      "head": "ea2d3affb0ab3a29ad27ee4676a6563790f724e2",
+      "branch": "release/english-display-names",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "openspec/changes/2026-09-22-gate-toolchain-unverified/tasks.md",
+        "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "integration_tasks_in_this_repository_native_ledger"
+    },
+    {
+      "id": "codereview-plugin",
+      "repository": "codereview-plugin",
+      "head": "e300f3f79c87826c8b001952ace8308c782445b9",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": false,
+        "docs/superpowers/plans": false,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "integration_tasks_in_this_repository_native_ledger"
+    },
+    {
+      "id": "gitflow-plugin",
+      "repository": "gitflow-plugin",
+      "head": "310c43c5e3fe7effa19245dcc4970249e569004c",
+      "branch": "main",
+      "markers": {
+        ".specify": false,
+        "openspec": true,
+        "docs/superpowers/specs": true,
+        "docs/superpowers/plans": true,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "docs/superpowers/plans/2026-10-07-gitflow.md",
+        "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "integration_tasks_in_this_repository_native_ledger"
+    },
+    {
+      "id": "flowguard-plugin",
+      "repository": "flowguard-plugin",
+      "head": "15f8415e8ad328634a252992f2f6bd5f0e8682b2",
+      "branch": "release/english-display-names",
+      "markers": {
+        ".specify": false,
+        "openspec": false,
+        "docs/superpowers/specs": true,
+        "docs/superpowers/plans": true,
+        ".codegraph": false
+      },
+      "native_ledgers": [
+        "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      ],
+      "initialization_decision": "reuse_existing_sources_no_init",
+      "initialization_authorization": "no_new_initialization_authorized_or_performed",
+      "handoff": "integration_tasks_in_this_repository_native_ledger"
+    }
+  ]
+}

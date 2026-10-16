@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "GateDecision",
+  "decisionId": "D-1",
+  "action": "MERGE",
+  "subjectDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "contractDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "policyDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "planDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "resultDigests": [
+    "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ],
+  "approvalRefs": [],
+  "decision": "ALLOW",
+  "reasons": [
+    "declared-pass-still-unverified"
+  ],
+  "missingObligations": [],
+  "activeViolations": [],
+  "requiredActions": [],
+  "evaluatedAt": "2026-10-17T00:00:00Z",
+  "expiresAt": "2026-10-17T00:05:00Z",
+  "issuer": "independent-controller"
+}

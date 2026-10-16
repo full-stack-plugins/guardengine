@@ -1,0 +1,25 @@
+//! 私有证据 SQLite 与文件存储；完整性检查不赋予证据生产者或调用者可信身份。
+mod audit_event;
+mod evidence_store;
+mod filesystem;
+mod public_summary;
+mod record;
+mod record_state;
+mod store_limits;
+mod store_lock;
+mod write_phase;
+pub use audit_event::AuditEvent;
+pub use evidence_store::EvidenceStore;
+pub use public_summary::PublicSummary;
+pub use record_state::RecordState;
+pub use store_limits::StoreLimits;
+pub use write_phase::WritePhase;
+mod head_audit_event;
+mod head_entry;
+mod head_identity;
+mod head_record;
+mod head_update;
+pub use head_audit_event::HeadAuditEvent;
+pub use head_identity::HeadIdentity;
+pub use head_record::HeadRecord;
+pub use head_update::HeadUpdate;

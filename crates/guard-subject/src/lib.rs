@@ -1,0 +1,20 @@
+//! 真实 Git 候选采集；显式身份仍是外部声明，不产生受信验收或授权。
+mod capture;
+mod capture_binding;
+mod captured_subject;
+mod git_client;
+mod git_object;
+mod input_entry;
+mod manifest;
+mod paths;
+mod selection;
+pub use capture::{capture, verify_current};
+pub use capture_binding::CaptureBinding;
+pub use captured_subject::CapturedSubject;
+pub use input_entry::InputEntry;
+pub use selection::Selection;
+mod materialization_io;
+mod materialize;
+mod materialized_subject;
+pub use materialize::materialize;
+pub use materialized_subject::MaterializedSubject;

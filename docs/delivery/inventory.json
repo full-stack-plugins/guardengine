@@ -1,0 +1,3076 @@
+{
+  "schema_version": "guard.delivery-inventory/v2",
+  "products": [
+    {
+      "id": "guardcore",
+      "repository": "guardengine",
+      "logical_names": [
+        "guardengine"
+      ]
+    },
+    {
+      "id": "archguard",
+      "repository": "archguard",
+      "logical_names": []
+    },
+    {
+      "id": "codeguard",
+      "repository": "codeguard",
+      "logical_names": []
+    },
+    {
+      "id": "gitguard",
+      "repository": "gitguard",
+      "logical_names": []
+    },
+    {
+      "id": "flowguard",
+      "repository": "flowguard",
+      "logical_names": []
+    },
+    {
+      "id": "specguard",
+      "repository": "specguard",
+      "logical_names": []
+    },
+    {
+      "id": "testguard",
+      "repository": "testguard",
+      "logical_names": []
+    },
+    {
+      "id": "codegraph-plugin",
+      "repository": "codegraph-plugin",
+      "logical_names": []
+    },
+    {
+      "id": "codeguard-plugin",
+      "repository": "codeguard-plugin",
+      "logical_names": []
+    },
+    {
+      "id": "codereview-plugin",
+      "repository": "codereview-plugin",
+      "logical_names": []
+    },
+    {
+      "id": "gitflow-plugin",
+      "repository": "gitflow-plugin",
+      "logical_names": []
+    },
+    {
+      "id": "flowguard-plugin",
+      "repository": "flowguard-plugin",
+      "logical_names": []
+    }
+  ],
+  "ledgers": [
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/add-agents-context-governance/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/add-guard-agent-installation/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/bootstrap-guard-protocol/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/execution-trace-evidence/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/integrate-architecture-methods/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "guardengine",
+      "path": "openspec/changes/professional-guard-checks/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/add-cargo-workspace-guard/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/add-maven-architecture-loop/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/java-source-architecture/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "archguard",
+      "path": "openspec/changes/project-model-baseline/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/tasks.md",
+      "ledger_kind": "stable_ids"
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/introduce-rust-codeguard-cli/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "codeguard-plugin",
+      "path": "openspec/changes/2026-09-22-gate-toolchain-unverified/tasks.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "gitflow-plugin",
+      "path": "docs/superpowers/plans/2026-10-07-gitflow.md",
+      "ledger_kind": "native_tasks"
+    },
+    {
+      "repository": "codegraph-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md",
+      "ledger_kind": "stable_ids"
+    },
+    {
+      "repository": "codeguard-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-host/tasks.md",
+      "ledger_kind": "stable_ids"
+    },
+    {
+      "repository": "codereview-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-review/tasks.md",
+      "ledger_kind": "stable_ids"
+    },
+    {
+      "repository": "gitflow-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-git/tasks.md",
+      "ledger_kind": "stable_ids"
+    },
+    {
+      "repository": "flowguard-plugin",
+      "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md",
+      "ledger_kind": "stable_ids"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "EG-K01",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-CON-001",
+        "EG-EVI-004"
+      ],
+      "dependencies": [
+        "EG-M01"
+      ],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K01-evidence.md"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-K02",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-CON-002",
+        "EG-CON-005"
+      ],
+      "dependencies": [
+        "EG-K01"
+      ],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K02-evidence.md"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-K03",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-CON-001",
+        "EG-CON-003",
+        "EG-CON-004"
+      ],
+      "dependencies": [
+        "EG-K02"
+      ],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K03-evidence.md"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-K04",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-002"
+      ],
+      "dependencies": [
+        "EG-K01"
+      ],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K04-evidence.md"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-K05",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-005"
+      ],
+      "dependencies": [
+        "EG-K01"
+      ],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K05-evidence.md"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-K06",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-001",
+        "EG-EVI-003",
+        "EG-GATE-007"
+      ],
+      "dependencies": [
+        "EG-K04",
+        "EG-K05"
+      ],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K06-evidence.md"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-K07",
+      "owner": "codeguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-004",
+        "EG-GATE-001"
+      ],
+      "dependencies": [
+        "EG-K03",
+        "EG-K06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K08",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-001",
+        "EG-GATE-005"
+      ],
+      "dependencies": [
+        "EG-K03",
+        "EG-K06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K09",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-002",
+        "EG-GATE-003"
+      ],
+      "dependencies": [
+        "EG-K03",
+        "EG-K08"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K10",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-004",
+        "EG-GATE-006"
+      ],
+      "dependencies": [
+        "EG-K04",
+        "EG-K09"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K11",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-CON-005",
+        "EG-GATE-007"
+      ],
+      "dependencies": [
+        "EG-K02",
+        "EG-K08"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K12",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-001",
+        "EG-ARCH-002",
+        "EG-GATE-001",
+        "EG-GATE-006"
+      ],
+      "dependencies": [
+        "EG-A01",
+        "EG-G06",
+        "EG-H04",
+        "EG-J03",
+        "EG-K07",
+        "EG-K10",
+        "EG-K11",
+        "EG-L03",
+        "EG-Q01",
+        "EG-R04",
+        "EG-W05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K13",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-001"
+      ],
+      "dependencies": [
+        "EG-K03",
+        "EG-K07"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K14",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-002"
+      ],
+      "dependencies": [
+        "EG-K13"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K15",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-001",
+        "EG-ARCH-003"
+      ],
+      "dependencies": [
+        "EG-K13",
+        "EG-K14"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K16",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-CON-004",
+        "EG-GATE-005"
+      ],
+      "dependencies": [
+        "EG-K09",
+        "EG-K15"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K17",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-001",
+        "EG-EVI-001"
+      ],
+      "dependencies": [
+        "EG-K12",
+        "EG-K15"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K18",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-004",
+        "EG-GATE-007"
+      ],
+      "dependencies": [
+        "EG-K01",
+        "EG-K11"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K19",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-006"
+      ],
+      "dependencies": [
+        "EG-H07",
+        "EG-K12",
+        "EG-K18"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K20",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-004",
+        "EG-GATE-006"
+      ],
+      "dependencies": [
+        "EG-F03",
+        "EG-G07",
+        "EG-H08",
+        "EG-K18",
+        "EG-K19",
+        "EG-R07",
+        "EG-W08"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K21",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-003",
+        "EG-ARCH-004"
+      ],
+      "dependencies": [
+        "EG-F05",
+        "EG-K13"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K22",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-003"
+      ],
+      "dependencies": [
+        "EG-K15",
+        "EG-K21",
+        "EG-R05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K23",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-004"
+      ],
+      "dependencies": [
+        "EG-G08",
+        "EG-K21"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K24",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-003",
+        "EG-ARCH-004"
+      ],
+      "dependencies": [
+        "EG-K22",
+        "EG-K23"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K25",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-005"
+      ],
+      "dependencies": [
+        "EG-K16",
+        "EG-K24"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K26",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-005",
+        "EG-GATE-002"
+      ],
+      "dependencies": [
+        "EG-K05",
+        "EG-K09",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K27",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-005",
+        "EG-GATE-004"
+      ],
+      "dependencies": [
+        "EG-G10",
+        "EG-K20",
+        "EG-K25",
+        "EG-K26",
+        "EG-W10"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-K28",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-006"
+      ],
+      "dependencies": [
+        "EG-F08",
+        "EG-H10",
+        "EG-K27",
+        "EG-P01",
+        "EG-P02",
+        "EG-P03",
+        "EG-P04",
+        "EG-P05",
+        "EG-P06",
+        "EG-P07",
+        "EG-R10",
+        "EG-W12"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-M01",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-001",
+        "EG-PROD-003"
+      ],
+      "dependencies": [],
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-M01-evidence.md"
+        },
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/repository-discovery.json"
+        },
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/audit.json"
+        },
+        {
+          "repository": "guardengine",
+          "path": "scripts/tests/test_delivery_inventory.py"
+        }
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "EG-A01",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-001",
+        "EG-PROD-001",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-K01",
+        "EG-K03",
+        "EG-K06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-A02",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-ARCH-002",
+        "EG-ARCH-003",
+        "EG-PROD-004"
+      ],
+      "dependencies": [
+        "EG-A01",
+        "EG-K14"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-Q01",
+      "owner": "codeguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-004",
+        "EG-PROD-001",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-K07"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-Q02",
+      "owner": "codeguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-EVI-001",
+        "EG-PROD-001"
+      ],
+      "dependencies": [
+        "EG-K17",
+        "EG-Q01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-J01",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-003",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-G01",
+        "EG-K01",
+        "EG-M01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-J02",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-004",
+        "EG-PROD-001"
+      ],
+      "dependencies": [
+        "EG-G04",
+        "EG-J01",
+        "EG-K09"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-J03",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-006",
+        "EG-PROD-005"
+      ],
+      "dependencies": [
+        "EG-G06",
+        "EG-J02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-J04",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-003"
+      ],
+      "dependencies": [
+        "EG-G07",
+        "EG-J03"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-J05",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-003"
+      ],
+      "dependencies": [
+        "EG-G10",
+        "EG-J04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-L01",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-003",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-K01",
+        "EG-M01",
+        "EG-W01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-L02",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-GATE-001",
+        "EG-PROD-001",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-K08",
+        "EG-L01",
+        "EG-W03"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-L03",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-005"
+      ],
+      "dependencies": [
+        "EG-K09",
+        "EG-L02",
+        "EG-W05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-L04",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-003"
+      ],
+      "dependencies": [
+        "EG-L03",
+        "EG-W08",
+        "EG-W13"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-L05",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-005",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-L04",
+        "EG-S06",
+        "EG-T06",
+        "EG-W12"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-S01",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-SPEC-001"
+      ],
+      "dependencies": [
+        "EG-K01",
+        "EG-M01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-S02",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-SPEC-002",
+        "EG-SPEC-004"
+      ],
+      "dependencies": [
+        "EG-K03",
+        "EG-S01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-S03",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-SPEC-003"
+      ],
+      "dependencies": [
+        "EG-K09",
+        "EG-S02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-S04",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-SPEC-004"
+      ],
+      "dependencies": [
+        "EG-S02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-S05",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-004",
+        "EG-SPEC-005"
+      ],
+      "dependencies": [
+        "EG-S03",
+        "EG-S04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-S06",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-005",
+        "EG-SPEC-001",
+        "EG-SPEC-002",
+        "EG-SPEC-003",
+        "EG-SPEC-004",
+        "EG-SPEC-005"
+      ],
+      "dependencies": [
+        "EG-K12",
+        "EG-S05",
+        "EG-T05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-T01",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-TEST-001"
+      ],
+      "dependencies": [
+        "EG-K01",
+        "EG-K03",
+        "EG-M01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-T02",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-TEST-002"
+      ],
+      "dependencies": [
+        "EG-K06",
+        "EG-T01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-T03",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-TEST-003"
+      ],
+      "dependencies": [
+        "EG-T02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-T04",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-TEST-004"
+      ],
+      "dependencies": [
+        "EG-A02",
+        "EG-T02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-T05",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-TEST-005"
+      ],
+      "dependencies": [
+        "EG-K09",
+        "EG-T03",
+        "EG-T04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-T06",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-005",
+        "EG-TEST-001",
+        "EG-TEST-002",
+        "EG-TEST-003",
+        "EG-TEST-004",
+        "EG-TEST-005"
+      ],
+      "dependencies": [
+        "EG-K12",
+        "EG-K17",
+        "EG-T05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P01",
+      "owner": "guardcore",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-K18",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P02",
+      "owner": "specguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-S06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P03",
+      "owner": "archguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-A02",
+        "EG-K24"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P04",
+      "owner": "codeguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-H08",
+        "EG-Q02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P05",
+      "owner": "testguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-T06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P06",
+      "owner": "gitguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-J05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-P07",
+      "owner": "flowguard",
+      "ledger": {
+        "repository": "codeguard",
+        "path": "openspec/changes/add-engineering-guard-core/tasks.md"
+      },
+      "requirements": [
+        "EG-PROD-002",
+        "EG-PROD-006"
+      ],
+      "dependencies": [
+        "EG-L05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F01",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-001",
+        "EG-CGP-005"
+      ],
+      "dependencies": [
+        "EG-M01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F02",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-002",
+        "EG-CGP-003"
+      ],
+      "dependencies": [
+        "EG-F01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F03",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-004",
+        "EG-CGP-005"
+      ],
+      "dependencies": [
+        "EG-F01",
+        "EG-K01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F04",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-001",
+        "EG-CGP-005"
+      ],
+      "dependencies": [
+        "EG-F03"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F05",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-002",
+        "EG-CGP-004"
+      ],
+      "dependencies": [
+        "EG-F02",
+        "EG-F04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F06",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-004"
+      ],
+      "dependencies": [
+        "EG-F05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F07",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-002",
+        "EG-CGP-005"
+      ],
+      "dependencies": [
+        "EG-F06",
+        "EG-K21"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-F08",
+      "owner": "codegraph-plugin",
+      "ledger": {
+        "repository": "codegraph-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-facts/tasks.md"
+      },
+      "requirements": [
+        "EG-CGP-001",
+        "EG-CGP-005"
+      ],
+      "dependencies": [
+        "EG-F07",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H01",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-001"
+      ],
+      "dependencies": [
+        "EG-K01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H02",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-002",
+        "EG-CGH-004"
+      ],
+      "dependencies": [
+        "EG-H01",
+        "EG-K04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H03",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-003"
+      ],
+      "dependencies": [
+        "EG-H02",
+        "EG-K05",
+        "EG-K06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H04",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-001",
+        "EG-CGH-004"
+      ],
+      "dependencies": [
+        "EG-H01",
+        "EG-H02",
+        "EG-K07"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H05",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-004"
+      ],
+      "dependencies": [
+        "EG-H04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H06",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-001",
+        "EG-CGH-002"
+      ],
+      "dependencies": [
+        "EG-H02",
+        "EG-K10",
+        "EG-K18"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H07",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-005"
+      ],
+      "dependencies": [
+        "EG-H04",
+        "EG-K18"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H08",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-001",
+        "EG-CGH-005"
+      ],
+      "dependencies": [
+        "EG-H07"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H09",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-003",
+        "EG-CGH-004"
+      ],
+      "dependencies": [
+        "EG-H03",
+        "EG-H05",
+        "EG-K09"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-H10",
+      "owner": "codeguard-plugin",
+      "ledger": {
+        "repository": "codeguard-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-host/tasks.md"
+      },
+      "requirements": [
+        "EG-CGH-001",
+        "EG-CGH-005"
+      ],
+      "dependencies": [
+        "EG-H06",
+        "EG-H08",
+        "EG-H09",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R01",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-001",
+        "EG-CR-005"
+      ],
+      "dependencies": [
+        "EG-K01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R02",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-002"
+      ],
+      "dependencies": [
+        "EG-R01",
+        "EG-K09"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R03",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-003"
+      ],
+      "dependencies": [
+        "EG-R01",
+        "EG-K04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R04",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-001",
+        "EG-CR-005"
+      ],
+      "dependencies": [
+        "EG-R01",
+        "EG-R03"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R05",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-004"
+      ],
+      "dependencies": [
+        "EG-R03",
+        "EG-K21"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R06",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-001",
+        "EG-CR-005"
+      ],
+      "dependencies": [
+        "EG-R02",
+        "EG-R04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R07",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-002",
+        "EG-CR-003"
+      ],
+      "dependencies": [
+        "EG-R03",
+        "EG-K18"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R08",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-004"
+      ],
+      "dependencies": [
+        "EG-R05",
+        "EG-K22"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R09",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-001",
+        "EG-CR-003",
+        "EG-CR-005"
+      ],
+      "dependencies": [
+        "EG-R06",
+        "EG-R08"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-R10",
+      "owner": "codereview-plugin",
+      "ledger": {
+        "repository": "codereview-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-review/tasks.md"
+      },
+      "requirements": [
+        "EG-CR-002",
+        "EG-CR-005"
+      ],
+      "dependencies": [
+        "EG-R07",
+        "EG-R09",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G01",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-001"
+      ],
+      "dependencies": [
+        "EG-M01",
+        "EG-K01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G02",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-002"
+      ],
+      "dependencies": [
+        "EG-G01",
+        "EG-K03"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G03",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-003"
+      ],
+      "dependencies": [
+        "EG-G02",
+        "EG-K04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G04",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-003",
+        "EG-GIT-005"
+      ],
+      "dependencies": [
+        "EG-G03",
+        "EG-K09"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G05",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-002",
+        "EG-GIT-004"
+      ],
+      "dependencies": [
+        "EG-G02",
+        "EG-K02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G06",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-004"
+      ],
+      "dependencies": [
+        "EG-G03",
+        "EG-G05"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G07",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-004",
+        "EG-GIT-005"
+      ],
+      "dependencies": [
+        "EG-G01",
+        "EG-G04",
+        "EG-G06",
+        "EG-K18"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G08",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-005"
+      ],
+      "dependencies": [
+        "EG-G02",
+        "EG-K21"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G09",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-003",
+        "EG-GIT-005"
+      ],
+      "dependencies": [
+        "EG-G04",
+        "EG-G08",
+        "EG-K10"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-G10",
+      "owner": "gitflow-plugin",
+      "ledger": {
+        "repository": "gitflow-plugin",
+        "path": "openspec/changes/integrate-engineering-guard-git/tasks.md"
+      },
+      "requirements": [
+        "EG-GIT-001",
+        "EG-GIT-004",
+        "EG-GIT-005"
+      ],
+      "dependencies": [
+        "EG-G07",
+        "EG-G09",
+        "EG-J04",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W01",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-001"
+      ],
+      "dependencies": [
+        "EG-M01",
+        "EG-K01"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W02",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-002"
+      ],
+      "dependencies": [
+        "EG-W01",
+        "EG-K04"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W03",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-003",
+        "EG-WF-004"
+      ],
+      "dependencies": [
+        "EG-W02",
+        "EG-K08"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W04",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-003",
+        "EG-WF-005"
+      ],
+      "dependencies": [
+        "EG-W03",
+        "EG-K09"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W05",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-003",
+        "EG-WF-004",
+        "EG-WF-008"
+      ],
+      "dependencies": [
+        "EG-W03",
+        "EG-W04",
+        "EG-K07"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W06",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-006"
+      ],
+      "dependencies": [
+        "EG-W01",
+        "EG-K03"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W07",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-001",
+        "EG-WF-004"
+      ],
+      "dependencies": [
+        "EG-W05",
+        "EG-L02"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W08",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-005",
+        "EG-WF-008"
+      ],
+      "dependencies": [
+        "EG-W05",
+        "EG-K18"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W09",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-002",
+        "EG-WF-006"
+      ],
+      "dependencies": [
+        "EG-W06",
+        "EG-K23"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W10",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-006",
+        "EG-WF-007"
+      ],
+      "dependencies": [
+        "EG-W09",
+        "EG-K25"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W11",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-003",
+        "EG-WF-007"
+      ],
+      "dependencies": [
+        "EG-W04",
+        "EG-K26"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W12",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-001",
+        "EG-WF-008"
+      ],
+      "dependencies": [
+        "EG-W07",
+        "EG-W08",
+        "EG-W10",
+        "EG-W11",
+        "EG-L04",
+        "EG-K20"
+      ],
+      "evidence": [],
+      "status": "pending"
+    },
+    {
+      "id": "EG-W13",
+      "owner": "flowguard-plugin",
+      "ledger": {
+        "repository": "flowguard-plugin",
+        "path": "docs/superpowers/plans/2026-09-23-flowguard-agent-driven-sdd-governance.md"
+      },
+      "requirements": [
+        "EG-WF-004",
+        "EG-WF-008"
+      ],
+      "dependencies": [
+        "EG-W03",
+        "EG-W06"
+      ],
+      "evidence": [],
+      "status": "pending"
+    }
+  ],
+  "ownership": {
+    "repository": "codeguard",
+    "path": "docs/engineering-guard/ownership.md"
+  },
+  "specifications": [
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/architecture-governance/spec.md",
+      "requirements": [
+        {
+          "id": "EG-ARCH-001",
+          "scenarios": [
+            "EG-ARCH-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-ARCH-002",
+          "scenarios": [
+            "EG-ARCH-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-ARCH-003",
+          "scenarios": [
+            "EG-ARCH-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-ARCH-004",
+          "scenarios": [
+            "EG-ARCH-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-ARCH-005",
+          "scenarios": [
+            "EG-ARCH-005 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/engineering-contracts/spec.md",
+      "requirements": [
+        {
+          "id": "EG-CON-001",
+          "scenarios": [
+            "EG-CON-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-CON-002",
+          "scenarios": [
+            "EG-CON-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-CON-003",
+          "scenarios": [
+            "EG-CON-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-CON-004",
+          "scenarios": [
+            "EG-CON-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-CON-005",
+          "scenarios": [
+            "EG-CON-005 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/engineering-evidence/spec.md",
+      "requirements": [
+        {
+          "id": "EG-EVI-001",
+          "scenarios": [
+            "EG-EVI-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-EVI-002",
+          "scenarios": [
+            "EG-EVI-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-EVI-003",
+          "scenarios": [
+            "EG-EVI-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-EVI-004",
+          "scenarios": [
+            "EG-EVI-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-EVI-005",
+          "scenarios": [
+            "EG-EVI-005 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/engineering-gate/spec.md",
+      "requirements": [
+        {
+          "id": "EG-GATE-001",
+          "scenarios": [
+            "EG-GATE-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-GATE-002",
+          "scenarios": [
+            "EG-GATE-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-GATE-003",
+          "scenarios": [
+            "EG-GATE-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-GATE-004",
+          "scenarios": [
+            "EG-GATE-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-GATE-005",
+          "scenarios": [
+            "EG-GATE-005 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-GATE-006",
+          "scenarios": [
+            "EG-GATE-006 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-GATE-007",
+          "scenarios": [
+            "EG-GATE-007 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/guard-product-boundaries/spec.md",
+      "requirements": [
+        {
+          "id": "EG-PROD-001",
+          "scenarios": [
+            "EG-PROD-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-PROD-002",
+          "scenarios": [
+            "EG-PROD-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-PROD-003",
+          "scenarios": [
+            "EG-PROD-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-PROD-004",
+          "scenarios": [
+            "EG-PROD-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-PROD-005",
+          "scenarios": [
+            "EG-PROD-005 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-PROD-006",
+          "scenarios": [
+            "EG-PROD-006 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/specification-governance/spec.md",
+      "requirements": [
+        {
+          "id": "EG-SPEC-001",
+          "scenarios": [
+            "EG-SPEC-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-SPEC-002",
+          "scenarios": [
+            "EG-SPEC-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-SPEC-003",
+          "scenarios": [
+            "EG-SPEC-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-SPEC-004",
+          "scenarios": [
+            "EG-SPEC-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-SPEC-005",
+          "scenarios": [
+            "EG-SPEC-005 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard",
+      "path": "openspec/changes/add-engineering-guard-core/specs/test-governance/spec.md",
+      "requirements": [
+        {
+          "id": "EG-TEST-001",
+          "scenarios": [
+            "EG-TEST-001 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-TEST-002",
+          "scenarios": [
+            "EG-TEST-002 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-TEST-003",
+          "scenarios": [
+            "EG-TEST-003 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-TEST-004",
+          "scenarios": [
+            "EG-TEST-004 contract behavior"
+          ]
+        },
+        {
+          "id": "EG-TEST-005",
+          "scenarios": [
+            "EG-TEST-005 contract behavior"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codegraph-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-facts/specs/engineering-fact-provider/spec.md",
+      "requirements": [
+        {
+          "id": "EG-CGP-001",
+          "scenarios": [
+            "EG-CGP-001 preserve supported behavior",
+            "EG-CGP-001 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGP-002",
+          "scenarios": [
+            "EG-CGP-002 preserve supported behavior",
+            "EG-CGP-002 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGP-003",
+          "scenarios": [
+            "EG-CGP-003 preserve supported behavior",
+            "EG-CGP-003 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGP-004",
+          "scenarios": [
+            "EG-CGP-004 preserve supported behavior",
+            "EG-CGP-004 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGP-005",
+          "scenarios": [
+            "EG-CGP-005 preserve supported behavior",
+            "EG-CGP-005 reject unsupported or unsafe input"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codeguard-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-host/specs/engineering-host-bridge/spec.md",
+      "requirements": [
+        {
+          "id": "EG-CGH-001",
+          "scenarios": [
+            "EG-CGH-001 preserve supported behavior",
+            "EG-CGH-001 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGH-002",
+          "scenarios": [
+            "EG-CGH-002 preserve supported behavior",
+            "EG-CGH-002 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGH-003",
+          "scenarios": [
+            "EG-CGH-003 preserve supported behavior",
+            "EG-CGH-003 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGH-004",
+          "scenarios": [
+            "EG-CGH-004 preserve supported behavior",
+            "EG-CGH-004 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CGH-005",
+          "scenarios": [
+            "EG-CGH-005 preserve supported behavior",
+            "EG-CGH-005 reject unsupported or unsafe input"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "codereview-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-review/specs/engineering-review-evidence/spec.md",
+      "requirements": [
+        {
+          "id": "EG-CR-001",
+          "scenarios": [
+            "EG-CR-001 preserve supported behavior",
+            "EG-CR-001 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CR-002",
+          "scenarios": [
+            "EG-CR-002 preserve supported behavior",
+            "EG-CR-002 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CR-003",
+          "scenarios": [
+            "EG-CR-003 preserve supported behavior",
+            "EG-CR-003 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CR-004",
+          "scenarios": [
+            "EG-CR-004 preserve supported behavior",
+            "EG-CR-004 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-CR-005",
+          "scenarios": [
+            "EG-CR-005 preserve supported behavior",
+            "EG-CR-005 reject unsupported or unsafe input"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "gitflow-plugin",
+      "path": "openspec/changes/integrate-engineering-guard-git/specs/engineering-git-integration/spec.md",
+      "requirements": [
+        {
+          "id": "EG-GIT-001",
+          "scenarios": [
+            "EG-GIT-001 preserve supported behavior",
+            "EG-GIT-001 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-GIT-002",
+          "scenarios": [
+            "EG-GIT-002 preserve supported behavior",
+            "EG-GIT-002 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-GIT-003",
+          "scenarios": [
+            "EG-GIT-003 preserve supported behavior",
+            "EG-GIT-003 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-GIT-004",
+          "scenarios": [
+            "EG-GIT-004 preserve supported behavior",
+            "EG-GIT-004 reject unsupported or unsafe input"
+          ]
+        },
+        {
+          "id": "EG-GIT-005",
+          "scenarios": [
+            "EG-GIT-005 preserve supported behavior",
+            "EG-GIT-005 reject unsupported or unsafe input"
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "flowguard-plugin",
+      "path": "docs/superpowers/specs/2026-09-23-flowguard-docs-ten-stage-governance.md",
+      "requirements": [
+        {
+          "id": "EG-WF-001",
+          "scenarios": [
+            "EG-WF-001 preserve supported behavior",
+            "EG-WF-001 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-002",
+          "scenarios": [
+            "EG-WF-002 preserve supported behavior",
+            "EG-WF-002 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-003",
+          "scenarios": [
+            "EG-WF-003 preserve supported behavior",
+            "EG-WF-003 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-004",
+          "scenarios": [
+            "EG-WF-004 preserve supported behavior",
+            "EG-WF-004 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-005",
+          "scenarios": [
+            "EG-WF-005 preserve supported behavior",
+            "EG-WF-005 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-006",
+          "scenarios": [
+            "EG-WF-006 preserve supported behavior",
+            "EG-WF-006 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-007",
+          "scenarios": [
+            "EG-WF-007 preserve supported behavior",
+            "EG-WF-007 reject unsafe or incomplete input"
+          ]
+        },
+        {
+          "id": "EG-WF-008",
+          "scenarios": [
+            "EG-WF-008 preserve supported behavior",
+            "EG-WF-008 reject unsafe or incomplete input"
+          ]
+        }
+      ]
+    }
+  ],
+  "acceptance": [
+    {
+      "repository": "codeguard",
+      "path": "docs/engineering-guard/acceptance.md",
+      "cases": [
+        {
+          "id": "EG-AT-001",
+          "tasks": [
+            "EG-K12"
+          ]
+        },
+        {
+          "id": "EG-AT-002",
+          "tasks": [
+            "EG-G05",
+            "EG-K03",
+            "EG-K08"
+          ]
+        },
+        {
+          "id": "EG-AT-003",
+          "tasks": [
+            "EG-K16"
+          ]
+        },
+        {
+          "id": "EG-AT-004",
+          "tasks": [
+            "EG-K09",
+            "EG-W05"
+          ]
+        },
+        {
+          "id": "EG-AT-005",
+          "tasks": [
+            "EG-R01",
+            "EG-W02"
+          ]
+        },
+        {
+          "id": "EG-AT-006",
+          "tasks": [
+            "EG-G01",
+            "EG-K07"
+          ]
+        },
+        {
+          "id": "EG-AT-007",
+          "tasks": [
+            "EG-K06",
+            "EG-K08"
+          ]
+        },
+        {
+          "id": "EG-AT-008",
+          "tasks": [
+            "EG-K02"
+          ]
+        },
+        {
+          "id": "EG-AT-009",
+          "tasks": [
+            "EG-K03"
+          ]
+        },
+        {
+          "id": "EG-AT-010",
+          "tasks": [
+            "EG-K04",
+            "EG-K06"
+          ]
+        },
+        {
+          "id": "EG-AT-011",
+          "tasks": [
+            "EG-K04",
+            "EG-R03"
+          ]
+        },
+        {
+          "id": "EG-AT-012",
+          "tasks": [
+            "EG-H03",
+            "EG-K06"
+          ]
+        },
+        {
+          "id": "EG-AT-013",
+          "tasks": [
+            "EG-G03",
+            "EG-G04"
+          ]
+        },
+        {
+          "id": "EG-AT-014",
+          "tasks": [
+            "EG-K09",
+            "EG-K10"
+          ]
+        },
+        {
+          "id": "EG-AT-015",
+          "tasks": [
+            "EG-G04"
+          ]
+        },
+        {
+          "id": "EG-AT-016",
+          "tasks": [
+            "EG-G06",
+            "EG-G07"
+          ]
+        },
+        {
+          "id": "EG-AT-017",
+          "tasks": [
+            "EG-G05",
+            "EG-K10"
+          ]
+        },
+        {
+          "id": "EG-AT-018",
+          "tasks": [
+            "EG-H03",
+            "EG-W04"
+          ]
+        },
+        {
+          "id": "EG-AT-019",
+          "tasks": [
+            "EG-K09",
+            "EG-R02"
+          ]
+        },
+        {
+          "id": "EG-AT-020",
+          "tasks": [
+            "EG-R02",
+            "EG-W04"
+          ]
+        },
+        {
+          "id": "EG-AT-021",
+          "tasks": [
+            "EG-R02"
+          ]
+        },
+        {
+          "id": "EG-AT-022",
+          "tasks": [
+            "EG-H05",
+            "EG-R06"
+          ]
+        },
+        {
+          "id": "EG-AT-023",
+          "tasks": [
+            "EG-F02",
+            "EG-F03"
+          ]
+        },
+        {
+          "id": "EG-AT-024",
+          "tasks": [
+            "EG-K13",
+            "EG-K14"
+          ]
+        },
+        {
+          "id": "EG-AT-025",
+          "tasks": [
+            "EG-K15",
+            "EG-K22"
+          ]
+        },
+        {
+          "id": "EG-AT-026",
+          "tasks": [
+            "EG-G08",
+            "EG-K23"
+          ]
+        },
+        {
+          "id": "EG-AT-027",
+          "tasks": [
+            "EG-K23",
+            "EG-R08"
+          ]
+        },
+        {
+          "id": "EG-AT-028",
+          "tasks": [
+            "EG-K16"
+          ]
+        },
+        {
+          "id": "EG-AT-029",
+          "tasks": [
+            "EG-K05"
+          ]
+        },
+        {
+          "id": "EG-AT-030",
+          "tasks": [
+            "EG-H06",
+            "EG-K18"
+          ]
+        },
+        {
+          "id": "EG-AT-031",
+          "tasks": [
+            "EG-K20"
+          ]
+        },
+        {
+          "id": "EG-AT-032",
+          "tasks": [
+            "EG-H07",
+            "EG-K19",
+            "EG-W08"
+          ]
+        },
+        {
+          "id": "EG-AT-033",
+          "tasks": [
+            "EG-K25",
+            "EG-W10"
+          ]
+        },
+        {
+          "id": "EG-AT-034",
+          "tasks": [
+            "EG-K26",
+            "EG-W11"
+          ]
+        },
+        {
+          "id": "EG-AT-035",
+          "tasks": [
+            "EG-G09",
+            "EG-K27"
+          ]
+        },
+        {
+          "id": "EG-AT-036",
+          "tasks": [
+            "EG-F02",
+            "EG-K02"
+          ]
+        },
+        {
+          "id": "EG-AT-037",
+          "tasks": [
+            "EG-S01",
+            "EG-S06"
+          ]
+        },
+        {
+          "id": "EG-AT-038",
+          "tasks": [
+            "EG-S02",
+            "EG-S04"
+          ]
+        },
+        {
+          "id": "EG-AT-039",
+          "tasks": [
+            "EG-S03",
+            "EG-S05"
+          ]
+        },
+        {
+          "id": "EG-AT-040",
+          "tasks": [
+            "EG-T01",
+            "EG-T02",
+            "EG-T03"
+          ]
+        },
+        {
+          "id": "EG-AT-041",
+          "tasks": [
+            "EG-T04",
+            "EG-T05",
+            "EG-T06"
+          ]
+        },
+        {
+          "id": "EG-AT-042",
+          "tasks": [
+            "EG-P01",
+            "EG-P02",
+            "EG-P03",
+            "EG-P04",
+            "EG-P05",
+            "EG-P06",
+            "EG-P07"
+          ]
+        },
+        {
+          "id": "EG-AT-043",
+          "tasks": [
+            "EG-A02",
+            "EG-S05"
+          ]
+        }
+      ]
+    }
+  ]
+}

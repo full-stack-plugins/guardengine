@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "extensions": {},
+  "documentType": "ContractSnapshot",
+  "contractId": "C-1",
+  "version": "approved-1",
+  "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sourceRefs": [
+    {
+      "repoId": "repo-example",
+      "path": {
+        "encoding": "base64",
+        "bytes": "c3JjL0V4YW1wbGUuamF2YQ=="
+      },
+      "ref": "main",
+      "contentDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "rules": [
+    {
+      "schemaVersion": "1.0.0",
+      "ruleId": "ARCH-1",
+      "revision": "1",
+      "owner": "archguard",
+      "mode": "ENFORCE",
+      "severity": "HIGH",
+      "applicability": {
+        "predicate": "java-source",
+        "parameters": {}
+      },
+      "parameters": {
+        "maxCycles": 0,
+        "thresholdDecimal": "0.99"
+      },
+      "verifierId": "java-package-check",
+      "requiredEvidence": [
+        "source-report"
+      ],
+      "waiverPolicy": {
+        "allowed": false,
+        "maxAgeSeconds": 0
+      },
+      "extensions": {}
+    }
+  ],
+  "obligations": [
+    {
+      "obligationId": "OB-1",
+      "ruleId": "ARCH-1",
+      "verifierId": "java-package-check",
+      "required": true,
+      "targets": [
+        {
+          "repositoryId": "repo-example",
+          "path": {
+            "encoding": "base64",
+            "bytes": "c3JjL0V4YW1wbGUuamF2YQ=="
+          },
+          "inputDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "requiredEvidence": [
+        "source-report"
+      ]
+    }
+  ],
+  "approvalRef": "R-1"
+}
