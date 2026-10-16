@@ -142,6 +142,7 @@ class Installation(unittest.TestCase):
                 expected_tools.update({'specguard_check_agents', 'specguard_agents_template'})
                 expected_tools.update({'specguard_check_specs', 'specguard_verify_specs'})
                 expected_tools.update({'specguard_check_trace', 'specguard_verify_trace'})
+                expected_tools.add('specguard_spec_sources')
             if tool == 'gitguard':
                 expected_tools.add('gitguard_policy_check')
             if tool == 'testguard':
