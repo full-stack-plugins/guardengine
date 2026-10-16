@@ -14,3 +14,20 @@ jobs:
       - run: cargo fmt --all -- --check
       - run: cargo clippy --all-targets -- -D warnings
       - run: cargo test --all-targets
+      - name: Verify shared installer formatting
+        run: cargo fmt --manifest-path crates/guard-install/Cargo.toml -- --check
+      - name: Check shared installer
+        run: cargo clippy --manifest-path crates/guard-install/Cargo.toml --all-targets --features test-fixture -- -D warnings
+      - name: Test shared installer
+        run: cargo test --manifest-path crates/guard-install/Cargo.toml --locked --features test-fixture
+      - name: Verify shared evidence formatting
+        run: cargo fmt --manifest-path crates/guard-evidence/Cargo.toml -- --check
+      - name: Check shared evidence
+        run: cargo clippy --manifest-path crates/guard-evidence/Cargo.toml --locked --all-targets -- -D warnings
+      - name: Test shared evidence
+        run: cargo test --manifest-path crates/guard-evidence/Cargo.toml --locked
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test offline skill bundles
+        run: python -B -m unittest discover -s scripts/tests -p test_skill_bundle.py

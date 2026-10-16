@@ -53,6 +53,7 @@ fn facts(prohibited: bool, complete: bool) -> GuardFacts {
             id: "example".into(),
             snapshot_digest: "sha256:fixture".into(),
         },
+        coverage: None,
         completeness: if complete {
             Completeness::Complete
         } else {

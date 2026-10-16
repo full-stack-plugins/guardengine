@@ -15,3 +15,9 @@ pub use protocol::{
     GuardAssertion, GuardContract, GuardFact, GuardFacts, GuardRule, GuardSubject,
     load_contract_yaml, load_facts_json,
 };
+
+mod analysis_coverage;
+mod graph_evaluation;
+mod guard_assertion;
+pub use analysis_coverage::AnalysisCoverage;
+pub use protocol::API_VERSION_V2;

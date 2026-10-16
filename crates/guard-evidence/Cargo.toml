@@ -1,0 +1,15 @@
+[package]
+name = "guard-evidence"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "Explicitly anchored local signed evidence and bounded source snapshots"
+
+[dependencies]
+serde_json = "1"
+sha2 = "0.10"
+ring = "=0.17.14"
+
+[dev-dependencies]
+tempfile = "3"

@@ -59,3 +59,25 @@ No rule may execute shell commands or arbitrary scripts in this version.
 ## Verifying evidence
 
 `guardengine verify --contract ... --facts ... --report ...` recalculates all rule results and digests. A successful consistency check is **not** a cryptographic signature or proof that the analyzer ran on the expected Git revision. Trusted CI must rerun analysis and bind the result to its protected checkout.
+
+## v1alpha2 graph constraints (engine 0.2.0)
+
+The versioned extension adds `forbid_path`, `allowed_dependencies`, `require_relation`, and `acyclic` alongside `forbid_relation`. New operators require v1alpha2 contracts. All operators honor enforce/review/advise; incomplete or uncovered input always blocks.
+
+v1alpha2 facts require:
+
+```json
+"coverage": {
+  "entities": ["io.demo:app", "io.demo:domain"],
+  "predicates": ["depends_on"],
+  "scope": "Maven reactor declared dependencies across all declared scopes"
+}
+```
+
+Inventory includes isolated modules. Facts must fall within the inventory and supported predicates. Missing entities, unsupported predicates, or legacy facts without coverage produce INDETERMINATE for v2 contracts. Malformed v2 coverage is rejected as invalid input. v1alpha1 contracts retain legacy exact-triple behavior, including absent entity matches; upgrade explicitly to enable strict coverage.
+
+Facts and coverage inventories are sorted for stable digests. Input limits: 1,000 rules, 100,000 facts, 10,000 covered entities. forbid_path returns a deterministic shortest witness path; acyclic returns one real closed witness path. AllowedDependencies checks direct outgoing edges against objects (empty permits none); RequireRelation fails when the exact required edge is absent. Coverage is analyzer-declared scope, not an assertion of whole-program completeness.
+
+Report apiVersion follows the contract. Reports bind engine and analyzer versions, so regenerate evidence after upgrades. Rust GuardFacts now includes optional coverage; struct-literal clients must provide it. Existing JSON/YAML v1alpha1 readers remain accepted.
+
+ArchGuard's `verify --project ... --report ...` reanalyzes current build inputs. GuardEngine's `verify --facts ...` checks consistency of provided evidence only. Neither performs signing or grants approval.

@@ -1,0 +1,2 @@
+# Locked source bytes must survive Windows and Unix checkouts identically.
+skill-library/** text eol=lf

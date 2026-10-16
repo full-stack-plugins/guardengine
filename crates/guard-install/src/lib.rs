@@ -1,0 +1,22 @@
+//! 六个 Guard 共享的安装机制；不包含专业规则判定。
+mod agent_context;
+mod cli;
+mod context_provider;
+mod domain_tool;
+mod files;
+mod instructions;
+mod integration;
+mod mcp;
+mod mutation;
+mod options;
+mod owned_entry;
+mod receipt;
+mod spec_context;
+mod tool;
+pub use agent_context::{CONTEXT_GUARDS, agent_context_block, agent_context_requirements};
+pub use cli::dispatch;
+pub use context_provider::ContextProvider;
+pub use domain_tool::DomainTool;
+pub use options::Options;
+pub use spec_context::{read_project_file, specification_context};
+pub use tool::Tool;

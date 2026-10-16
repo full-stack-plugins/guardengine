@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "upstream": {
+    "repository": "https://github.com/mattpocock/skills",
+    "revision": "49dd158d1076134a641b33efb035946536778336",
+    "version": "1.3.1"
+  },
+  "skills": {
+    "guard-grilling": {
+      "path": "adapters/guard-grilling",
+      "dependencies": [],
+      "references": {
+        "guard-workflow.md": "references/guard-workflow.md"
+      }
+    },
+    "archguard-domain-modeling": {
+      "path": "adapters/archguard-domain-modeling",
+      "dependencies": [
+        "guard-grilling"
+      ],
+      "references": {
+        "guard-workflow.md": "references/guard-workflow.md"
+      }
+    },
+    "archguard-grill-with-docs": {
+      "path": "adapters/archguard-grill-with-docs",
+      "dependencies": [
+        "guard-grilling",
+        "archguard-domain-modeling"
+      ],
+      "references": {
+        "guard-workflow.md": "references/guard-workflow.md"
+      }
+    },
+    "archguard-codebase-design": {
+      "path": "adapters/archguard-codebase-design",
+      "dependencies": [],
+      "references": {
+        "guard-workflow.md": "references/guard-workflow.md"
+      }
+    },
+    "archguard-improve-codebase-architecture": {
+      "path": "adapters/archguard-improve-codebase-architecture",
+      "dependencies": [
+        "archguard-codebase-design",
+        "archguard-grill-with-docs",
+        "archguard-research"
+      ],
+      "references": {
+        "guard-workflow.md": "references/guard-workflow.md"
+      }
+    },
+    "archguard-research": {
+      "path": "adapters/archguard-research",
+      "dependencies": [],
+      "references": {
+        "guard-workflow.md": "references/guard-workflow.md"
+      }
+    }
+  }
+}

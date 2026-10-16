@@ -37,6 +37,7 @@ fn prepare_fixture() -> (tempfile::TempDir, String, String, String) {
             id: "test".into(),
             snapshot_digest: "sha256:fixture".into(),
         },
+        coverage: None,
         completeness: Completeness::Complete,
         facts: vec![GuardFact {
             subject: "job".into(),

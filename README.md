@@ -72,3 +72,7 @@ See [architecture](docs/architecture.md), [technical design](docs/technical-desi
 
 Run `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and `cargo test --all-targets`.
 License: Apache-2.0.
+
+## Agent installation / 智能体接入
+
+`crates/guard-install` is a separate shared installation library for the six Guard CLIs, independent of the evaluation kernel. See [design and usage](docs/agent-installation.md) and the single [OpenSpec change](openspec/changes/add-guard-agent-installation/).

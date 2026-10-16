@@ -2,3 +2,5 @@
 /.ideas/
 /.DS_Store
 *.log
+
+/crates/guard-install/target/

@@ -3,8 +3,8 @@ use sha2::{Digest, Sha256};
 
 use crate::error::GuardError;
 use crate::protocol::{
-    API_VERSION, AnalyzerIdentity, Completeness, Enforcement, GuardAssertion, GuardContract,
-    GuardFact, GuardFacts, GuardSubject,
+    API_VERSION_V2, AnalyzerIdentity, Completeness, Enforcement, GuardContract, GuardFact,
+    GuardFacts, GuardSubject,
 };
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -74,11 +74,15 @@ pub fn evaluate(
     let mut canonical_facts = fact_set.clone();
     canonical_facts.facts.sort();
     canonical_facts.facts.dedup();
+    if let Some(coverage) = &mut canonical_facts.coverage {
+        coverage.entities.sort();
+        coverage.predicates.sort();
+    }
 
     let contract_digest = digest_json(contract)?;
     let facts_digest = digest_json(&canonical_facts)?;
     let evaluation_id = digest_json(&(
-        API_VERSION,
+        &contract.api_version,
         env!("CARGO_PKG_VERSION"),
         &contract_digest,
         &facts_digest,
@@ -86,17 +90,13 @@ pub fn evaluate(
 
     let mut evaluations = Vec::with_capacity(contract.spec.rules.len());
     for rule in &contract.spec.rules {
-        let mut matched = Vec::new();
-        let GuardAssertion::ForbidRelation {
-            subject,
-            predicate,
-            object,
-        } = &rule.assertion;
-        for fact in &canonical_facts.facts {
-            if &fact.subject == subject && &fact.predicate == predicate && &fact.object == object {
-                matched.push(fact.clone());
-            }
-        }
+        let (violated, matched) =
+            crate::graph_evaluation::violation(&rule.assertion, &canonical_facts.facts);
+        let coverage_problem = crate::graph_evaluation::coverage_problem(
+            &rule.assertion,
+            &canonical_facts,
+            contract.api_version == API_VERSION_V2,
+        );
         let (status, detail) = if canonical_facts.completeness == Completeness::Partial {
             (
                 RuleStatus::Indeterminate,
@@ -105,13 +105,18 @@ pub fn evaluate(
                     canonical_facts.diagnostics.join("; ")
                 ),
             )
-        } else if matched.is_empty() {
-            (RuleStatus::Pass, "no forbidden relation found".to_owned())
+        } else if let Some(problem) = coverage_problem {
+            (RuleStatus::Indeterminate, problem)
+        } else if !violated {
+            (
+                RuleStatus::Pass,
+                "constraint satisfied within declared scope".to_owned(),
+            )
         } else {
             match rule.enforcement {
                 Enforcement::Enforce => (
                     RuleStatus::Fail,
-                    format!("found {} forbidden relation(s)", matched.len()),
+                    format!("constraint violated; {} witness edge(s)", matched.len()),
                 ),
                 Enforcement::Review => (
                     RuleStatus::ReviewRequired,
@@ -147,7 +152,7 @@ pub fn evaluate(
     };
 
     Ok(GuardReport {
-        api_version: API_VERSION.into(),
+        api_version: contract.api_version.clone(),
         kind: "GuardReport".into(),
         evaluation_id,
         engine_version: env!("CARGO_PKG_VERSION").into(),
