@@ -26,3 +26,5 @@ Rust1.85协议27项测试通过，fmt/clippy/schema通过；96个正负fixture�
 ## 剩余任务
 
 完整六产品/五插件/provider/policy/toolchain发布组合、兼容矩阵、发布签名、真实制品采集provider和实际发布继续由K20等任务承担。K07专业报告投影/差分迁移、K09批准验签和可信提供者也未由协议解析实现。release JSON解析仍UNVERIFIED，不证明来源commit/tree关系、实际制品字节或构建可复现。K06 runner/运行账本当前仍局部候选，任务未勾选。K01局部完成不代表CON/EVI整条需求或P0集成可交付。
+
+后续状态：以上为K01验收时点记录；K06之后已取得[独立局部验收](EG-K06-evidence.md)，当前完成计数见[状态页](status.md)，不据此扩大K01范围。

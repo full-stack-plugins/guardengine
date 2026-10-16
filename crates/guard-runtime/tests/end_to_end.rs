@@ -804,6 +804,7 @@ async fn v2_all_git_candidates_read_frozen_bytes_in_private_roots_with_stable_ap
         let storage = tempfile::tempdir().unwrap();
         let scratch = storage.path().join("scratch");
         fs::create_dir(&scratch).unwrap();
+        let scratch = scratch.canonicalize().unwrap();
         let marker = storage.path().join("ran");
         let merge_base = "class Example {\n int left=0;\n // padding 0\n // padding 1\n // padding 2\n // padding 3\n // padding 4\n // padding 5\n // padding 6\n // padding 7\n int right=0;\n}\n";
         if kind == "merge" {
@@ -951,7 +952,18 @@ async fn v2_all_git_candidates_read_frozen_bytes_in_private_roots_with_stable_ap
         assert_eq!(result.invocation.approved_config_digest, approved);
         assert_eq!(result.invocation.subject_digest, subject.identity_digest);
         let cwd = result.invocation.working_directory.as_ref().unwrap();
-        assert!(Path::new(cwd).starts_with(&scratch));
+        // cwd已按原生工具转为DOS/UNC表示；比较真实存在的祖先身份，不能比较路径拼法。
+        let actual_scratch = Path::new(cwd)
+            .parent()
+            .and_then(Path::parent)
+            .expect("private TempDir/inputs layout")
+            .canonicalize()
+            .unwrap();
+        assert_eq!(actual_scratch, scratch.canonicalize().unwrap());
+        assert_eq!(
+            Path::new(cwd).file_name(),
+            Some(std::ffi::OsStr::new("inputs"))
+        );
         assert_ne!(Path::new(cwd), root.canonicalize().unwrap());
         assert!(result.invocation.materialization.is_some());
         assert!(result.invocation.effective_invocation_digest.is_some());

@@ -1,6 +1,6 @@
 # Guard Run Ledger：本地持久化运行顺序
 
-此独立候选库提供EG-K06/EVI-003的一部分：运行start/finalize/recover、单飞、持久运行序号和迟到结果处理。沿用CodeGuard的`add-engineering-guard-core`、`engineering-evidence/spec.md`、protocol与design D07为事实源。它复用guard-store现有SQLite、私有原件和完整head CAS，不增加内存事实源、不修改旧.codeguard、不执行工具或Git动作。没有勾选K06，也不代表完整D07表族或P0交付完成。
+此独立候选库提供EG-K06/EVI-003的一部分：运行start/finalize/recover、单飞、持久运行序号和迟到结果处理。沿用CodeGuard的`add-engineering-guard-core`、`engineering-evidence/spec.md`、protocol与design D07为事实源。它复用guard-store现有SQLite、私有原件和完整head CAS，不增加内存事实源、不修改旧.codeguard、不执行工具或Git动作。EG-K06本地机械范围已取得runner、运行账本及runtime联合[验收证据](../../docs/delivery/EG-K06-evidence.md)，不代表完整D07表族或P0交付完成。
 
 ```mermaid
 flowchart LR

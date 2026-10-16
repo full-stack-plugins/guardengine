@@ -39,3 +39,5 @@ Job或进程组不等于文件、网络和凭据沙箱；Unix逃离进程组、�
 提交f55501b的真实CI运行38960965176中，Ubuntu七组件通过；Windows账本双进程测试遇到worker打开数据库的 `store busy`，旧测试unwrap退出101，未到运行票竞争。生产默认300ms busy上限及拒绝派发行为正确，未提高生产等待上限。
 
 测试宿主改为仅对明确的打开阶段busy最多重试5秒；两个worker均完成打开后，以有界ready/go屏障同步真实start竞争。未知错误仍失败，不再把任意start错误都归作正常落败；结束额外核验唯一Running头sequence=1。当前Rust1.85本地账本完整10 reported再次通过，1.07秒，退出0。远端复验仍需按修复提交独立检查，不能把首次失败写成成功。
+
+同次远端Windows runtime还在测试路径断言失败：有效原生cwd与scratch的路径拼法不同，旧 `starts_with` 比较不能证明目录身份。修正测试为核验cwd确属inputs、其真实存在的祖先规范身份等于配置scratch，并主动使用规范化scratch输入覆盖Windows verbatim/DOS差异；生产代码未改。四候选真实执行focused再次通过，158.72秒，1 passed/11 filtered、退出0。首次CI最终13/15成功、两项测试失败均保留原记录，修复提交仍待远端复验。
