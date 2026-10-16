@@ -10,6 +10,8 @@
 
 更新来源必须固定新提交，重新审查差异、许可和依赖，再显式更新锁。不能只改生成的 ArchGuard 插件文件，也不能将完整上游仓库中未发布的实验技能自动加入。
 
+锁定源与生成包必须使用 LF 换行，由两个仓库的 `.gitattributes` 固定；锁命令拒绝 CRLF 工作树，避免 Windows 本地摘要与提交后 Linux/Windows 检出的字节不同。摘要校验始终比较原始字节，不会把漂移归一化后放行。
+
 ```text
 python -B scripts/lock_skill_library.py --library skill-library
 python -B scripts/skill_bundle.py --library skill-library --plugin ../archguard/plugin

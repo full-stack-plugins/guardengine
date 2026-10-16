@@ -17,7 +17,11 @@ def main():
             relative = path.relative_to(root).as_posix()
             safe(root, relative)
             if path.is_file():
-                files[relative] = digest(read(path))
+                content = read(path)
+                # .gitattributes 会以 LF 提交；拒绝对尚未规范化的工作树生成无法复验的锁。
+                if b'\r\n' in content:
+                    raise ValueError(f'LF line endings required before locking: {relative}')
+                files[relative] = digest(content)
     catalog['files'] = files
     replace(safe(root, 'skills.lock.json'), encoded(catalog))
     print(json.dumps({'status': 'locked', 'files': len(files), 'revision': catalog['upstream']['revision']}))

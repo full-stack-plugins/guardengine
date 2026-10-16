@@ -8,6 +8,7 @@ import tempfile
 import unittest
 
 BUILDER = Path(__file__).resolve().parents[1] / 'skill_bundle.py'
+LOCKER = BUILDER.with_name('lock_skill_library.py')
 
 
 class SkillBundle(unittest.TestCase):
@@ -34,7 +35,7 @@ class SkillBundle(unittest.TestCase):
     def file(self, name, content):
         path = self.library / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding='utf-8')
+        path.write_bytes(content.encode('utf-8'))
         self.lock['files'][name] = hashlib.sha256(path.read_bytes()).hexdigest()
 
     def save(self):
@@ -57,6 +58,26 @@ class SkillBundle(unittest.TestCase):
         self.run_bundle('--check')
         self.run_bundle()
         self.assertEqual(before, self.snapshot())
+
+    def test_lock_rejects_crlf_before_replacing_reviewed_lock(self):
+        catalog = {key: value for key, value in self.lock.items() if key != 'files'}
+        (self.library / 'catalog.json').write_bytes(json.dumps(catalog).encode('utf-8'))
+        path = self.library / 'adapters/guard-grilling/SKILL.md'
+        original = path.read_bytes()
+        path.write_bytes(original.replace(b'\n', b'\r\n'))
+        before = (self.library / 'skills.lock.json').read_bytes()
+        result = subprocess.run([sys.executable, '-B', str(LOCKER), '--library', str(self.library)], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('LF line endings required', result.stderr)
+        self.assertEqual(before, (self.library / 'skills.lock.json').read_bytes())
+        path.write_bytes(original)
+        subprocess.run([sys.executable, '-B', str(LOCKER), '--library', str(self.library)], check=True, capture_output=True)
+        self.run_bundle()
+        self.run_bundle('--check')
+        # 校验继续比较原始字节，不把换行篡改隐式归一化为可信输入。
+        path.write_bytes(original.replace(b'\n', b'\r\n'))
+        result = self.run_bundle('--check', code=2)
+        self.assertIn('locked source digest mismatch', result.stderr)
 
     def test_missing_dependency_cycle_and_source_digest_fail_before_writing(self):
         for dependencies in [['absent'], ['archguard-grill-with-docs']]:
