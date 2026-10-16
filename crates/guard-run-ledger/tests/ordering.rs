@@ -1,7 +1,11 @@
 use guard_protocol::{Digest, Identifier};
 use guard_run_ledger::{FinalizeOutcome, RunIdentity, RunLedger, RunScope, RunState, StartOutcome};
 use guard_store::{EvidenceStore, StoreLimits};
-use std::{path::Path, process::Command};
+use std::{
+    path::Path,
+    process::Command,
+    time::{Duration, Instant},
+};
 fn d(s: &str) -> Digest {
     guard_protocol::digest_json(&serde_json::to_vec(s).unwrap()).unwrap()
 }
@@ -140,35 +144,86 @@ fn two_real_processes_only_one_start_is_dispatchable() {
     let tmp = tempfile::tempdir().unwrap();
     let root = tmp.path().join("store");
     EvidenceStore::create(&root, StoreLimits::default()).unwrap();
+    let barrier = tmp.path().join("barrier");
+    std::fs::create_dir(&barrier).unwrap();
     let mut a = Command::new(std::env::current_exe().unwrap())
         .args(["--exact", "worker", "--nocapture"])
         .env("LEDGER_ROOT", &root)
+        .env("LEDGER_BARRIER", &barrier)
         .spawn()
         .unwrap();
     let mut b = Command::new(std::env::current_exe().unwrap())
         .args(["--exact", "worker", "--nocapture"])
         .env("LEDGER_ROOT", &root)
+        .env("LEDGER_BARRIER", &barrier)
         .spawn()
         .unwrap();
+    // 两个worker均完成只读打开后再竞争start，不把准备阶段300ms忙碌冒认为CAS结果。
+    let deadline = Instant::now() + Duration::from_secs(10);
+    while std::fs::read_dir(&barrier).unwrap().count() != 2 {
+        assert!(
+            Instant::now() < deadline,
+            "workers did not finish bounded store preparation"
+        );
+        std::thread::sleep(Duration::from_millis(10));
+    }
+    std::fs::write(barrier.join("go"), b"start").unwrap();
     let mut codes = vec![
         a.wait().unwrap().code().unwrap(),
         b.wait().unwrap().code().unwrap(),
     ];
     codes.sort();
     assert_eq!(codes, vec![81, 82]);
+    let opened = store(&root);
+    let active = RunLedger::new(&opened)
+        .inspect(&scope(), &identity("a"), 1001)
+        .unwrap()
+        .unwrap();
+    assert_eq!(active.state, RunState::Running);
+    assert_eq!(active.sequence.as_str(), "1");
 }
 #[test]
 fn worker() {
     let Some(root) = std::env::var_os("LEDGER_ROOT") else {
         return;
     };
-    let store = store(Path::new(&root));
+    // CI慢盘可在恢复/打开阶段超过默认busy上限；测试宿主仅对明确busy有限重试。
+    // 生产StoreLimits及start本身的等待/失败语义保持不变，其他错误仍直接失败。
+    let deadline = Instant::now() + Duration::from_secs(5);
+    let store = loop {
+        match EvidenceStore::open(Path::new(&root), StoreLimits::default()) {
+            Ok(store) => break store,
+            Err(error) if error == "store busy" && Instant::now() < deadline => {
+                std::thread::sleep(Duration::from_millis(10));
+            }
+            Err(error) => panic!("worker store preparation failed: {error}"),
+        }
+    };
+    if let Some(barrier) = std::env::var_os("LEDGER_BARRIER") {
+        let barrier = Path::new(&barrier);
+        std::fs::write(
+            barrier.join(format!("{}.ready", std::process::id())),
+            b"ready",
+        )
+        .unwrap();
+        let deadline = Instant::now() + Duration::from_secs(10);
+        while !barrier.join("go").exists() {
+            assert!(Instant::now() < deadline, "start barrier deadline exceeded");
+            std::thread::sleep(Duration::from_millis(10));
+        }
+    }
     let ledger = RunLedger::new(&store);
     let outcome = ledger.start(&scope(), &identity("a"), "worker", 9000, 1000);
-    let code = if matches!(outcome, Ok(StartOutcome::Started(_))) {
-        81
-    } else {
-        82
+    let code = match outcome {
+        Ok(StartOutcome::Started(_)) => 81,
+        Ok(StartOutcome::Existing(_)) => 82,
+        Err(error)
+            if error == "store busy"
+                || error == "concurrent start lost; no process may be dispatched" =>
+        {
+            82
+        }
+        Err(error) => panic!("unexpected start rejection: {error}"),
     };
     std::process::exit(code);
 }
