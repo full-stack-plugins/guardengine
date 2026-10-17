@@ -39,7 +39,7 @@ Git 的 write-tree 和 merge-tree 必须产生对象；本库将它们写入私�
 
 ## 进程和并发边界
 
-只执行固定 Git argv，不使用 shell，不执行报告或源码内命令。清除继承的所有 `GIT_*` 路由变量，禁系统／全局 Git config、对象 replace、lazy fetch、可选锁、fsmonitor 和自动维护。Git executable 来自调用端受信 PATH，不能把本库当作恶意 executable 的沙箱。
+只执行固定 Git argv，不使用 shell，不执行报告或源码内命令。清除继承的所有 `GIT_*` 路由变量，禁系统／全局 Git config、对象 replace、lazy fetch、可选锁、fsmonitor 和自动维护。未配置 provider 时，Git executable 沿用调用端受信 PATH；显式 provider 使用固定绝对路径及批准环境（见下文）。两种模式都不能把本库当作恶意 executable 的沙箱。
 
 合并前枚举有效配置（含 include）；发现自定义 merge driver 或 clean/smudge/process filter 即拒绝，避免 merge renormalization 执行候选配置命令。工作树读取不调用 clean/smudge。不会执行用户提供的 Git 动作。
 
@@ -85,3 +85,42 @@ scratch_parent 必须是显式提供、绝对且已存在的目录，其祖先�
 `verify_inputs` 只复验冻结的每条原始输入仍存在、名称精确、类型为普通文件、原始字节和适用 mode 一致；修改、删除或大小写别名替换均失败。合法新增构建输出允许存在，但不会进入 captured manifest，不成为新批准输入或质量通过证据。原输入字节检查不是 OS 原子快照，不抵御恶意同用户 ABA/任意并发篡改。此对象也不约束工具 argv、环境、文件或网络权限；宿主必须避免参数偷偷指回原 repo，并处理 Git 向执行根祖先发现仓库的问题（例如经明确 pin 的 ceiling 环境）。这些边界不得通过物化目录存在而冒认为已建立 OS 沙箱。
 
 真实 TDD 先观察缺少 materialize 公共 API 的编译失败；随后在 Windows 的 Index 物化实际遇到 verbatim 私有 index.lock 创建失败，再修复环境路径表示并复验。新增7项 Windows行为测试覆盖 SHA1/SHA256 四种候选实际内容、仅私有 objects 中的合并新 blob、原 index/全部 refs/objects 保持不写、构建输出允许但不增输入、源/目标篡改及删除、无原仓硬链接、mode、Git控制路径原始 tree、linked worktree 外部元数据父目录、实际 junction 父目录、大小写别名，以及生命周期清理与 Send+Sync。当前Windows全包16项真实测试的最终结果以实际执行记录为准；Unix专用模式和无损路径分支尚未在本机执行，不据此宣称Unix平台验收。
+
+### Explicit fixed Git provider (additive SDK API)
+
+A host can call `configure_git_provider(GitProvider { executable,
+artifact_digest, environment })` synchronously before starting capture or a
+Tokio runtime. The executable is an absolute regular file: symlinks and Windows
+reparse ancestors are rejected; Windows requires a native `.exe`, Unix requires
+an executable permission bit. SHA256 is checked at configuration and before and
+after every Git command. File hashing is bounded to 512 MiB and consumes the
+existing capture deadline, which is not renewed per command or per check.
+
+The provider is immutable process-wide. An exactly equal repeated configuration
+is idempotent. A different configuration fails. The first unconfigured Git
+attempt freezes the existing SDK default, including when that attempt fails;
+late configuration is then rejected. An invalid initial configuration does not
+freeze the process. No process-global environment variables are changed.
+
+With a provider, commands use its absolute executable and `env_clear()`, followed
+by the explicit environment and library-owned Git safety variables. Environment
+keys must be ASCII identifiers, at most 128 bytes; case aliases and every
+`GIT_*` key are rejected on every OS. Limits are 256 entries, 32 KiB per value,
+and 128 KiB total key/value bytes; NUL values are rejected. The host must include
+its necessary `SystemRoot`/temporary directories and other approved values.
+The library still owns private index/object variables and disables inherited
+Git configuration, replacement objects, prompts, lazy fetch and optional locks.
+Without configuration the previous SDK PATH/environment behavior is retained.
+
+This fixes which executable and explicit environment this library invokes; it
+does not verify every DLL, interpreter, nested executable or environment value,
+provide an OS sandbox, eliminate adversarial file replacement races, or grant
+trust to capture results. A pinned Git distribution wrapper remains a wrapper.
+The host remains responsible for protecting its approved installation and pins.
+
+`cargo test --all-features --test git_provider -- --test-threads=1` includes a
+controlled native helper (`git-provider-test-fixture`) that delegates to real
+Git. Isolated subprocesses exercise fake PATH/current-directory Git, real
+capture/current verification, environment clearing, immutable/default lifetime,
+invalid configuration, and executable modification before and after dispatch.
+The helper is test-only and is not built by default or an authority provider.

@@ -18,3 +18,6 @@ mod materialize;
 mod materialized_subject;
 pub use materialize::materialize;
 pub use materialized_subject::MaterializedSubject;
+
+mod git_provider;
+pub use git_provider::{GitProvider, configure_git_provider};

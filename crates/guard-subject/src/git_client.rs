@@ -79,7 +79,33 @@ impl GitClient {
         if Instant::now() >= self.deadline {
             return Err("Git capture deadline exceeded".into());
         }
-        let mut command = Command::new("git");
+        let provider = crate::git_provider::selected();
+        if let Some(provider) = provider {
+            provider.verify_artifact(self.deadline)?;
+        }
+        let result = self.run_process(args, limit, private, provider);
+        if let Some(provider) = provider {
+            provider.verify_artifact(self.deadline)?;
+        }
+        result
+    }
+    fn run_process(
+        &self,
+        args: &[&str],
+        limit: usize,
+        private: bool,
+        provider: Option<&crate::GitProvider>,
+    ) -> Result<Vec<u8>, String> {
+        if Instant::now() >= self.deadline {
+            return Err("Git capture deadline exceeded".into());
+        }
+        let mut command = if let Some(provider) = provider {
+            let mut command = Command::new(&provider.executable);
+            command.env_clear().envs(&provider.environment);
+            command
+        } else {
+            Command::new("git")
+        };
         command
             .arg("--no-optional-locks")
             .arg("-c")
