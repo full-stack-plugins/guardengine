@@ -50,6 +50,8 @@ jobs:
         run: python -B crates/guard-protocol/scripts/generate_schemas.py --check
       - name: Test delivery inventory validator
         run: python -B -m unittest discover -s scripts/tests -p test_delivery_inventory.py
+      - name: Test restricted OPA CI preparation
+        run: python -B -m unittest discover -s scripts/tests -p test_prepare_ci_opa.py
 
   kernel-components:
     name: ${{ matrix.component }} / ${{ matrix.os }} / MSRV
@@ -57,7 +59,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-24.04, windows-latest]
-        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime]
+        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime, guard-policy]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -67,6 +69,94 @@ jobs:
       - name: Verify component formatting
         run: cargo fmt --manifest-path crates/${{ matrix.component }}/Cargo.toml -- --check
       - name: Check component
+        if: matrix.component != 'guard-policy'
         run: cargo clippy --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features --all-targets -- -D warnings
       - name: Test component with real local tools and storage
+        if: matrix.component != 'guard-policy'
         run: cargo test --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features
+      - name: Check default policy interfaces
+        if: matrix.component == 'guard-policy'
+        run: cargo clippy --manifest-path crates/guard-policy/Cargo.toml --locked --all-targets -- -D warnings
+      - name: Test default policy interfaces (real OPA has separate required job)
+        if: matrix.component == 'guard-policy'
+        run: cargo test --manifest-path crates/guard-policy/Cargo.toml --locked
+
+  real-opa:
+    name: Real OPA / ${{ matrix.os }} / MSRV
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    env:
+      CARGO_TERM_COLOR: always
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: guardengine
+      # 首次发布须先有core准备器，再发布Flow包，然后重跑本job；无缺依赖回退或skip。
+      - uses: actions/checkout@v4
+        with:
+          repository: full-stack-plugins/flowguard
+          ref: main
+          path: flowguard
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: dtolnay/rust-toolchain@1.85.0
+        with:
+          components: rustfmt, clippy
+      - name: Create job-local policy paths
+        shell: python
+        run: |
+          import os
+          from pathlib import Path
+          state = Path(os.environ['RUNNER_TEMP']) / 'guardengine-real-opa'
+          state.mkdir(mode=0o700)
+          for name in ['tmp', 'tools', 'cargo-home', 'target']:
+              (state / name).mkdir(mode=0o700)
+          executable = state / 'tools' / ('opa.exe' if os.name == 'nt' else 'opa')
+          values = {
+              'GUARD_POLICY_OPA_EXECUTABLE': str(executable),
+              'GUARD_POLICY_FLOWGUARD_PACKAGE': str(Path(os.environ['GITHUB_WORKSPACE']) / 'flowguard/policy/engineering-gate/v1'),
+              'GUARD_POLICY_FLOWGUARD_CASES': str(state / 'flowguard-policy-cases.json'),
+              'CARGO_HOME': str(state / 'cargo-home'),
+              'CARGO_TARGET_DIR': str(state / 'target'),
+              'TEMP': str(state / 'tmp'),
+              'TMP': str(state / 'tmp'),
+              'TMPDIR': str(state / 'tmp'),
+          }
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as output:
+              for key, value in values.items():
+                  output.write(f'{key}={value}\n')
+      - name: Test restricted OPA preparation
+        run: python -B guardengine/scripts/tests/test_prepare_ci_opa.py
+      - name: Prepare fixed official OPA and independent cases
+        shell: python
+        run: |
+          import json, os, subprocess, sys
+          from pathlib import Path
+          observed = subprocess.run([
+              sys.executable, '-B', 'guardengine/scripts/prepare_ci_opa.py',
+              '--output', os.environ['GUARD_POLICY_OPA_EXECUTABLE'],
+          ], check=True, capture_output=True, text=True, timeout=240)
+          metadata = json.loads(observed.stdout)
+          assert metadata['version'] == '1.21.2'
+          assert Path(metadata['path']).resolve() == Path(os.environ['GUARD_POLICY_OPA_EXECUTABLE']).resolve()
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as output:
+              output.write(f"GUARD_POLICY_OPA_SHA256={metadata['sha256']}\n")
+          subprocess.run([
+              sys.executable, '-B', 'flowguard/tests/policy_gate.py',
+              '--export-cases', os.environ['GUARD_POLICY_FLOWGUARD_CASES'],
+          ], check=True)
+          print(json.dumps(metadata))
+      - name: Check policy including real-tool tests
+        working-directory: guardengine
+        run: cargo clippy --manifest-path crates/guard-policy/Cargo.toml --locked --all-targets --features real-opa-tests -- -D warnings
+      - name: Run real OPA, bound-plan, recovery and independent FlowGuard differential tests
+        working-directory: guardengine
+        run: cargo test --manifest-path crates/guard-policy/Cargo.toml --locked --features real-opa-tests -- --test-threads=1 --nocapture

@@ -1,0 +1,32 @@
+//! 固定OPA原件与不可变规则包的通用执行端口；领域政策归专业守卫，不授信或签发授权。
+mod capabilities;
+mod opa_config;
+mod paths;
+mod policy_artifact_ref;
+mod policy_binding;
+mod policy_decision;
+mod policy_evaluation;
+mod policy_file;
+mod policy_input;
+mod policy_manifest;
+mod policy_package;
+mod policy_receipt;
+pub use opa_config::OpaConfig;
+pub use policy_artifact_ref::PolicyArtifactRef;
+pub use policy_binding::PolicyBinding;
+pub use policy_decision::PolicyDecision;
+pub use policy_evaluation::PolicyEvaluation;
+pub use policy_file::PolicyFile;
+pub use policy_input::PolicyInput;
+pub use policy_manifest::PolicyManifest;
+pub use policy_package::PolicyPackage;
+pub use policy_receipt::PolicyReceipt;
+
+mod blocking;
+mod bound_policy_evaluator;
+mod opa_evaluator;
+mod policy_process_observation;
+mod policy_workspace;
+pub use bound_policy_evaluator::BoundPolicyEvaluator;
+pub use opa_evaluator::OpaEvaluator;
+pub use policy_process_observation::PolicyProcessObservation;
