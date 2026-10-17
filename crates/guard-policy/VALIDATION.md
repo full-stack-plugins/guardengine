@@ -45,3 +45,9 @@ OPA语法与CLI依据：[官方CLI](https://www.openpolicyagent.org/docs/cli)、
 ## 主任务独立复验
 
 终态会话94676，exit0：Rust1.85全套12/12通过，绑定真实OPA测试48.61s、contracts 2/2、package 4/4、真实OPA组5/5 211.79s；包括27项OPA求值及1项无效信封提前拒绝的28项组合差分。使用现有官方E盘OPA，临时目录在D盘。共享CI准备脚本另15/15通过（0.307s）。首次独立调用把摘要环境变量误写成裸hex，因Digest格式非法而失败；改为批准的sha256:完整值后执行上述整套，没有修改生产校验。跨平台CI尚待发布后独立确认，EG-K08未勾选。
+
+## Linux CI 真实失败与调试哈希优化
+
+诊断提交0ab8397的CI38990905280留下确证：OPA version实际exit0，stdout215字节，Version=1.21.2、Platform=linux/amd64、Rego=v1均准确，stderr为空；真实进程startedAt=01:28:09.745Z、finishedAt=01:28:09.752Z。约01:28:11.864Z返回Failed/ExecutableChanged，符合guard-runner固定两秒后置制品核验期限被未优化的64MB软件SHA耗尽。该状态还表示核验未完成，不能据此断言原件真的被篡改；没有通过忽略Failed来接受版本输出。
+
+最小修正仅给guard-policy自身的dev/test构建设置sha2 opt-level=3，优化真实密码学压缩计算；所有原始字节仍完整读取并做相同SHA256比较，runner两秒复验上限、原件pin、OPA版本/argv、整个策略截止均未放宽，也未删除前后核验。此构建性能修正不等于已证明2秒策略总延迟或30样本分位数目标。修正后的跨平台真实结果仍需新CI终态，不能用此前Windows结果代替Linux验证。

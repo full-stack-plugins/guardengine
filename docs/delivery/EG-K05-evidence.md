@@ -23,3 +23,7 @@
 日期：2026-10-17。验收以原生 `codeguard/openspec/changes/add-engineering-guard-core/tasks.md` 的本任务字面为限；独立审查核对源码、真实行为反例与实际测试结果，未以任务勾选代替证明。Rust 1.85、固定 Cargo.lock、`--locked --offline`；TEMP/TMP、Cargo缓存与构建目标均在E盘。
 
 EG-K01已按本地协议/字段清单冻结任务验收，仍保持candidate-unpublished；本库对未发布协议的局部实现已验证，不代表协议已经公开发布或P0产品集成可交付。CLI/MCP、真实受信授权提供者、OPA执行、有界runner、托管隔离与全链路验收仍由K06/K08/K09/K10/K11/K12及后续任务承担。不得据本任务关闭整条CON/EVI需求或P0路线；不sync/archive总体变更，不改既有alpha CLI或旧.codeguard状态。
+
+## 后续并发夹具复验
+
+CI38990905280的Windows storage用例在四worker同时open/recovery时，默认300ms写锁返回合法store busy，被测试unwrap误作必须成功。仅修改测试：顺序完成连接准备，再同屏障竞争实际写入；至少一次实际成功，其他错误必须精确为store busy，全部竞争结束后由调用者明确重试一次，仍核所有summary相同及仅一条completed审计。生产锁/SQLite等待上限、错误语义和恢复逻辑均未改变，也未添加自动无限重试。根Rust1.85独立全套10 heads+17 storage通过（1.69s+1.48s），strict Clippy/fmt通过；此变更的Windows CI仍须新提交复验，不能把本地结果写成远端已绿。

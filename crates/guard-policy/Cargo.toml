@@ -21,3 +21,10 @@ real-opa-tests = []
 
 [dev-dependencies]
 guard-subject = { path = "../guard-subject" }
+
+# 保留真实的前后原件核验与两秒复验上限，仅优化64MB原件的SHA压缩计算。
+[profile.dev.package.sha2]
+opt-level = 3
+
+[profile.test.package.sha2]
+opt-level = 3

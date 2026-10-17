@@ -46,3 +46,5 @@ OPA undefined、编译/执行错误、版本/摘要错误、取消、超时、�
 Rust MSRV 1.85。默认测试不要求安装OPA；真实测试须显式启用 `real-opa-tests`，并提供 `GUARD_POLICY_OPA_EXECUTABLE`、`GUARD_POLICY_OPA_SHA256`、`GUARD_POLICY_FLOWGUARD_PACKAGE`、`GUARD_POLICY_FLOWGUARD_CASES`。摘要来自独立批准的官方原件记录，测试不自动将现有文件摘要视为批准。
 
 FlowGuard独立验收表用其 `tests/policy_gate.py --export-cases <path>` 导出，期望显式维护，core对27项有效信封真实执行比较，另1项无效信封由输入解析提前拒绝；合计28项组合差分。真实通用测试预算明确10秒，包含Git来源复核及运行期间漂移验证的绑定集成显式批准30秒；强制超时仍为6秒、准备排队耗尽仍为250毫秒。debug构建反复核验64MB原件，不能据此声称默认2秒预算或P0吞吐/分位数目标已经验证。实际终态结果由本次交付证据另列。
+
+Linux真实CI曾因64MB OPA在未优化debug SHA后置核验耗尽固定两秒而拒绝：OPA实际7ms正常退出且版本正确，拒绝状态ExecutableChanged并不单独证明字节改变。dev/test仅优化sha2压缩计算，保留同一完整SHA256核验及全部截止、版本和pins；细节见VALIDATION.md，新CI成功前不宣称该修正已在Linux通过。

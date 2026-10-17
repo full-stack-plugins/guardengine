@@ -66,19 +66,35 @@ fn concurrent_connections_have_one_idempotent_result() {
     let (temp, store) = fixture();
     let root = temp.path().join("private");
     drop(store);
+    // 先完成连接恢复准备，再同时竞争写入；默认有界锁允许竞争者返回busy。
+    let stores: Vec<_> = (0..4)
+        .map(|_| EvidenceStore::open(&root, StoreLimits::default()).unwrap())
+        .collect();
     let barrier = Arc::new(Barrier::new(4));
-    let handles: Vec<_> = (0..4)
-        .map(|_| {
-            let root = root.clone();
+    let handles: Vec<_> = stores
+        .into_iter()
+        .map(|store| {
             let barrier = barrier.clone();
             thread::spawn(move || {
                 barrier.wait();
-                let store = EvidenceStore::open(&root, StoreLimits::default()).unwrap();
-                store.put("same", b"identical", 5000, 1000).unwrap()
+                let result = store.put("same", b"identical", 5000, 1000);
+                (store, result)
             })
         })
         .collect();
-    let values: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+    let attempts: Vec<_> = handles.into_iter().map(|h| h.join().unwrap()).collect();
+    assert!(attempts.iter().any(|(_, result)| result.is_ok()));
+    // 并发阶段结束后只显式重试一次busy，保留生产300ms上限和其余错误。
+    let values: Vec<_> = attempts
+        .into_iter()
+        .map(|(store, result)| match result {
+            Ok(value) => value,
+            Err(error) => {
+                assert_eq!(error, "store busy");
+                store.put("same", b"identical", 5000, 1000).unwrap()
+            }
+        })
+        .collect();
     assert!(values.iter().all(|v| v == &values[0]));
     let store = EvidenceStore::open(&root, StoreLimits::default()).unwrap();
     assert_eq!(
