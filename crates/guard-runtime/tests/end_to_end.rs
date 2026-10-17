@@ -1188,3 +1188,161 @@ async fn fixture_slot() -> tokio::sync::OwnedSemaphorePermit {
         .await
         .unwrap()
 }
+
+#[tokio::test]
+async fn real_dispatch_emits_opaque_completion_and_public_ledger_can_forge_only_metadata() {
+    let _fixture_slot = fixture_slot().await;
+    let temp = fixture();
+    let root = temp.path();
+    let storage = tempfile::tempdir().unwrap();
+    let marker = storage.path().join("receipt-ran");
+    let cmd = command(root, "fail", &marker);
+    let contract = contract(&cmd);
+    let subject = captured(root, &contract);
+    let bind = binding(&contract);
+    let store = Arc::new(
+        EvidenceStore::create(&storage.path().join("store"), StoreLimits::default()).unwrap(),
+    );
+    let end = now() + 600000;
+    let plan = freeze(root, &contract, &bind, &subject, budget())
+        .unwrap()
+        .register(&store, end, now())
+        .unwrap();
+    let runtime = Runtime::new(&plan, &contract, store.clone(), root, end).unwrap();
+    let obligation = plan.plan().verification().obligations[0]
+        .obligation_id
+        .clone();
+    let (outcome, completion) = runtime
+        .execute_with_receipt(
+            &obligation,
+            "receipt-actual",
+            native(cmd),
+            Cancellation::new(),
+        )
+        .await
+        .unwrap()
+        .into_parts();
+    let DispatchOutcome::Finished(observation) = outcome else {
+        panic!("not finished")
+    };
+    assert_eq!(observation.exit_code, Some(7));
+    assert!(marker.exists());
+    let completion = completion.expect("real failed process must produce source-only completion");
+    completion.verify_current(now()).unwrap();
+    // 公开账本确实允许制造当前元数据，故不能由它恢复来源资格。
+    let scope = guard_run_ledger::RunScope {
+        repository_id: contract.context().repository_id.clone(),
+        task_id: bind.task_id.clone(),
+        obligation_id: obligation,
+        approved_scope_digest: guard_protocol::digest_json(
+            &serde_json::to_vec(&bind.scope).unwrap(),
+        )
+        .unwrap(),
+    };
+    let ledger = guard_run_ledger::RunLedger::new(&store);
+    let forged = ledger
+        .start(
+            &scope,
+            &observation.identity,
+            "forged-after-real",
+            end,
+            now(),
+        )
+        .unwrap()
+        .into_ticket();
+    let raw = guard_protocol::canonicalize(&serde_json::to_vec(&observation).unwrap()).unwrap();
+    assert_eq!(
+        ledger
+            .finalize(&forged, RunState::Pass, &raw, now())
+            .unwrap(),
+        FinalizeOutcome::Applied
+    );
+    assert_eq!(
+        ledger
+            .inspect(&scope, &observation.identity, now())
+            .unwrap()
+            .unwrap()
+            .state,
+        RunState::Pass
+    );
+    assert!(
+        completion.verify_current(now()).is_err(),
+        "a new fabricated active head must still invalidate the real old completion"
+    );
+}
+
+#[tokio::test]
+async fn public_existing_ticket_cannot_make_audit_only_runtime_mint_source_completion() {
+    let _fixture_slot = fixture_slot().await;
+    let temp = fixture();
+    let root = temp.path();
+    let storage = tempfile::tempdir().unwrap();
+    let marker = storage.path().join("stolen-running");
+    let cmd = command(root, "wait", &marker);
+    let contract = contract(&cmd);
+    let subject = captured(root, &contract);
+    let bind = binding(&contract);
+    let store = Arc::new(
+        EvidenceStore::create(&storage.path().join("store"), StoreLimits::default()).unwrap(),
+    );
+    let end = now() + 600000;
+    let plan = freeze(root, &contract, &bind, &subject, budget())
+        .unwrap()
+        .register(&store, end, now())
+        .unwrap();
+    let runtime = Runtime::new(&plan, &contract, store.clone(), root, end).unwrap();
+    let obligation = plan.plan().verification().obligations[0]
+        .obligation_id
+        .clone();
+    let scope = guard_run_ledger::RunScope {
+        repository_id: contract.context().repository_id.clone(),
+        task_id: bind.task_id.clone(),
+        obligation_id: obligation.clone(),
+        approved_scope_digest: guard_protocol::digest_json(
+            &serde_json::to_vec(&bind.scope).unwrap(),
+        )
+        .unwrap(),
+    };
+    let verification = plan.plan().verification();
+    let identity = guard_run_ledger::RunIdentity {
+        binding_digest: guard_protocol::digest_json(&serde_json::to_vec(&json!({"taskBinding":plan.binding(),"planDigest":plan.plan().digest(),"activeHead":plan.head()})).unwrap()).unwrap(),
+        subject_digest: verification.subject_digest.clone(), contract_digest: contract.digest().clone(), policy_digest: verification.policy_digest.clone(), verifier_digest: verifier_digest(&contract).unwrap(), environment_digest: plan.capture_binding().environment_digest.clone(),
+    };
+    let cancel = Cancellation::new();
+    let signal = cancel.clone();
+    let running = tokio::spawn(async move {
+        runtime
+            .execute_with_receipt(&obligation, "stolen-op", native(cmd), signal)
+            .await
+    });
+    tokio::time::timeout(std::time::Duration::from_secs(60), async {
+        while !marker.exists() {
+            tokio::time::sleep(std::time::Duration::from_millis(10)).await;
+        }
+    })
+    .await
+    .unwrap();
+    let ledger = guard_run_ledger::RunLedger::new(&store);
+    let guard_run_ledger::StartOutcome::Existing(stolen) = ledger
+        .start(&scope, &identity, "stolen-op", end, now())
+        .unwrap()
+    else {
+        panic!("expected running ticket")
+    };
+    assert_eq!(
+        ledger
+            .finalize(&stolen, RunState::Pass, b"{\"fabricated\":true}", now())
+            .unwrap(),
+        FinalizeOutcome::Applied
+    );
+    cancel.cancel();
+    let (outcome, completion) = running.await.unwrap().unwrap().into_parts();
+    let DispatchOutcome::Finished(observed) = outcome else {
+        panic!("expected audit")
+    };
+    assert_eq!(observed.finalization, Some(FinalizeOutcome::AuditOnly));
+    assert!(
+        completion.is_none(),
+        "real process became audit-only: no signing qualification"
+    );
+}

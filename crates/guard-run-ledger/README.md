@@ -52,3 +52,9 @@ cargo +1.85 test --locked --offline --manifest-path crates/guard-run-ledger/Carg
 cargo +1.85 fmt --manifest-path crates/guard-run-ledger/Cargo.toml -- --check
 cargo +1.85 clippy --locked --offline --manifest-path crates/guard-run-ledger/Cargo.toml --all-targets -- -D warnings
 ```
+
+## 只读当前快照不是来源资格
+
+新增`current_receipt(scope, identity, now)`提供完整终态头、稳定范围、六身份、operation/sequence及metadata操作/摘要；`assert_current_receipt`重读比较完整head与记录。无metadata的恢复Incomplete、Running、旧输入或损坏原件拒绝。终态Fail/Timeout/部分结果可保留机械原件，不能转成质量通过。
+
+CurrentRunReceipt无公开字段或Deserialize，但公开start/finalize同样能制造它；不可把类型私有误称独立生产者来源。K09真实派发资格只由Runtime内部铸造，Store/本账本读取不能恢复。独立签名消费仍须核对当前头、原件和来源权威，不因本地PASS或SQLite完整而授信。

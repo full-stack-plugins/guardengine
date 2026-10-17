@@ -15,9 +15,28 @@ serde_json = "1"
 base64 = "0.22"
 ed25519-dalek = { version = "=2.2.0", default-features = false, features = ["std"] }
 
+guard-runtime = { path = "../guard-runtime" }
+guard-run-ledger = { path = "../guard-run-ledger" }
+guard-store = { path = "../guard-store" }
+chrono = { version = "=0.4.42", default-features = false, features = ["std"] }
+
 [dev-dependencies]
 ring = "0.17"
 guard-subject = { path = "../guard-subject" }
-guard-store = { path = "../guard-store" }
 tempfile = "3"
 sha2 = "0.10"
+guard-runner = { path = "../guard-runner" }
+tokio = { version = "=1.53.1", features = ["rt-multi-thread", "macros", "time", "sync"] }
+
+[features]
+source-test-fixture = []
+
+[[bin]]
+name = "guard-authority-source-fixture"
+path = "tests/support/source_fixture.rs"
+required-features = ["source-test-fixture"]
+
+[[test]]
+name = "source"
+path = "tests/source.rs"
+required-features = ["source-test-fixture"]

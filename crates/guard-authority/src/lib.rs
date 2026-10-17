@@ -36,3 +36,30 @@ mod receipt_approval_authority;
 pub use receipt_approval_authority::ReceiptApprovalAuthority;
 mod approval_permission;
 pub use approval_permission::ApprovalPermission;
+
+mod producer_registration;
+pub use producer_registration::ProducerRegistration;
+
+mod producer_registry;
+pub use producer_registry::ProducerRegistry;
+
+mod producer_attestation;
+pub use producer_attestation::ProducerAttestation;
+
+mod producer_signing_request;
+pub use producer_signing_request::ProducerSigningRequest;
+
+mod producer_signer;
+pub use producer_signer::ProducerSigner;
+
+mod producer_signing_profile;
+pub use producer_signing_profile::{PRODUCER_SIGNING_DOMAIN, producer_signing_bytes};
+
+mod verified_producer_evidence;
+pub use verified_producer_evidence::VerifiedProducerEvidence;
+
+mod producer_restore_context;
+pub use producer_restore_context::ProducerRestoreContext;
+
+mod producer_verifier;
+pub use producer_verifier::ProducerVerifier;

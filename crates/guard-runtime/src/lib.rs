@@ -17,3 +17,15 @@ pub use materialization_receipt::MaterializationReceipt;
 pub use native_verifier_command::NativeVerifierCommand;
 pub use native_verifier_command_v2::NativeVerifierCommandV2;
 pub use runtime::Runtime;
+
+mod dispatch_completion;
+pub use dispatch_completion::DispatchCompletion;
+mod dispatch_with_receipt;
+pub use dispatch_with_receipt::DispatchWithReceipt;
+
+mod source_invocation;
+pub use source_invocation::SourceInvocation;
+mod dispatch_provenance;
+pub use dispatch_provenance::DispatchProvenance;
+
+mod dispatch_profile;

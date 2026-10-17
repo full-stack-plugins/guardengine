@@ -85,3 +85,15 @@ cargo +1.85 fmt --check
 最终同一源码的受影响复验：`cargo +1.85 test --locked --offline --features test-fixture v2_ -- --nocapture` 四项 E2E 全通过（174.02 秒，其他八项过滤），包含四种 Git 候选实际读取正确私有内容、原仓不可读取的合并新 blob、nonce 不改变批准配置/计划、Git 发现阴性和解除 ceiling 后阳性、来源变化与私有输入改写后保留输出。`--lib` 四项单元全部通过，在 Windows 实际覆盖 drive/UNC 转换、设备/尾点别名拒绝、ASCII 环境闭合与模板一次性替换；Unix 原样路径分支未在本机实际执行。最终格式检查与严格 Clippy 通过。这里保留分阶段的真实结果，不声明单一命令已完成当前十六项全套运行。
 
 这些测试没有证明生产批准服务、K09/K10、真实 Java/Maven/Cargo 专业适配、完整输入/依赖环境真实性、Unix 执行结果或整项 K06 已完成。本库不自动勾任务、不写旧 `.codeguard`、不安装工具，也不发布产品。
+
+## K09附属来源凭据（本地候选，未发布）
+
+新`execute_with_receipt`/`execute_v2_with_receipt`与旧API共享真实执行路径；旧API不执行新资格读取、不改变观察wire/trust。包装的`into_parts()`返回原观察和可选`DispatchCompletion`，`qualification_error()`保留附属采集失败；没有凭据不等于空结果或无违规。
+
+完成凭据仅在真实ProcessRunner进程创建信号与finalize Applied之后内部铸造，绑定原始已保存metadata字节、实际双流、完整运行头和计划。Existing、未创建进程、AuditOnly没有凭据；公开ExecutionObservation、RunLedger.start/finalize或Store JSON无法构造它。真实进程创建不证明Windows已Resume，状态/时间仍原样保留。非零/超时/截断只证明相应部分字节的来源，零退出仍不证明规则通过。
+
+`DispatchCompletion::verify_current`必须重读实际计划/候选、完整运行头、metadata与双流；新头或损坏使旧对象失效。跨重启不提供from_store恢复；只有独立受保护签名原件经authority复核后能取得独立来源对象。可解析`DispatchProvenance`及其只读存储检查本身不构成资格。env/argv在私有来源原件内，不自动公开。
+
+真实反例已证明：公开账本能手造active PASS元数据；另一个调用者能取得Existing票提前终结。真实Runtime在后一种竞争中只能AuditOnly，不能铸造签名资格。来源签名与专业解析/领域归一化分离，生产隔离与grant仍属后续范围。
+
+此来源profile只覆盖Runtime执行的domain verifier（编译pin具有专业owner）。policy-engine的owner=None不产生完成凭据；OPA继续由独立BoundPolicyEvaluator执行和核验，本批不重构K08，也不声称建成所有生产者/角色的统一签名体系。其他provider不能借本profile的opaque类型自行授信。

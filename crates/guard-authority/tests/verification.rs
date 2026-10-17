@@ -545,3 +545,30 @@ fn rotating_to_a_new_trusted_key_cannot_revive_a_revoked_receipt_id() {
         .verify(&next)
         .expect("new receipt identity may be separately approved by rotated trusted key");
 }
+
+#[test]
+fn operation_authorization_requires_exact_subject_and_action() {
+    let (ports, mut request, verifier) = fixture();
+    let subject = digest(b"{\"operationCandidate\":1}");
+    rewrite(&ports, |receipt, _| {
+        receipt.intent = ApprovalIntent::OperationAuthorization;
+        receipt.subject_binding.kind = receipt.intent;
+        receipt.subject_binding.subject_digest = Some(subject.clone());
+    });
+    request.intent = ApprovalIntent::OperationAuthorization;
+    request.subject_digest = Some(subject.clone());
+    verifier
+        .verify(&request)
+        .expect("real signed exact operation authorization");
+    request.subject_digest = Some(digest(b"{\"operationCandidate\":2}"));
+    assert!(
+        verifier.verify(&request).is_err(),
+        "operation authorization cannot move to another candidate"
+    );
+    request.subject_digest = Some(subject);
+    request.material.action = Action::Push;
+    assert!(
+        verifier.verify(&request).is_err(),
+        "operation authorization cannot move to another action"
+    );
+}

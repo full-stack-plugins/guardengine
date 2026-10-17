@@ -206,6 +206,38 @@ impl<'a> RunLedger<'a> {
             }
         }))
     }
+    /// 读取完整相同输入的当前终态原件快照；本地完整性不是独立来源证明。
+    pub fn current_receipt(
+        &self,
+        scope: &RunScope,
+        identity: &RunIdentity,
+        now_ms: u64,
+    ) -> Result<crate::CurrentRunReceipt, String> {
+        let (head, record) = self.current(scope, now_ms)?.ok_or("current run missing")?;
+        if &record.identity != identity
+            || !record.state.terminal()
+            || record.result_operation.is_none()
+            || record.result_digest.is_none()
+        {
+            return Err("current terminal run metadata missing or stale".into());
+        }
+        Ok(crate::CurrentRunReceipt { head, record })
+    }
+    /// 重读并比较完整头及记录，拒绝ABA、晚到和恢复；不会铸造Runtime完成凭据。
+    pub fn assert_current_receipt(
+        &self,
+        receipt: &crate::CurrentRunReceipt,
+        now_ms: u64,
+    ) -> Result<(), String> {
+        let current =
+            self.current_receipt(&receipt.record.scope, &receipt.record.identity, now_ms)?;
+        if current.head != receipt.head
+            || canonical(&current.record)? != canonical(&receipt.record)?
+        {
+            return Err("run receipt no longer current".into());
+        }
+        Ok(())
+    }
     /// 立即撤销所见running资格，不证明OS进程死亡；不重放、不查PID、不杀进程。
     /// 控制端恢复调度前必须独立停止/隔离旧执行树；并发新头不会被覆盖。
     pub fn recover(&self, scope: &RunScope, now_ms: u64) -> Result<bool, String> {

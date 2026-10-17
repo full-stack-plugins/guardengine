@@ -1,4 +1,5 @@
 use crate::check_failure::CheckFailure;
+use crate::dispatch_profile::DispatchProfile;
 use crate::native_verifier_command::digest;
 use crate::{
     ArtifactRef, DispatchOutcome, ExecutionObservation, InvocationReceipt, MaterializationReceipt,
@@ -230,8 +231,65 @@ impl Runtime {
             return Err("v2 runtime requires explicit execute_v2 command profile".into());
         }
         let approved = NativeVerifierCommand::configuration_digest(&native.command)?;
-        self.execute_native(obligation_id, operation_id, native, approved, false, cancel)
-            .await
+        Ok(self
+            .execute_native(
+                obligation_id,
+                operation_id,
+                native,
+                approved,
+                DispatchProfile::LegacyV1,
+                cancel,
+            )
+            .await?
+            .into_parts()
+            .0)
+    }
+    /// 在同一真实执行路径上返回内部来源凭据，旧execute仅丢弃此附属凭据。
+    pub async fn execute_with_receipt(
+        &self,
+        obligation_id: &Identifier,
+        operation_id: &str,
+        native: NativeVerifierCommand,
+        cancel: Cancellation,
+    ) -> Result<crate::DispatchWithReceipt, String> {
+        if self.scratch_parent.is_some() {
+            return Err("v2 runtime requires explicit execute_v2 command profile".into());
+        }
+        let approved = NativeVerifierCommand::configuration_digest(&native.command)?;
+        self.execute_native(
+            obligation_id,
+            operation_id,
+            native,
+            approved,
+            DispatchProfile::ObservedV1,
+            cancel,
+        )
+        .await
+    }
+    /// v2同次私有物化派发的附属来源凭据，不从DTO或存储恢复资格。
+    pub async fn execute_v2_with_receipt(
+        &self,
+        obligation_id: &Identifier,
+        operation_id: &str,
+        native: NativeVerifierCommandV2,
+        cancel: Cancellation,
+    ) -> Result<crate::DispatchWithReceipt, String> {
+        if self.scratch_parent.is_none() {
+            return Err("v1 runtime cannot consume v2 profile".into());
+        }
+        let approved = NativeVerifierCommandV2::configuration_digest(&native.command)?;
+        self.execute_native(
+            obligation_id,
+            operation_id,
+            NativeVerifierCommand {
+                verifier_id: native.verifier_id,
+                command: native.command,
+            },
+            approved,
+            DispatchProfile::ObservedV2,
+            cancel,
+        )
+        .await
     }
     /// 执行已批准逻辑根模板，四种Git候选都先物化且只映射显式subject_root占位。
     pub async fn execute_v2(
@@ -245,18 +303,21 @@ impl Runtime {
             return Err("v1 runtime cannot consume v2 profile".into());
         }
         let approved = NativeVerifierCommandV2::configuration_digest(&native.command)?;
-        self.execute_native(
-            obligation_id,
-            operation_id,
-            NativeVerifierCommand {
-                verifier_id: native.verifier_id,
-                command: native.command,
-            },
-            approved,
-            true,
-            cancel,
-        )
-        .await
+        Ok(self
+            .execute_native(
+                obligation_id,
+                operation_id,
+                NativeVerifierCommand {
+                    verifier_id: native.verifier_id,
+                    command: native.command,
+                },
+                approved,
+                DispatchProfile::LegacyV2,
+                cancel,
+            )
+            .await?
+            .into_parts()
+            .0)
     }
     async fn execute_native(
         &self,
@@ -264,9 +325,11 @@ impl Runtime {
         operation_id: &str,
         native: NativeVerifierCommand,
         approved: Digest,
-        v2: bool,
+        profile: DispatchProfile,
         cancel: Cancellation,
-    ) -> Result<DispatchOutcome, String> {
+    ) -> Result<crate::DispatchWithReceipt, String> {
+        let v2 = profile.v2();
+        let receipt_requested = profile.receipt();
         self.check_current(
             Some(&cancel),
             std::time::Instant::now() + Duration::from_secs(30),
@@ -329,8 +392,12 @@ impl Runtime {
             now()?,
         )? {
             StartOutcome::Existing(ticket) => {
-                return Ok(DispatchOutcome::Existing {
-                    sequence: ticket.sequence().clone(),
+                return Ok(crate::DispatchWithReceipt {
+                    outcome: DispatchOutcome::Existing {
+                        sequence: ticket.sequence().clone(),
+                    },
+                    completion: None,
+                    qualification_error: None,
                 });
             }
             StartOutcome::Started(ticket) => ticket,
@@ -374,6 +441,11 @@ impl Runtime {
             working_directory: None,
             materialization: None,
         };
+        let approved_invocation = if receipt_requested {
+            Some(crate::SourceInvocation::capture(&native.command)?)
+        } else {
+            None
+        };
         let effective = if let Some(workspace) = &workspace {
             NativeVerifierCommandV2::render(&native.command, workspace.path())?
         } else {
@@ -411,6 +483,11 @@ impl Runtime {
                 });
             }
         }
+        let effective_invocation = if receipt_requested {
+            Some(crate::SourceInvocation::capture(&effective)?)
+        } else {
+            None
+        };
         let result = match &checked {
             Ok(()) => self.runner.run_until(effective, cancel, deadline).await,
             Err(CheckFailure::Rejected(_)) => Err("input recheck rejected before dispatch".into()),
@@ -434,6 +511,9 @@ impl Runtime {
                 finished_at: None,
             }),
         };
+        let actually_spawned = result
+            .as_ref()
+            .is_ok_and(|output| output.process_id.is_some());
         let after = self
             .check_execution(
                 workspace.clone(),
@@ -542,7 +622,99 @@ impl Runtime {
         let metadata = guard_protocol::canonicalize(
             &serde_json::to_vec(&observation).map_err(|e| e.to_string())?,
         )?;
-        observation.finalization = Some(ledger.finalize(&ticket, state, &metadata, stamp)?);
-        Ok(DispatchOutcome::Finished(Box::new(observation)))
+        let finalized = ledger.finalize(&ticket, state, &metadata, stamp)?;
+        observation.finalization = Some(finalized);
+        let captured = (|| -> Result<Option<crate::DispatchCompletion>, String> {
+            let completion = if receipt_requested
+                && pin.owner.is_some()
+                && actually_spawned
+                && finalized == guard_run_ledger::FinalizeOutcome::Applied
+            {
+                let current = ledger.current_receipt(&scope, &identity, stamp)?;
+                if self
+                    .store
+                    .read_private(current.metadata_operation(), stamp)?
+                    != metadata
+                    || current.sequence() != ticket.sequence()
+                    || current.state() != state
+                    || current.operation_id().as_str() != operation_id
+                {
+                    return Err("terminal metadata differs from actual dispatch".into());
+                }
+                let provenance = crate::DispatchProvenance {
+                    schema_version: "guard.dispatch-provenance/v1".into(),
+                    scope,
+                    identity,
+                    plan_digest: self.plan.plan().digest().clone(),
+                    plan_head_digest: digest(&self.plan.head())?,
+                    run_head_digest: digest(current.head())?,
+                    operation_id: current.operation_id().clone(),
+                    sequence: ticket.sequence().clone(),
+                    subject_kind: self
+                        .plan
+                        .captured_subject()
+                        .snapshot
+                        .as_git()
+                        .ok_or("Git required")?
+                        .kind,
+                    verifier_id: pin.verifier_id.clone(),
+                    producer: guard_protocol::ProducerIdentity {
+                        schema_version: guard_protocol::SchemaVersion::new("1.0.0")?,
+                        producer_id: pin.verifier_id.clone(),
+                        version: pin.version.clone(),
+                        artifact_digest: pin.artifact_digest.clone(),
+                        config_digest: pin.config_digest.clone(),
+                        adapter_version: pin.adapter_version.clone(),
+                        execution_environment_digest: self
+                            .plan
+                            .capture_binding()
+                            .environment_digest
+                            .clone(),
+                        extensions: guard_protocol::Extensions::default(),
+                    },
+                    domain: pin.owner.ok_or("source receipt requires domain verifier")?,
+                    verifier_pin_digest: digest(pin)?,
+                    profile: observation.invocation.profile.into(),
+                    approved_invocation: approved_invocation
+                        .ok_or("missing approved invocation")?,
+                    effective_invocation: effective_invocation
+                        .ok_or("missing effective invocation")?,
+                    execution_status: status,
+                    state,
+                    exit_code: exit,
+                    started_at: observation.started_at.clone(),
+                    finished_at: observation.finished_at.clone(),
+                    output_truncated: truncated,
+                    input_drifted: drifted,
+                    metadata: ArtifactRef {
+                        operation: current.metadata_operation().into(),
+                        digest: current.metadata_digest().clone(),
+                        size: metadata.len() as u64,
+                    },
+                    stdout: observation.stdout.clone(),
+                    stderr: observation.stderr.clone(),
+                };
+                Some(crate::DispatchCompletion {
+                    plan: self.plan.clone(),
+                    store: self.store.clone(),
+                    project: self.project.clone(),
+                    current,
+                    metadata,
+                    provenance,
+                })
+            } else {
+                None
+            };
+            Ok(completion)
+        })();
+        let (completion, qualification_error) = match captured {
+            Ok(completion) => (completion, None),
+            Err(error) => (None, Some(error.chars().take(512).collect())),
+        };
+        Ok(crate::DispatchWithReceipt {
+            outcome: DispatchOutcome::Finished(Box::new(observation)),
+            completion,
+            qualification_error,
+        })
     }
 }

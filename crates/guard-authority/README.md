@@ -35,7 +35,7 @@ RequirementScope无subject，范围、契约与其他批准内容不变可复用
 
 CAS前核验只证明该边界再次观察到有效批准，不与外部撤销服务形成原子事务。真正动作消费须K10复验/幂等对账；CompiledContract及RegisteredPlan的clone也不是永久批准。anchors/receipt/revocation/clock端口均需受保护宿主注入；本库不验证真实宿主隔离或真实人机批准通道。
 
-本批只实现K09的批准核验切片。生产者身份/来源核验、GuardResult到Flow verifiedResultIds的受信normalizer、实际受保护CI/宿主安装、grant签发与消费未实现；不得仅凭本库测试关闭完整EG-K09，更不得升级现有UNVERIFIED结果。没有增加Flow策略或扩大K08。
+已发布批次实现K09的批准核验切片。生产者身份/来源核验的新增本地候选见下节；GuardResult到Flow verifiedResultIds的受信normalizer、实际受保护CI/宿主安装、grant签发与消费仍未实现；来源切片仍须真实完整回归及新双OS CI后再判断EG-K09实现任务验收，不能升级现有UNVERIFIED结果。没有增加Flow策略或扩大K08。
 
 
 ## 撤销条目精确身份与不可复活
@@ -59,4 +59,43 @@ Rust 1.85、Windows、锁定依赖离线串行执行：7项真实Git/SQLite集�
 
 现有guard-plan原12项真实规划回归也已执行通过（204.42秒）；本批仅在迁移发布CAS前增加当前binding检查与第二次同请求批准核验，不改变正常规划范围。测试内受控端口不证明生产信任部署，K09任务保持未完成。
 
-作者最终停写后，同级审查者独立运行最终verification测试程序，14/14通过（0.78秒），零跳过；只读安全审查未发现新增确证阻断。本次独立复验未重跑7项Git/SQLite或Linux。新库与迁移接线的双OS CI尚待发布后的具体提交验证，不能据本地结果宣称跨平台已通过。
+作者最终停写后，同级审查者独立运行最终verification测试程序，14/14通过（0.78秒），零跳过；只读安全审查未发现新增确证阻断。本次独立复验未重跑7项Git/SQLite或Linux。该批准切片随后已于afa1082发布，实际CI 38992692068为21/21 job成功（含Windows/Ubuntu）；文档快照58b8b69的CI 38993606579也21/21成功。这些已发布结果不涵盖下面尚未提交的来源切片。
+
+## K09来源切片（新本地候选，尚未发布）
+
+沿用EG-GATE-002、EVI-002/003/005，不建立第二规格、不改旧协议。`ProducerVerifier`只核验机械来源；不接任意GuardResult，不签assessment，不输出Flow verified arrays或执行grant。旧报告中的local_unverified/not_evaluated原样保留，独立来源对象不能自动赋予SATISFIED/COMPLETE。
+
+```mermaid
+flowchart LR
+  R[真实Runtime派发与Applied终结] --> C[内部opaque完成凭据]
+  C --> P[独立注册匹配完整pin与argv/env]
+  P --> S[独立签名器 仅机械来源请求]
+  S --> V[消费端验签 注册 撤销 当前计划运行头 原件]
+  V --> D[专业适配器读取绑定raw]
+  D --> L[后续L02归一化与组合]
+  J[公开DTO或手造账本] --> X[不能构造完成凭据或签名请求]
+```
+
+Runtime新增`execute_with_receipt`/`execute_v2_with_receipt`，旧execute档位不执行新凭据读取。`DispatchCompletion`仅由真实ProcessRunner返回实际进程创建信号、账本finalize Applied的路径内部构造；不支持Deserialize/公开new，也没有from_store/from_dto。OS创建信号不证明Windows进程已Resume或用户程序完成，真实执行状态/起止观察仍原样保留。辅助凭据采集失败返回None及受限qualification_error，原观察保持；Existing、未创建进程和AuditOnly没有凭据。
+
+`ProducerVerifier::prepare`只接opaque完成凭据，受保护ProducerRegistry还要独立匹配repo/task/contract/policy/scope、完整ProducerIdentity、全verifier pin摘要、domain、候选种类、profile、批准argv与环境，并核对本次有效调用。不能从候选CompiledContract或报告自称批准推导注册。`ProducerSigningRequest`私有字段且不可反序列化；Signer端口仅接该机械请求，库不持有生产私钥。
+
+新附属闭合`guard.producer-attestation/v1`采用独立域`b"guard.producer-attestation/v1\n"`与原始wire RFC8785/JCS，仅删除proof.signature；issuer/audience/algorithm/keyId/provenance和全部机械字段均签入。Ed25519 strict拒弱key，标准base64不混legacy hex。签名原件与argv/env可能敏感，按私有证据保管，不自动写公开摘要。
+
+`verify_live`先验独立来源签名再比对真实opaque凭据并重核当前原件；`verify_restored`跨重启必须验独立签名及当前RegisteredPlan、完整plan/run head（含revision）、序号、operation、六身份、pin、metadata/双流实际摘要尺寸和保留期，前后重新查注册/撤销/时钟。恢复只产生来源核验对象，绝不恢复DispatchCompletion。签名曾有效、旧metadata存在或本地PASS都不能绕过当前头。签名检查与外部撤销及未来操作不是全局原子事务。
+
+生产者签名同样按issuer+attestationId冻结完整原始wire摘要；有效重签另一份原件会隔离该ID，恢复旧字节不能消除冲突。已观察撤销不能通过更高active版本或换key复活旧ID。实例缓存不能提供跨重启权威；持久不可变ID及撤销抗回退依赖独立受保护端口。
+
+`max_validity_ms`只限制attestation的issuedAt→expiresAt，不是来源运行TTL。仍current且原件保留的等价运行可新签；startedAt/finishedAt/sequence不刷新，新签不等于重跑。没有擅自增加全局max_source_age，也尚未核验漏洞库等外部数据TTL；需要时由专业/组织profile显式批准并检查。
+
+安全边界是安全Rust API与明确受保护端口；不证明恶意同进程宿主、私钥失陷或同OS写者隔离。当前本地候选仍待完整回归和新双OS CI，EG-K09暂不关闭。真实生产部署、L02的Flow受信组合及K10继续由各自后续任务负责，不反向扩成EG-K09实现任务的前置。
+
+此来源profile只覆盖Runtime执行的domain verifier（编译pin具有专业owner）。policy-engine的owner=None不产生完成凭据；OPA继续由独立BoundPolicyEvaluator执行和核验，本批不重构K08，也不声称建成所有生产者/角色的统一签名体系。其他provider不能借本profile的opaque类型自行授信。
+
+## 来源候选的实际验证证据（Windows，Rust 1.85）
+
+最终同源码串行、锁定依赖离线回归：Authority 7项真实契约/Git/SQLite集成通过（97.01秒），1项真实Runtime/独立来源签名组合E2E通过（62.57秒），15项真实签名与边界通过（0.70秒，含OperationAuthorization合法subject/换subject/错action），3项compile-fail文档测试通过（0.64秒），共26 reported测试，零ignored。Runtime完整4项unit+14项E2E+2项compile-fail全通过（E2E 575.70秒）；Ledger原10项reported通过（3.95秒，含1个worker辅助入口）。三crate的all-features/all-targets严格Clippy、fmt检查和diff检查通过。
+
+来源组合E2E的首次真实RED为54.56秒：同次真实失败进程和独立签名存在，但目标核验尚不可用；修复后的扩展组合曾通过127.02秒，根独立运行最新版通过64.26秒，最终完整套件再次通过62.57秒。一次测试撤销端口重复临时锁导致夹具自锁，核对唯一测试进程身份后停止；该轮非正常退出不计通过。Runtime凭据首个真实RED为20.06秒，后续手造active metadata与Existing提前终结负例均已纳入最终14项E2E。
+
+组合E2E内的多个断言不单算独立测试。旧头/撤销/过期负例检查精确目标错误，避免被其他损坏原因掩盖。源profile仍是未发布本地候选，新双OS CI由主任务执行，不沿用已发布批准切片的旧绿作为新源码证据。

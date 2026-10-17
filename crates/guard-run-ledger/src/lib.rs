@@ -16,3 +16,6 @@ pub use run_scope::RunScope;
 pub use run_state::RunState;
 pub use run_ticket::RunTicket;
 pub use start_outcome::StartOutcome;
+
+mod current_run_receipt;
+pub use current_run_receipt::CurrentRunReceipt;
