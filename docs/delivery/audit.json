@@ -79,7 +79,7 @@
       "path": "openspec/changes/add-engineering-guard-core/tasks.md",
       "ledger_kind": "stable_ids",
       "total": 62,
-      "completed": 10
+      "completed": 11
     },
     {
       "repository": "codeguard",

@@ -1,6 +1,6 @@
 # EG-K09 独立批准与生产者来源核验
 
-2026-10-17。事实源为CodeGuard现有add-engineering-guard-core的EG-K09及EG-GATE-002/003。本页记录验收候选，完整新回归与双OS CI通过前不勾任务。
+2026-10-17。事实源为CodeGuard现有add-engineering-guard-core的EG-K09及EG-GATE-002/003。本页仅验收独立核验端口与提供者，不声明生产强制执行。
 
 ## 已发布批准核验
 
@@ -28,7 +28,7 @@ GuardEngine afa10825052e70f4918c6d28bf42a89579f1d313提供ApprovalVerifier和Rec
 
 作者最终锁定依赖离线串行完整回归已通过：Runtime 4单元、14真实E2E（575.70秒）及2编译失败文档测试，共20；Ledger原10个reported（3.95秒，含1个worker辅助入口）；Authority 7真实Git/SQLite（97.01秒）、1来源组合（62.57秒）、15签名边界（0.70秒）、3编译失败文档测试，共26。均零ignored。三个crate的all-features/all-targets严格Clippy、格式和diff检查通过。
 
-新来源提交的双OS CI仍待终态；当前EG-K09保持未勾选，已发布旧提交绿灯不替代本批验证。
+来源提交f03336d1f6bdd8ebf185d98b13125240fc6562c0的[CI38996105203](https://github.com/full-stack-plugins/guardengine/actions/runs/38996105203)已终态success，21/21 jobs通过，包含两OS authority、runtime、ledger及真实OPA。本批实际新提交已完成回归和跨平台复验，可按原任务字面将EG-K09标verified；不使用旧绿灯替代本批验证。
 
 ## 任务边界
 

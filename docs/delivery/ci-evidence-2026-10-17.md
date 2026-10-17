@@ -8,7 +8,7 @@
 
 | 仓库 | 具体提交 | 远端证据 |
 |---|---|---|
-| GuardEngine | afa10825052e70f4918c6d28bf42a89579f1d313 | [38992692068](https://github.com/full-stack-plugins/guardengine/actions/runs/38992692068)，21/21成功，含双OS真实OPA与批准核验切片 |
+| GuardEngine | f03336d1f6bdd8ebf185d98b13125240fc6562c0 | [38996105203](https://github.com/full-stack-plugins/guardengine/actions/runs/38996105203)，21/21成功，含双OS真实OPA、批准与Runtime domain来源核验 |
 | ArchGuard | 42daff5c4edb910a390a5bb7b830ed242cc83b4c | [主CI38988235956](https://github.com/full-stack-plugins/archguard/actions/runs/38988235956)、[安装38988235968](https://github.com/full-stack-plugins/archguard/actions/runs/38988235968)成功 |
 | SpecGuard | d4463477b2b665ab7909ff7a67b54acd78810971 | [38972402820](https://github.com/full-stack-plugins/specguard/actions/runs/38972402820)双OS成功 |
 | TestGuard | 2100f3e4d5ea079aa91579bdfa5140b99591c90b | [38888948106](https://github.com/full-stack-plugins/testguard/actions/runs/38888948106)成功 |
