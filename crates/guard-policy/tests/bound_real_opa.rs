@@ -344,8 +344,19 @@ async fn registered_git_sqlite_plan_pins_real_production_opa_before_and_after() 
         .unwrap();
     assert!(
         !receipt.evaluation.incomplete,
-        "{:?}",
-        receipt.evaluation.diagnostics
+        "{:?}; versionObservation={:?}; versionStdout={}; versionStderr={}",
+        receipt.evaluation.diagnostics,
+        receipt.evaluation.version,
+        String::from_utf8_lossy(
+            &store
+                .read_private(&receipt.evaluation.version.stdout.operation, now())
+                .unwrap()
+        ),
+        String::from_utf8_lossy(
+            &store
+                .read_private(&receipt.evaluation.version.stderr.operation, now())
+                .unwrap()
+        )
     );
     assert_eq!(
         receipt.evaluation.binding.contract_digest,

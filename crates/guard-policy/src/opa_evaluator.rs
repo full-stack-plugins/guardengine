@@ -246,7 +246,7 @@ impl OpaEvaluator {
                 Err(error) => diagnostics.push(format!("OPA evaluation process rejected: {error}")),
             }
         } else {
-            diagnostics.push("pinned OPA version/platform/Rego probe did not complete exactly; no policy dispatched".into());
+            diagnostics.push(format!("pinned OPA version/platform/Rego probe did not complete exactly; no policy dispatched; status={:?}; reason={:?}; exit={:?}; truncated={}; stdoutDigest={}; stderrDigest={}",version.status,version.reason,version.exit_code,version.output_truncated,hash(&version.stdout).as_str(),hash(&version.stderr).as_str()));
         }
         let mut decision = None;
         if execution.status == ExecutionStatus::Completed
