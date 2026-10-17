@@ -59,7 +59,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-24.04, windows-latest]
-        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime, guard-policy]
+        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime, guard-policy, guard-authority]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -72,8 +72,11 @@ jobs:
         if: matrix.component != 'guard-policy'
         run: cargo clippy --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features --all-targets -- -D warnings
       - name: Test component with real local tools and storage
-        if: matrix.component != 'guard-policy'
+        if: matrix.component != 'guard-policy' && matrix.component != 'guard-authority'
         run: cargo test --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features
+      - name: Test independent approvals with real Git and SQLite
+        if: matrix.component == 'guard-authority'
+        run: cargo test --manifest-path crates/guard-authority/Cargo.toml --locked --all-features -- --test-threads=1
       - name: Check default policy interfaces
         if: matrix.component == 'guard-policy'
         run: cargo clippy --manifest-path crates/guard-policy/Cargo.toml --locked --all-targets -- -D warnings

@@ -63,6 +63,16 @@ pub fn migrate(
         retain_until_ms,
         now_ms,
     )?;
+    // Git核验与持久化可能耗时；CAS发布前重新读取独立批准，旧attestation不能永久复用。
+    // 此边界检查不是与外部撤销源的分布式原子事务，动作消费仍须K10再次核验。
+    previous.assert_binding_current(store, now_ms)?;
+    let refreshed = authority.verify(&request)?;
+    if refreshed.authority_id != approval.authority_id
+        || refreshed.approval_ref != approval.approval_ref
+        || refreshed.request_digest != approval.request_digest
+    {
+        return Err("migration approval identity changed before head publication".into());
+    }
     let head = match store.compare_and_swap_head(
         &previous.head_key,
         Some(&previous.head),
