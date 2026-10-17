@@ -8,13 +8,13 @@
 
 | 仓库 | 具体提交 | 远端证据 |
 |---|---|---|
-| GuardEngine | f03336d1f6bdd8ebf185d98b13125240fc6562c0 | [38996105203](https://github.com/full-stack-plugins/guardengine/actions/runs/38996105203)，21/21成功，含双OS真实OPA、批准与Runtime domain来源核验 |
+| GuardEngine | 4684537ec950354450f0a20c37cbf19b28d0c25c | [38997382891](https://github.com/full-stack-plugins/guardengine/actions/runs/38997382891)，21/21成功，新增固定Git来源的双OS验证；K09来源提交f03336d的38996105203亦21/21成功 |
 | ArchGuard | 42daff5c4edb910a390a5bb7b830ed242cc83b4c | [主CI38988235956](https://github.com/full-stack-plugins/archguard/actions/runs/38988235956)、[安装38988235968](https://github.com/full-stack-plugins/archguard/actions/runs/38988235968)成功 |
 | SpecGuard | d4463477b2b665ab7909ff7a67b54acd78810971 | [38972402820](https://github.com/full-stack-plugins/specguard/actions/runs/38972402820)双OS成功 |
 | TestGuard | 2100f3e4d5ea079aa91579bdfa5140b99591c90b | [38888948106](https://github.com/full-stack-plugins/testguard/actions/runs/38888948106)成功 |
 | GitGuard | 6d017a43c270e768360c6abc2e1f69568c210f86 | [38888942256](https://github.com/full-stack-plugins/gitguard/actions/runs/38888942256)成功 |
 | FlowGuard | 608f1c8 | [OPA38990336275](https://github.com/full-stack-plugins/flowguard/actions/runs/38990336275)、[安装38990336276](https://github.com/full-stack-plugins/flowguard/actions/runs/38990336276)双OS成功 |
-| CodeGuard | 640d2b9d（最新修复候选） | 前一提交4a82e922的[38990883250](https://github.com/full-stack-plugins/codeguard/actions/runs/38990883250)终态失败：真实CLI/同次Maven、MSRV、默认suite和npm成功，但后续WASM Go测试仍要求历史0.49版本。640d2b9d修正当前输出断言及CVE报告导出版本条件；完整新CI待验收，不宣称全绿 |
+| CodeGuard | 640d2b9de7e3e7ef0c096beb2174f753ac9d06aa | [主CI38993532494](https://github.com/full-stack-plugins/codeguard/actions/runs/38993532494)全部成功：gate 1小时1分7秒、MSRV 2分4秒；安装38993532477/38993529750亦成功。最新文档提交28fa6093的38996544062尚待独立终态，不把旧绿外推新HEAD |
 
 OPA历史真实失败及修复见[EG-K08](EG-K08-evidence.md)：首次Flow发布竞态、后续Linux软件SHA后置复核超时与Windows存储准备竞争均保留，不把exit0或本机测试替代完整当前CI。ArchGuard/SpecGuard已完成的最小任务分别见[EG-A01](EG-A01-evidence.md)、[EG-S01](EG-S01-evidence.md)，不扩大为全路线交付。
 

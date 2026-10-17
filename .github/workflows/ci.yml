@@ -59,7 +59,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-24.04, windows-latest]
-        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime, guard-policy, guard-authority]
+        component: [guard-contract, guard-subject, guard-store, guard-plan, guard-runner, guard-run-ledger, guard-runtime, guard-policy, guard-authority, guard-cli]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -69,10 +69,10 @@ jobs:
       - name: Verify component formatting
         run: cargo fmt --manifest-path crates/${{ matrix.component }}/Cargo.toml -- --check
       - name: Check component
-        if: matrix.component != 'guard-policy'
+        if: matrix.component != 'guard-policy' && matrix.component != 'guard-cli'
         run: cargo clippy --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features --all-targets -- -D warnings
       - name: Test component with real local tools and storage
-        if: matrix.component != 'guard-policy' && matrix.component != 'guard-authority'
+        if: matrix.component != 'guard-policy' && matrix.component != 'guard-authority' && matrix.component != 'guard-cli'
         run: cargo test --manifest-path crates/${{ matrix.component }}/Cargo.toml --locked --all-features
       - name: Test independent approvals with real Git and SQLite
         if: matrix.component == 'guard-authority'
@@ -83,6 +83,12 @@ jobs:
       - name: Test default policy interfaces (real OPA has separate required job)
         if: matrix.component == 'guard-policy'
         run: cargo test --manifest-path crates/guard-policy/Cargo.toml --locked
+      - name: Check production CLI without fixture configuration
+        if: matrix.component == 'guard-cli'
+        run: cargo clippy --manifest-path crates/guard-cli/Cargo.toml --locked --all-targets -- -D warnings
+      - name: Test production CLI discovery and missing-host behavior
+        if: matrix.component == 'guard-cli'
+        run: cargo test --manifest-path crates/guard-cli/Cargo.toml --locked
 
   real-opa:
     name: Real OPA / ${{ matrix.os }} / MSRV
@@ -116,7 +122,7 @@ jobs:
       - name: Create job-local policy paths
         shell: python
         run: |
-          import os
+          import os, shutil
           from pathlib import Path
           state = Path(os.environ['RUNNER_TEMP']) / 'guardengine-real-opa'
           state.mkdir(mode=0o700)
@@ -132,7 +138,10 @@ jobs:
               'TEMP': str(state / 'tmp'),
               'TMP': str(state / 'tmp'),
               'TMPDIR': str(state / 'tmp'),
+              'GUARDCORE_TEST_HOST_ROOT': str(state / 'guardcore-test-host'),
+              'GUARDCORE_TEST_GIT_EXE': str(Path(shutil.which('git') or '').resolve()),
           }
+          assert shutil.which('git'), 'real Git is required for CLI integration'
           with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as output:
               for key, value in values.items():
                   output.write(f'{key}={value}\n')
@@ -163,3 +172,9 @@ jobs:
       - name: Run real OPA, bound-plan, recovery and independent FlowGuard differential tests
         working-directory: guardengine
         run: cargo test --manifest-path crates/guard-policy/Cargo.toml --locked --features real-opa-tests -- --test-threads=1 --nocapture
+      - name: Check complete CLI integration with fixed test host
+        working-directory: guardengine
+        run: cargo clippy --manifest-path crates/guard-cli/Cargo.toml --locked --all-features --all-targets -- -D warnings
+      - name: Exercise six CLI groups with real Git, SQLite, signatures and OPA
+        working-directory: guardengine
+        run: cargo test --manifest-path crates/guard-cli/Cargo.toml --locked --features test-fixture --test real -- --test-threads=1 --nocapture

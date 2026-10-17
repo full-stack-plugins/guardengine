@@ -24,9 +24,9 @@ K07当前投影/同次Maven、默认套件及npm已有实际成功，WASM当前�
 
 ## 库存范围及权威边界
 
-登记七产品及五关联插件，共12仓。GuardCore逻辑角色复用guardengine，不新建或重命名仓库。CodeGuard原跨仓账本62项；四插件既有集成change及FlowGuard原计划补充共51项；总113稳定ID，唯一原生完成账本和原任务语义不变。
+登记七产品及五关联插件，共12仓。GuardCore逻辑角色复用guardengine，不新建或重命名仓库。CodeGuard原跨仓账本62项；四插件原生集成change及FlowGuard原计划补充共51项；总113稳定ID，唯一原生完成账本和原任务语义不变。
 
-共19份活动原生checklist；12份正式规格登记66条Requirement、94个WHEN/THEN局部场景及43个端到端用例。无稳定EG ID的历史长期任务独立汇总，不造ID、不把原勾选当运行证据。四个集成change为integrate-engineering-guard-facts/host/review/git；Flow沿用已有Superpowers，不初始化OpenSpec。
+共21份活动原生checklist；12份正式规格登记66条Requirement、89个WHEN/THEN局部场景及43个端到端用例。无稳定EG ID的历史长期任务独立汇总，不造ID、不把原勾选当运行证据。四个集成change为integrate-engineering-guard-facts/host/review/git；Flow沿用已有Superpowers，不初始化OpenSpec。
 
 ownership显式引用CodeGuard所有权表，不在库存中擅自改派。自动发现活动openspec/changes与docs/superpowers/plans，排除archive；正式规格路径显式登记。拒绝场景丢失、未知依赖、重复物理身份、错误owner或来源损坏。
 
@@ -45,3 +45,9 @@ python -B scripts/tests/test_delivery_inventory.py
 本次审计与严格模式均实际PASS：113任务、零未解析依赖。库存检查器22项测试中21通过、1项Windows链接能力相关跳过；OpenSpec add-engineering-guard-core严格结构验证通过。以上结果不证明全部任务实现。
 
 审计结果以audit.json本次实际输出为准。实际产品接收、规则owner切换、旧位置指针、全语言资格、真实宿主、受保护CI、四平台签名发布仍按各任务验收，不以库存在、tasks勾选或本地Hook代替。
+
+## 远端原生规格复核
+
+2026-10-17 同步 CodeGraph 插件时发现远端 22ca12d 已含原生集成规划；原先本地检出与可用历史中的缺失不能解释为远端也缺失。已以合并提交 1f328b9 保留远端规格及较新的 v0.2.0 实现，原生文件与远端 8c0902f 完全一致；本地重建版本仅留在 Git 历史中，不替换正式规格。35 项现有测试及该变更 OpenSpec 严格校验通过。清单按原生 F 系列依赖、Requirement 和具名场景重算后严格审计 PASS：113 项任务、66 条 Requirement、89 个场景、43 个端到端用例、零未知依赖。94 是旧本地重建快照计数，不是当前分母；F 系列全部保持 pending。该清单调整不表示专业能力新增验收。
+
+同步CodeGuard插件已发布main时，还发现两份已有原生长期账本：2026-10-03-rust-wasm-runtime-candidate、2026-10-04-rust-lifecycle-default。两者按native_tasks登记，保留已有勾选/缺口，不计入113项新路线的已验收数；活动账本因此由19增至21。

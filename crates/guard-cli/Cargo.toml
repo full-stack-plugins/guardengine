@@ -1,0 +1,58 @@
+[package]
+name = "guard-cli"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+
+[[bin]]
+name = "guardcore"
+path = "src/main.rs"
+
+[features]
+test-fixture = []
+
+[[bin]]
+name = "guardcore-fixture"
+path = "tests/support/native_fixture.rs"
+required-features = ["test-fixture"]
+
+[[test]]
+name = "real"
+path = "tests/real.rs"
+required-features = ["test-fixture"]
+
+[dependencies]
+clap = { version = "=4.6.7", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+base64 = "0.22"
+chrono = { version = "=0.4.42", default-features = false, features = ["std", "now"] }
+tokio = { version = "=1.53.1", features = ["rt-multi-thread", "macros", "signal", "time"] }
+tempfile = "3"
+guard-protocol = { path = "../guard-protocol" }
+guard-contract = { path = "../guard-contract" }
+guard-subject = { path = "../guard-subject" }
+guard-plan = { path = "../guard-plan" }
+guard-store = { path = "../guard-store" }
+guard-runner = { path = "../guard-runner" }
+guard-runtime = { path = "../guard-runtime" }
+guard-run-ledger = { path = "../guard-run-ledger" }
+guard-authority = { path = "../guard-authority" }
+guard-policy = { path = "../guard-policy" }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_UI_Shell", "Win32_System_Com"] }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = "3"
+ring = "0.17"
+
+[profile.dev.package.sha2]
+opt-level = 3
+[profile.test.package.sha2]
+opt-level = 3

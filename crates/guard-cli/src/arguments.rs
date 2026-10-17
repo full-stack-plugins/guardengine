@@ -1,0 +1,74 @@
+use clap::{Arg, ArgAction, Command};
+fn required(name: &'static str) -> Arg {
+    Arg::new(name).long(name).required(true).num_args(1)
+}
+fn selection(command: Command) -> Command {
+    command.arg(required("selection"))
+}
+fn current(command: Command) -> Command {
+    selection(command).arg(required("plan-operation"))
+}
+/// 构造六组公共Clap命令与参数，返回解析器。
+pub(crate) fn command() -> Command {
+    Command::new("guardcore")
+        .version(env!("CARGO_PKG_VERSION"))
+        .about("真实内核接线；不签发授权或推断工程通过")
+        .subcommand_required(true)
+        .arg_required_else_help(true)
+        .subcommand(Command::new("doctor"))
+        .subcommand(
+            Command::new("contract")
+                .subcommand_required(true)
+                .subcommand(Command::new("validate").arg(required("file")))
+                .subcommand(Command::new("compile")),
+        )
+        .subcommand(
+            Command::new("plan")
+                .subcommand_required(true)
+                .subcommand(selection(Command::new("preview")))
+                .subcommand(selection(Command::new("register")).arg(required("operation")))
+                .subcommand(selection(Command::new("restore")).arg(required("operation"))),
+        )
+        .subcommand(
+            current(Command::new("run"))
+                .arg(required("operation"))
+                .arg(required("obligation"))
+                .arg(
+                    Arg::new("cancel-request")
+                        .long("cancel-request")
+                        .num_args(1)
+                        .help("仅执行阶段：scratchRoot直接子文件的精确操作取消请求"),
+                ),
+        )
+        .subcommand(
+            Command::new("evidence")
+                .subcommand_required(true)
+                .subcommand(
+                    Command::new("show")
+                        .arg(required("operation"))
+                        .arg(Arg::new("raw").long("raw").action(ArgAction::SetTrue)),
+                )
+                .subcommand(
+                    Command::new("verify")
+                        .about("仅校验存储完整性，不验证生产者来源")
+                        .arg(required("operation")),
+                )
+                .subcommand(current(Command::new("source-verify")).arg(required("file"))),
+        )
+        .subcommand(
+            Command::new("policy")
+                .subcommand_required(true)
+                .subcommand(Command::new("validate"))
+                .subcommand(
+                    current(Command::new("evaluate"))
+                        .arg(required("operation"))
+                        .arg(required("facts"))
+                        .arg(
+                            Arg::new("cancel-request")
+                                .long("cancel-request")
+                                .num_args(1)
+                                .help("仅执行阶段的精确操作取消请求"),
+                        ),
+                ),
+        )
+}
