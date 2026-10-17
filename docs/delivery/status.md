@@ -5,7 +5,7 @@
 ## 权威来源与边界
 
 - 登记七产品仓和五关联插件仓，GuardCore逻辑角色映射已有 `guardengine` 仓库，不新建或重命名仓库。
-- CodeGuard临时跨仓账本保留62项总体任务；另按既有规划重建四插件OpenSpec集成change与FlowGuard原计划第5节，共51项。113项任务保留稳定ID和唯一原生完成账本，EG-M01清单建设及EG-K01至K06局部任务已验收，共7/113项verified，其余106项仍pending。K07及全部后续集成任务保持未勾选。
+- CodeGuard临时跨仓账本保留62项总体任务；另按既有规划重建四插件OpenSpec集成change与FlowGuard原计划第5节，共51项。113项任务保留稳定ID和唯一原生完成账本，EG-M01清单建设、EG-K01至K06及EG-S01局部任务已验收，共8/113项verified，其余105项仍pending。K07及全部后续集成任务保持未勾选。
 - `ownership: {repository, path}` 显式引用CodeGuard权威所有权表，逐项核对真实owner，不能在清单内擅自改派。路径拒绝空段、尾斜杠、链接和重复物理身份。
 - 共19份活动原生checklist；无稳定EG ID的历史长期任务独立汇总，不另造ID或改变其原生状态。
 - 12份正式规格来源登记66条Requirement、94个具名WHEN/THEN局部场景，另登记43个端到端用例。校验原生定义、任务引用、场景名及用例责任任务，拒绝丢失场景、未知需求和错误归属。代码围栏中的示例不计为正式定义。
@@ -41,6 +41,8 @@ K06的原任务逐项核验和真实反例见[执行闭环验收审查](EG-K06-r
 
 ## 局部实现验收
 
-2026-10-17独立审查及真实测试完成后，EG-K02、EG-K03、EG-K05按各自原任务字面标为verified，证据分别见[契约编译](EG-K02-evidence.md)、[冻结计划](EG-K03-evidence.md)、[本地存储](EG-K05-evidence.md)。加上[本地协议冻结](EG-K01-evidence.md)、[Git候选采集](EG-K04-evidence.md)、[执行与运行顺序](EG-K06-evidence.md)及既有EG-M01，当前共7/113，106项pending。K01保持candidate-unpublished；全部未来集成任务保持未勾选，不把库完成当作P0集成可交付。
+2026-10-17独立审查及真实测试完成后，EG-K02、EG-K03、EG-K05按各自原任务字面标为verified，证据分别见[契约编译](EG-K02-evidence.md)、[冻结计划](EG-K03-evidence.md)、[本地存储](EG-K05-evidence.md)。加上[本地协议冻结](EG-K01-evidence.md)、[Git候选采集](EG-K04-evidence.md)、[执行与运行顺序](EG-K06-evidence.md)、既有EG-M01及EG-S01，当前共8/113，105项pending。K01保持candidate-unpublished；全部未来集成任务保持未勾选，不把库完成当作P0集成可交付。
 
 本次库存回归实际22项：21通过、1项Windows符号链接权限跳过；严格模式与audit均PASS、退出0，audit.json已刷新。
+
+2026-10-17新增局部验收：[EG-S01三类规格来源适配](EG-S01-evidence.md)完成真实RED→GREEN、独立全49项回归及SpecGuard具体提交的Ubuntu/Windows双CI验收；现共8/113 verified、105 pending。上述七项内核/清单之外仅新增S01，不关闭S02–S06、K07或A01。

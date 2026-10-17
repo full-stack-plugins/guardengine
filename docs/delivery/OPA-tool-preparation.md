@@ -1,6 +1,6 @@
 # EG-K08：真实 OPA 工具准备
 
-核对日期：2026-10-17。本机 `Get-Command opa` 未发现 CLI；尚未下载或执行。此页记录待授权的本地测试依赖，不代表策略引擎或 K08 已完成，也不执行全局安装。
+核对日期：2026-10-17。用户已明确授权仅放在 E 盘项目测试目录。已实际下载固定版本、实时核对官方 `.sha256`、原件长度和文件摘要，并执行 version 成功；不代表策略引擎或 K08 已完成，也不执行全局安装。
 
 ## 已核对的官方来源
 
@@ -36,4 +36,6 @@ if (Test-Path -LiteralPath $opaToolFile) {
 if ($LASTEXITCODE -ne 0) { throw 'OPA version verification failed.' }
 ```
 
-下载授权正在单独询问。批准前不执行以上片段；代码、接线及不依赖该工具的检查继续推进。运行测试时还必须实际核验版本、制品 pin、策略包和受限能力，不能仅凭这里的摘要文字信任工具。其他平台制品应分别核对并验收，不复用 Windows 摘要。
+实际文件为 `E:/workspaces/workspace-agent-skills/.guard-build/tools/opa/1.21.2/opa.exe`，长度64,622,592字节，SHA256与上文及官方摘要一致。实际 version 退出0：Version 1.21.2、Platform windows/amd64、Rego Version v1、Build Commit `3f7474e6b3c631821d8aac25ca444f7e75a56483-dirty`。该构建字符串来自官方原件，仍以完整制品摘要固定身份。未修改全局 PATH，未初始化受治理项目。
+
+运行测试时还必须实际核验版本、制品 pin、策略包和受限能力，不能仅凭这里的摘要文字信任工具。其他平台制品应分别核对并验收，不复用 Windows 摘要。通用执行器实现位于 GuardCore，生产流程组合政策由 FlowGuard 拥有；当前双方已开始实施，不能据工具准备完成关闭 EG-K08。

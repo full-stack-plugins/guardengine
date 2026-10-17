@@ -1022,8 +1022,13 @@
         "EG-K01",
         "EG-M01"
       ],
-      "evidence": [],
-      "status": "pending"
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-S01-evidence.md"
+        }
+      ],
+      "status": "verified"
     },
     {
       "id": "EG-S02",
