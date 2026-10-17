@@ -38,4 +38,4 @@ if ($LASTEXITCODE -ne 0) { throw 'OPA version verification failed.' }
 
 实际文件为 `E:/workspaces/workspace-agent-skills/.guard-build/tools/opa/1.21.2/opa.exe`，长度64,622,592字节，SHA256与上文及官方摘要一致。实际 version 退出0：Version 1.21.2、Platform windows/amd64、Rego Version v1、Build Commit `3f7474e6b3c631821d8aac25ca444f7e75a56483-dirty`。该构建字符串来自官方原件，仍以完整制品摘要固定身份。未修改全局 PATH，未初始化受治理项目。
 
-运行测试时还必须实际核验版本、制品 pin、策略包和受限能力，不能仅凭这里的摘要文字信任工具。其他平台制品应分别核对并验收，不复用 Windows 摘要。通用执行器实现位于 GuardCore，生产流程组合政策由 FlowGuard 拥有；当前双方已开始实施，不能据工具准备完成关闭 EG-K08。
+运行测试时还必须实际核验版本、制品 pin、策略包和受限能力，不能仅凭这里的摘要文字信任工具。其他平台制品应分别核对并验收，不复用 Windows 摘要。通用执行器实现位于 GuardCore，生产流程组合政策由 FlowGuard 拥有；双方执行器与政策包的后续验收见[EG-K08完整证据](EG-K08-evidence.md)；不能仅据工具准备完成推断执行能力。

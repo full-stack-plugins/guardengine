@@ -328,8 +328,13 @@
         "EG-K03",
         "EG-K06"
       ],
-      "evidence": [],
-      "status": "pending"
+      "evidence": [
+        {
+          "repository": "guardengine",
+          "path": "docs/delivery/EG-K08-evidence.md"
+        }
+      ],
+      "status": "verified"
     },
     {
       "id": "EG-K09",
